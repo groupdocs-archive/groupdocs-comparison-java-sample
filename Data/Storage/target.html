@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey -->
+<html lang="en-US" dir="ltr" class="redesign " data-ffo-opensanslight="true" data-ffo-opensans="true"><head prefix="og: http://ogp.me/ns#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <script async="" src="https://www.google-analytics.com/analytics.js"></script><script>(function(d) { d.className = d.className.replace(/\bno-js/, ''); })(document.documentElement);</script>
+
+
+
+
+
+  <title>accesskey - HTML | MDN</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <link rel="home" href="https://developer.mozilla.org/en-US/">
+  <link rel="copyright" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#copyright">
+
+
+
+
+    <link href="./accesskey - HTML _ MDN_files/mdn.593f20d8c365.css" rel="stylesheet" type="text/css">
+
+
+
+    <link href="./accesskey - HTML _ MDN_files/wiki.13dd9abdfb62.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+  <!-- common social tags -->
+
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://developer.cdn.mozilla.net/static/img/opengraph-logo.dc4e08e2f6af.png">
+  <meta property="og:site_name" content="Mozilla Developer Network">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://developer.cdn.mozilla.net/static/img/opengraph-logo.dc4e08e2f6af.png">
+  <meta name="twitter:site" content="@MozDevNet">
+  <meta name="twitter:creator" content="@MozDevNet">
+
+  <link rel="search" type="application/opensearchdescription+xml" href="https://developer.mozilla.org/en-US/search/xml" title="Mozilla Developer Network">
+
+  <!-- third-generation iPad with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://developer.cdn.mozilla.net/static/img/favicon144.a6e4162070f4.png">
+  <!-- iPhone with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://developer.cdn.mozilla.net/static/img/favicon114.0e9fabd44f85.png">
+  <!-- first- and second-generation iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://developer.cdn.mozilla.net/static/img/favicon72.8ff9d87c82a0.png">
+  <!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <link rel="apple-touch-icon-precomposed" href="https://developer.cdn.mozilla.net/static/img/favicon57.a2490b9a2d76.png">
+  <!-- basic favicon -->
+
+
+
+  <link rel="shortcut icon" href="https://developer.cdn.mozilla.net/static/img/favicon32.e02854fdcf73.png">
+  <!--[if IE]>
+  <meta http-equiv="imagetoolbar" content="no">
+  <script type="text/javascript" src="https://developer.cdn.mozilla.net/static/build/js/html5shiv.3948ccddab6f.js" charset="utf-8"></script>
+  <![endif]-->
+
+
+  <link rel="alternate" type="application/json" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey$json">
+  <link rel="canonical" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey">
+
+
+
+      <link rel="alternate" hreflang="bn-BD" href="https://developer.mozilla.org/bn-BD/docs/Web/HTML/Global_attributes/accesskey" title="অ্যাক্সেস কী">
+
+      <link rel="alternate" hreflang="es" href="https://developer.mozilla.org/es/docs/Web/HTML/Atributos_Globales/accesskey" title="accesskey">
+
+      <link rel="alternate" hreflang="fr" href="https://developer.mozilla.org/fr/docs/Web/HTML/Attributs_globaux/accesskey" title="accesskey">
+
+      <link rel="alternate" hreflang="ja" href="https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/accesskey" title="accesskey">
+
+
+
+  <!-- document-specific social tags -->
+  <meta property="og:title" content="accesskey">
+  <meta property="og:url" content="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey">
+  <meta name="twitter:url" content="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey">
+  <meta name="twitter:title" content="accesskey">
+
+  <meta property="og:description" content="The operation to activate the accesskey depends on browser and its platform.">
+  <meta name="description" content="The operation to activate the accesskey depends on browser and its platform.">
+  <meta name="twitter:description" content="The operation to activate the accesskey depends on browser and its platform.">
+
+
+
+
+
+
+<script type="text/javascript">
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-36116321-5', 'mozilla.org');
+    ga('set', 'anonymizeIp', true);
+
+
+
+    // dimension9 == "Section editing"
+
+
+    (function() {
+        // http://cfsimplicity.com/61/removing-analytics-clutter-from-campaign-urls
+        var win = window;
+        var removeUtms = function(){
+            var location = win.location;
+            if (location.href.indexOf('utm') != -1 && win.history.replaceState) {
+                win.history.replaceState({}, '', location.pathname);
+            }
+        };
+
+        ga('send', 'pageview', {'hitCallback': removeUtms});
+    })();
+</script>
+
+
+<script type="text/javascript" src="chrome-extension://bfbmjmiodbnnpllbbbfblcplfjjepjdn/js/injected.js"></script><style type="text/css">:root #content > #center > .dose > .dosesingle,
+:root #content > #right > .dose > .dosesingle
+{display:none !important;}</style></head>
+<body data-slug="Web/HTML/Global_attributes/accesskey" contextmenu="edit-history-menu" data-search-url="" class="document  ">
+
+  <script type="text/javascript">
+    (function(win) {
+        'use strict';
+
+
+            (function(){
+  var FLAGS = {
+    'compat_api': false,'kumaediting': false,'page_move': false,'registration_disabled': false,'search_suggestions': false,'section_edit': false,'spam_admin_override': false,'spam_checks_enabled': true,'spam_spammer_override': false,'spam_submissions_enabled': false,'spam_testing_mode': false,'wiki_samples': true,'wiki_spam_exempted': false,'wiki_spam_training': false
+    },
+    SWITCHES = {
+    'wiki_error_on_delete': false,'wiki_force_immediate_rendering': false,'enable_optimizely': false,'welcome_email': true,'application_ACAO': true,'store_revision_ips': true,'dumb_doc_urls': true
+    },
+    SAMPLES = {
+
+    };
+  window.waffle = {
+    "flag_is_active": function waffle_flag(flag_name) {
+
+      return !!FLAGS[flag_name];
+    },
+    "switch_is_active": function waffle_switch(switch_name) {
+
+      return !!SWITCHES[switch_name];
+    },
+    "sample_is_active": function waffle_sample(sample_name) {
+
+      return !!SAMPLES[sample_name];
+    },
+    "FLAGS": FLAGS,
+    "SWITCHES": SWITCHES,
+    "SAMPLES": SAMPLES
+  };
+})();
+
+
+
+        // This needs to be set before ckeditor.js loads
+        window.CKEDITOR_BASEPATH = '/static/js/libs/ckeditor/build/ckeditor/';
+
+        // This represents the site configuration
+        win.mdn = {
+            // Properties and settings for CKEditor will go here
+            ckeditor: {},
+            // Feature test results and methods will be placed here
+            features: {},
+            // The path to static assets (images, CSS, JS) in MDN
+            staticPath: 'https://developer.cdn.mozilla.net/static/',
+            // Optimizely API
+            optimizely: win['optimizely'] || [],
+            // Site notifications
+
+            notifications: [],
+
+            // Wiki-specific settings will be placed here
+            wiki: {
+                autosuggestTitleUrl: '/en-US/docs/get-documents'
+            },
+            // Assets that need to be dynamically injected
+            assets: {
+                css: {
+                    'editor-content': ['https://developer.cdn.mozilla.net/static/build/styles/editor-content.3d79df72080d.css',],
+                    'wiki-compat-tables': ['https://developer.cdn.mozilla.net/static/build/styles/wiki-compat-tables.f3a3bfce97a1.css',]
+                },
+                js: {
+                    'syntax-prism': ['https://developer.cdn.mozilla.net/static/build/js/syntax-prism.7a66ddfa68bf.js',],
+                    'wiki-compat-tables': ['https://developer.cdn.mozilla.net/static/build/js/wiki-compat-tables.14ce5dcb2c3d.js',]
+                }
+            }
+        };
+    })(this);
+</script>
+
+
+  <div class="global-notice">
+    <div class="wrap center">
+
+        <p><bdi>Mozilla wants to hear from developers like you. <a href="http://www.surveygizmo.com/s3/2737536/440b74c45e94?a=mdn">http://www.surveygizmo.com/s3/2737536/440b74c45e94?a=mdn</a></bdi></p>
+
+    </div>
+  </div>
+
+
+  <ul id="nav-access">
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#document-main" id="skip-main">Skip to main content</a></li>
+    <li><a id="skip-language" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#language">Select language</a></li>
+
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#q" id="skip-search">Skip to search</a></li>
+
+  </ul>
+
+  <!-- Header -->
+  <header id="main-header"><div class="center">
+
+    <div id="tabzilla">
+        <a href="https://www.mozilla.org/" class="no-track">mozilla</a>
+    </div>
+
+    <div class="clear header-clear"></div>
+
+
+    <a href="https://developer.mozilla.org/en-US/" class="logo">Mozilla Developer Network</a>
+
+
+    <div id="nav-sec">
+
+                  <ul>
+                  <li>
+
+
+
+    <form>
+      <div class="oauth-login-container">
+          <div class="oauth-login-options" tabindex="0">
+              <span class="oauth-login-options-text">
+                Sign in
+              </span>
+              <span class="oauth-icon oauth-github" data-service="GitHub" data-href="/users/github/login/?next=%2Fen-US%2Fdocs%2FWeb%2FHTML%2FGlobal_attributes%2Faccesskey" title="GitHub"><i class="icon-github" aria-hidden="true"></i></span>
+              <span class="oauth-icon oauth-persona launch-persona-login wait-for-persona" data-service="Persona" data-next="/en-US/docs/Web/HTML/Global_attributes/accesskey" title="Persona"><i class="icon-user" aria-hidden="true"></i></span>
+          </div>
+          <div class="oauth-login-picker" aria-hidden="true">
+              <ul>
+                  <li class="wait-for-persona"><a href="https://developer.mozilla.org/en-US/users/signin" class="login-link launch-persona-login" data-next="/en-US/docs/Web/HTML/Global_attributes/accesskey" data-service="Persona"><i class="icon-user" aria-hidden="true"></i>Persona</a></li>
+                  <li><a href="https://developer.mozilla.org/users/github/login/?next=%2Fen-US%2Fdocs%2FWeb%2FHTML%2FGlobal_attributes%2Faccesskey" class="login-link" data-service="GitHub"><i class="icon-github" aria-hidden="true"></i>GitHub</a></li>
+              </ul>
+
+          </div>
+      </div>
+    </form>
+</li>
+                </ul>
+
+    </div>
+
+    <nav id="main-nav" role="navigation"><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web">Web Platform<i aria-hidden="true" class="icon-caret-down"></i></a>
+
+        <div class="submenu submenu-cols-2 js-submenu" id="nav-platform-submenu">
+          <div class="submenu-column">
+            <div class="title">Technologies</div>
+            <ul>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Graphics">Graphics</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/API">APIs / DOM</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/Apps">Apps</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/MathML">MathML</a></li>
+            </ul>
+          </div><div class="submenu-column last">
+            <div class="title">References &amp; Guides</div>
+            <ul>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Learn">Learn the Web</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/Tutorials">Tutorials</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/Reference">References</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide">Developer Guides</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility">Accessibility</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web">...more docs</a></li>
+            </ul>
+          </div>
+        </div>
+      </li><li><button href="https://developer.mozilla.org/en-US/docs/Zones">Mozilla Docs<i aria-hidden="true" class="icon-caret-down"></i></button>
+
+
+      </li><li><a href="https://developer.mozilla.org/en-US/docs/Tools">Developer Tools Changed</a></li><li><a href="https://developer.mozilla.org/en-US/docs/MDN/Feedback">Feedback<i aria-hidden="true" class="icon-caret-down"></i></a>
+
+        <div class="submenu js-submenu" id="nav-contact-submenu">
+          <div class="submenu-column">
+            <ul>
+                <li><a href="https://support.mozilla.org/">Get Firefox help<i aria-hidden="true" class="icon-external-link"></i></a></li>
+                <li><a href="http://stackoverflow.com/">Get web development help<i aria-hidden="true" class="icon-external-link"></i></a></li>
+            </ul>
+            <ul>
+              <li><a href="https://developer.mozilla.org/en-US/docs/MDN/Community">Join the MDN community</a></li>
+              <li><a href="https://bugzilla.mozilla.org/form.doc">Report a content problem<i aria-hidden="true" class="icon-external-link"></i></a></li>
+              <li><a href="https://bugzilla.mozilla.org/form.mdn">Report a bug<i aria-hidden="true" class="icon-external-link"></i></a></li>
+            </ul>
+          </div>
+        </div>
+
+      </li><li class="nav-search-link"><a href="https://developer.mozilla.org/en-US/search" title="Search"><i aria-hidden="true" class="icon-search"></i></a></li><li class="main-nav-search"><form action="https://developer.mozilla.org/en-US/search" method="get" role="search">
+        <div class="search-wrap">
+          <label for="main-q" class="offscreen">Search</label>
+          <input type="search" id="main-q" name="q" placeholder="Search" data-value="" value="">
+          <span class="search-trigger"><i aria-hidden="true" class="icon-search"></i></span>&nbsp;
+          <button type="submit" class="offscreen">Search</button>
+        </div>
+      </form></li></ul></nav>
+  </div></header>
+
+  <!-- Content will go here -->
+  <main id="content"><div class="center clear">
+
+
+   <!-- end is_zone -->
+
+
+    <div class="wiki-main-content" id="document-main" role="main"><div class="center">
+
+      <div class="article-meta">
+        <!-- action buttons -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <ul class="page-buttons" data-sticky="false">
+
+      <li><button id="languages-menu" class="transparent" aria-haspopup="true" aria-owns="languages-menu-submenu" aria-expanded="false"><span>Languages</span><i aria-hidden="true" class="icon-globe"></i></button>
+
+        <div class="submenu js-submenu" id="languages-menu-submenu">
+          <div class="submenu-column">
+            <ul id="translations">
+
+
+                  <li><bdi><a rel="internal" href="https://developer.mozilla.org/bn-BD/docs/Web/HTML/Global_attributes/accesskey" title="অ্যাক্সেস কী">বাংলা (বাংলাদেশ)</a></bdi></li>
+
+                  <li><bdi><a rel="internal" href="https://developer.mozilla.org/es/docs/Web/HTML/Atributos_Globales/accesskey" title="accesskey">Español</a></bdi></li>
+
+                  <li><bdi><a rel="internal" href="https://developer.mozilla.org/fr/docs/Web/HTML/Attributs_globaux/accesskey" title="accesskey">Français</a></bdi></li>
+
+                  <li><bdi><a rel="internal" href="https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/accesskey" title="accesskey">日本語</a></bdi></li>
+
+
+
+
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey$locales" rel="nofollow, noindex" id="translations-add">Add a translation</a></li>
+
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="page-buttons-edit"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey$edit" class="button" data-optimizely-hook="button-edit-doc" id="edit-button">Edit<i aria-hidden="true" class="icon-pencil"></i></a></li>
+
+
+
+        <li><button id="advanced-menu" class="only-icon" aria-haspopup="true" aria-owns="advanced-menu-submenu" aria-expanded="false"><span>Advanced</span><i aria-hidden="true" class="icon-cog"></i></button>
+        <div class="submenu js-submenu" id="advanced-menu-submenu" aria-hidden="true" style="z-index: 99998;">
+          <!-- this page -->
+          <div class="submenu-column">
+            <div class="title">Advanced</div>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey$history" rel="nofollow, noindex">History</a></li>
+
+
+
+
+
+
+
+
+
+
+
+                <li class="page-print"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#" onclick="return window.print();">Print this article</a></li>
+            </ul>
+          </div>
+        <button type="button" class="submenu-close transparent"><span class="offscreen">Close submenu</span><i aria-hidden="true" class="icon-remove-sign"></i></button></div>
+  </li></ul>
+
+        <!-- crumbs -->
+
+  <nav class="crumbs" role="navigation"><ol xmlns:v="http://rdf.data-vocabulary.org/#" aria-label="breadcrumbs">
+    <li typeof="v:Breadcrumb"><a href="https://developer.mozilla.org/en-US" rel="v:url" property="v:title">MDN</a></li>
+
+      <li class="crumb" typeof="v:Breadcrumb"><a href="https://developer.mozilla.org/en-US/docs/Web" rel="v:url" property="v:title">Web technology for developers</a></li>
+
+      <li class="crumb" typeof="v:Breadcrumb"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" rel="v:url" property="v:title">HTML</a></li>
+
+      <li class="crumb" typeof="v:Breadcrumb"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes" rel="v:url" property="v:title">Global attributes</a></li>
+
+    <li class="crumb" typeof="v:Breadcrumb" property="v:title">accesskey</li>
+  </ol></nav>
+      </div>
+
+      <!-- heading -->
+      <div id="wiki-document-head" class="document-head">
+          <span class="from-search-previous-box">
+            <a class="button from-search-previous only-icon disabled" title="Previous Search Result" data-empty-title="No Previous Search Result"><i aria-hidden="true" class="icon-chevron-left"></i></a>
+          </span>
+          <span class="from-search-navigate-wrap">
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#" class="from-search-navigate"><span class="from-search-navigate-up"><i aria-hidden="true" class="icon-double-angle-up"></i></span><span class="from-search-navigate-down"><i aria-hidden="true" class="icon-double-angle-down"></i></span></a>
+          </span>
+          <div class="from-search-toc submenu">
+            <span class="title">Your Search Results</span>
+            <ol></ol>
+          </div>
+          <span class="from-search-next-box">
+            <a class="button from-search-next only-icon disabled" title="Next Search Result" data-empty-title="No Previous Search Result"><i aria-hidden="true" class="icon-chevron-right"></i></a>
+          </span>
+
+
+        <div class="contributor-avatars" data-all-text="see all contributors" data-alternate-message="hide contributors">
+            <ul>
+
+                <li class="shown">
+                <a href="https://developer.mozilla.org/en-US/profiles/Tigt" title="View profile: Tigt">
+                <img src="./accesskey - HTML _ MDN_files/6dfc114d927c3f5bd61c2697b4adf2bc" class="avatar loaded" height="34" width="34" alt="Tigt"></a>
+                </li>
+
+                <li class="shown">
+                <a href="https://developer.mozilla.org/en-US/profiles/teoli" title="View profile: teoli">
+                <img src="./accesskey - HTML _ MDN_files/d0d90148e08e3b64ccf75c46f31442c5" class="avatar loaded" height="34" width="34" alt="teoli"></a>
+                </li>
+
+                <li class="shown">
+                <a href="https://developer.mozilla.org/en-US/profiles/fscholz" title="View profile: fscholz">
+                <img src="./accesskey - HTML _ MDN_files/e24391c9174352988d819a9b9ea77c9e" class="avatar loaded" height="34" width="34" alt="fscholz"></a>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <h1>accesskey</h1>
+
+      </div>
+
+
+      <!-- start the main content container -->
+        <div id="wiki-column-container" class="wiki-right-present wiki-left-present">
+
+          <!-- content row with three strips -->
+          <div class="column-container column-container-reverse">
+
+
+              <!-- TOC, approvals, etc -->
+              <div class="column-strip wiki-column" id="wiki-right">
+
+              <!-- table of contents -->
+              <div id="toc" class="toc toggleable current" style="width: auto; max-height: none;" data-closed="">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#toc" class="title toggler" data-open-icon="icon-plus" data-closed-icon="icon-minus" aria-haspopup="true">In This Article<i class="icon-minus"></i></a>
+                <ol class="toggle-container" aria-expanded="true" style="">
+                  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#Specifications" rel="internal">Specifications</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#Browser_compatibility" rel="internal">Browser compatibility</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#See_also" rel="internal">See also</a>
+                </li></ol>
+              </div>
+
+              </div>
+
+
+
+
+
+
+
+            <!-- center: main article content -->
+            <div id="wiki-content" class="column-half wiki-column text-content">
+
+
+
+
+
+
+
+
+
+
+
+
+              <!-- just the article content -->
+              <article id="wikiArticle">
+
+
+                    <p></p><section id="Quick_Links" class="Quick_links"><!-- --></section><p></p>
+
+The <strong>accesskey</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes">global attribute</a> provides a hint for generating a keyboard shortcut for the current element. This attribute consists of a space-separated list of characters (one single Unicode code point). The browser uses the first one that exists on the computer keyboard layout.
+
+<p>The operation to activate the accesskey depends on browser and its platform.</p>
+
+<table class="standard-table">
+ <tbody>
+  <tr>
+   <th>&nbsp;</th>
+   <th>Windows</th>
+   <th>Linux</th>
+   <th>Mac</th>
+  </tr>
+  <tr>
+   <th>Firefox</th>
+   <td rowspan="1" colspan="2"><kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd><em>key</em></kbd></td>
+   <td>On Firefox 14 or newer, <kbd>Control</kbd> + <kbd>Alt</kbd> + <kbd><em>key</em></kbd><br>
+    On Firefox 13 or older, <kbd>Control</kbd> + <kbd><em>key</em></kbd></td>
+  </tr>
+  <tr>
+   <th>Internet Explorer</th>
+   <td><kbd>Alt</kbd> + <kbd><em>key</em></kbd></td>
+   <td rowspan="1" colspan="2">N/A</td>
+  </tr>
+  <tr>
+   <th>Google Chrome</th>
+   <td rowspan="1" style="text-align: center;" colspan="2"><kbd>Alt</kbd> + <kbd><em>key</em></kbd></td>
+   <td><kbd>Control</kbd> + <kbd>Alt</kbd> + <kbd><em>key</em></kbd></td>
+  </tr>
+  <tr>
+   <th>Safari</th>
+   <td><kbd>Alt</kbd> + <kbd><em>key</em></kbd></td>
+   <td>N/A</td>
+   <td><kbd>Control</kbd> + <kbd>Alt</kbd> + <kbd><em>key</em></kbd></td>
+  </tr>
+  <tr>
+   <th>Opera</th>
+   <td rowspan="1" colspan="3"><kbd>Shift</kbd> + <kbd>Esc</kbd> opens a contents list which are accessible by accesskey, then, can choose an item by pressing <kbd><em>key</em></kbd></td>
+  </tr>
+ </tbody>
+</table>
+
+<p>Note that Firefox can customize the required modifier key by user's preferences.</p>
+
+<h2 id="Specifications">Specifications</h2>
+
+<table class="standard-table">
+ <tbody>
+  <tr>
+   <th scope="col">Specification</th>
+   <th scope="col">Status</th>
+   <th scope="col">Comment</th>
+  </tr>
+  <tr>
+   <td><a href="https://html.spec.whatwg.org/multipage/interaction.html#the-accesskey-attribute" class="external external-icon" lang="en" hreflang="en">WHATWG HTML Living Standard<br><small lang="en-US">The definition of 'accesskey' in that specification.</small></a></td>
+   <td><span class="spec-Living">Living Standard</span></td>
+   <td>No change from latest snapshot, <a href="http://www.w3.org/html/wg/drafts/html/master/" class="external external-icon" lang="en" title="The &#39;HTML5.1&#39; specification" hreflang="en">HTML5.1</a></td>
+  </tr>
+  <tr>
+   <td><a href="http://www.w3.org/html/wg/drafts/html/master/editing.html#the-accesskey-attribute" class="external external-icon" lang="en" hreflang="en">HTML5.1<br><small lang="en-US">The definition of 'accesskey' in that specification.</small></a></td>
+   <td><span class="spec-WD">Working Draft</span></td>
+   <td>Snapshot of <a href="https://html.spec.whatwg.org/multipage/" class="external external-icon" lang="en" title="The &#39;WHATWG HTML Living Standard&#39; specification" hreflang="en">WHATWG HTML Living Standard</a>, no change from <a href="http://www.w3.org/TR/html5/" class="external external-icon" lang="en" title="The &#39;HTML5&#39; specification" hreflang="en">HTML5</a></td>
+  </tr>
+  <tr>
+   <td><a href="http://www.w3.org/TR/html5/editing.html#the-accesskey-attribute" class="external external-icon" lang="en" hreflang="en">HTML5<br><small lang="en-US">The definition of 'accesskey' in that specification.</small></a></td>
+   <td><span class="spec-REC">Recommendation</span></td>
+   <td>Snapshot of&nbsp; <a href="https://html.spec.whatwg.org/multipage/" class="external external-icon" lang="en" title="The &#39;WHATWG HTML Living Standard&#39; specification" hreflang="en">WHATWG HTML Living Standard</a>. From <a href="http://www.w3.org/TR/html401/" class="external external-icon" lang="en" title="The &#39;HTML 4.01 Specification&#39; specification" hreflang="en">HTML 4.01 Specification</a>, several characters can be set as the <code>accesskey</code>. Also, it can be set on any element.</td>
+  </tr>
+  <tr>
+   <td><a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.11.2" class="external external-icon" lang="en" hreflang="en">HTML 4.01 Specification<br><small lang="en-US">The definition of 'accesskey' in that specification.</small></a></td>
+   <td><span class="spec-REC">Recommendation</span></td>
+   <td>Only supported on <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a" title="The HTML Anchor Element (&lt;a&gt;) defines a hyperlink to a location on the same page or any other page on the Web. It can also be used (in an obsolete way) to create an anchor point—a destination for hyperlinks within the content of a page, so that links aren&#39;t limited to connecting simply to the top of a page."><code>&lt;a&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/area" title="The HTML &lt;area&gt; element defines a hot-spot region on an image, and optionally associates it with a hypertext link. This element is used only within a &lt;map&gt; element."><code>&lt;area&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button" title="The HTML &lt;button&gt; Element represents a clickable button."><code>&lt;button&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" title="The HTML &lt;input&gt; element is used to create interactive controls for web-based forms in order to accept data from the user. How an &lt;input&gt; works varies considerably depending on the value of its type attribute."><code>&lt;input&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label" title="The HTML Label Element (&lt;label&gt;) represents a caption for an item in a user interface. It can be associated with a control either by placing the control element inside the &lt;label&gt; element, or by using the for attribute. Such a control is called the labeled control of the label element."><code>&lt;label&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend" title="The HTML &lt;legend&gt; Element (or HTML Legend Field Element) represents a caption for the content of its parent &lt;fieldset&gt;."><code>&lt;legend&gt;</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea" title="The HTML &lt;textarea&gt; element represents a multi-line plain-text editing control."><code>&lt;textarea&gt;</code></a></td>
+  </tr>
+ </tbody>
+</table>
+
+<h2 id="Browser_compatibility">Browser compatibility</h2>
+
+<p></p><div class="htab">
+    <a name="AutoCompatibilityTable" id="AutoCompatibilityTable"></a>
+    <ul>
+        <li class="selected"><a>Desktop</a></li>
+        <li><a>Mobile</a></li>
+    </ul>
+<div id="compat-desktop" style="display: block;">
+<table class="compat-table">
+ <tbody>
+  <tr>
+   <th>Feature</th>
+   <th>Chrome</th>
+   <th>Firefox (Gecko)</th>
+   <th>Internet Explorer</th>
+   <th>Opera</th>
+   <th>Safari</th>
+  </tr>
+  <tr>
+   <td>Basic support</td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+  </tr>
+ </tbody>
+</table>
+</div><div id="compat-mobile" style="display: none;">
+<table class="compat-table">
+ <tbody>
+  <tr>
+   <th>Feature</th>
+   <th>Android</th>
+   <th>Chrome for Android</th>
+   <th>Firefox Mobile (Gecko)</th>
+   <th>IE Mobile</th>
+   <th>Opera Mobile</th>
+   <th>Safari Mobile</th>
+  </tr>
+  <tr>
+   <td>Basic support</td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+   <td><span title="Please update this with the earliest version of support." style="color: #888;">(Yes)</span></td>
+  </tr>
+ </tbody>
+</table>
+</div></div><p></p>
+
+
+
+
+
+<h2 id="See_also">See also</h2>
+
+<ul>
+ <li>All <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes">global attributes</a>.</li>
+</ul>
+
+
+              </article>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="share">
+        <strong>Share:</strong>
+        <ul>
+            <li><a href="http://twitter.com/share?url=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FHTML%2FGlobal_attributes%2Faccesskey%3Futm_campaign%3Dshare%26utm_medium%3Ddoc%2Bshare%2Blink%26utm_source%3Dtwitter.com&amp;text=I+learned+about+accesskey+on+MDN." target="_blank" data-url="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey?utm_campaign=share&amp;utm_medium=doc+share+link&amp;utm_source=twitter.com" data-title="I learned about accesskey on MDN." class="share-link twitter"><i aria-hidden="true" class="icon-twitter"></i>Twitter</a></li>
+            <li><a href="http://facebook.com/sharer.php?s=100&amp;p[url]=https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey?utm_campaign=share&amp;utm_medium=doc+share+link&amp;utm_source=facebook.com" target="_blank" data-url="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey?utm_campaign=share&amp;utm_medium=doc+share+link&amp;utm_source=facebook.com" data-title="I learned about accesskey on MDN." class="share-link facebook"><i aria-hidden="true" class="icon-facebook"></i>Facebook</a></li>
+            <li><a href="https://plus.google.com/share?url=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FHTML%2FGlobal_attributes%2Faccesskey%3Futm_campaign%3Dshare%26utm_medium%3Ddoc%2Bshare%2Blink%26utm_source%3Dplus.google.com" target="_blank" data-url="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey?utm_campaign=share&amp;utm_medium=doc+share+link&amp;utm_source=plus.google.com" data-title="I learned about accesskey on MDN." class="share-link gplus"><i aria-hidden="true" class="icon-google-plus"></i>Google+</a></li>
+        </ul>
+    </div>
+
+
+
+                <!-- contributors -->
+                <div class="wiki-block contributors">
+                  <h2 class="offscreen">Document Tags and Contributors</h2>
+
+
+  <div class="tag-attach-list contributors-sub">
+    <i aria-hidden="true" class="icon-tags icon-fw"></i>
+    <strong>Tags:</strong>&nbsp;
+    <ul class="tags tags-small">
+
+        <li><a href="https://developer.mozilla.org/en-US/docs/tag/Global%20attributes">Global attributes</a></li>
+
+        <li><a href="https://developer.mozilla.org/en-US/docs/tag/HTML">HTML</a></li>
+
+        <li><a href="https://developer.mozilla.org/en-US/docs/tag/Reference">Reference</a></li>
+
+        <li><a href="https://developer.mozilla.org/en-US/docs/tag/R%C3%A9f%C3%A9rence">Référence</a></li>
+
+    </ul>
+  </div>
+
+
+
+                    <div class="contributors-sub">
+                      <i aria-hidden="true" class="icon-group icon-fw"></i>&nbsp;<strong>Contributors to this page:</strong>
+        <a href="https://developer.mozilla.org/en-US/profiles/Tigt">Tigt</a>,
+
+        <a href="https://developer.mozilla.org/en-US/profiles/teoli">teoli</a>,
+
+        <a href="https://developer.mozilla.org/en-US/profiles/fscholz">fscholz</a>
+
+                    </div>
+
+
+
+                    <div class="contributors-sub">
+                      <i aria-hidden="true" class="icon-clock-o icon-fw"></i>&nbsp;<strong>Last updated by:</strong>
+                      <a href="https://developer.mozilla.org/en-US/profiles/Tigt">Tigt</a>,
+                      <time datetime="2015-10-26T15:05:39-07:00">Oct 26, 2015, 3:05:39 PM</time>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+              <!-- quick links and zone subnav strip -->
+              <div id="wiki-left" class="column-strip wiki-column">
+
+
+
+
+
+
+                  <!-- quick links -->
+
+  <div class="quick-links" id="quick-links">
+    <div class="title see-also">See also</div>
+
+ <ol>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><strong><em>HTML</em></strong></a></li>
+  <li><strong>Tutorials:</strong></li>
+  <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>Introductory</a>
+   <ol class="toggle-container" style="display: none;">
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML">HTML developer guide</a></li>
+   </ol>
+  </li>
+  <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>Intermediate</a>
+   <ol class="toggle-container" style="display: none;">
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements">Block-level elements</a></li>
+   </ol>
+  </li>
+  <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>Advanced</a>
+   <ol class="toggle-container" style="display: none;">
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Optimizing_your_pages_for_speculative_parsing">Optimizing your pages for speculative parsing</a></li>
+   </ol>
+  </li>
+  <li><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference">References:</a></strong></li>
+  <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>HTML elements</a>
+   <ol class="toggle-container" style="display: none;"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" title="This page lists all the HTML elements.">HTML element reference</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a" title="The HTML Anchor Element (&lt;a&gt;) defines a hyperlink to a location on the same page or any other page on the Web. It can also be used (in an obsolete way) to create an anchor point—a destination for hyperlinks within the content of a page, so that links aren&#39;t limited to connecting simply to the top of a page.">&lt;a&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr" title="The HTML Abbreviation element (&lt;abbr&gt;) represents an abbreviation and optionally provides a full description for it. If present, the title attribute must contain this full description and nothing else.">&lt;abbr&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/acronym" title="The HTML Acronym Element (&lt;acronym&gt;) allows authors to clearly indicate a sequence of characters that compose an acronym or abbreviation for a word.">&lt;acronym&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address" title="The HTML &lt;address&gt; element supplies contact information for its nearest &lt;article&gt; or &lt;body&gt; ancestor; in the latter case, it applies to the whole document.">&lt;address&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/applet" title="The HTML Applet Element (&lt;applet&gt;) identifies the inclusion of a Java applet.">&lt;applet&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/area" title="The HTML &lt;area&gt; element defines a hot-spot region on an image, and optionally associates it with a hypertext link. This element is used only within a &lt;map&gt; element.">&lt;area&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" title="The HTML &lt;article&gt; Element represents a self-contained composition in a document, page, application, or site, which is intended to be independently distributable or reusable (e.g., in syndication). This could be a forum post, a magazine or newspaper article, a blog entry, an object, or any other independent item of content. Each &lt;article&gt; should be identified, typically by including a heading (&lt;h1&gt;-&lt;h6&gt; element) as a child of the &lt;article&gt; element.">&lt;article&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside" title="The HTML &lt;aside&gt; element represents a section of the page with content connected tangentially to the rest, which could be considered separate from that content. These sections are often represented as sidebars or inserts. They often contain the definitions on the sidebars, such as definitions from the glossary; there may also be other types of information, such as related advertisements; the biography of the author; web applications; profile information or related links on the blog.">&lt;aside&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio" title="The HTML &lt;audio&gt; element is used to embed sound content in documents. It may contain several audio sources, represented using the src attribute or the &lt;source&gt; element; the browser will choose the most suitable one.">&lt;audio&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/b" title="The HTML &lt;b&gt; Element represents a span of text stylistically different from normal text, without conveying any special importance or relevance. It is typically used for keywords in a summary, product names in a review, or other spans of text whose typical presentation would be boldfaced. Another example of its use is to mark the lead sentence of each paragraph of an article.">&lt;b&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base" title="The HTML &lt;base&gt; element specifies the base URL to use for all relative URLs contained within a document. There can be only one &lt;base&gt; element in a document.">&lt;base&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/basefont" title="The HTML basefont element (&lt;basefont&gt;) establishes a default font size for a document. Font size then can be varied relative to the base font size using the &lt;font&gt; element.">&lt;basefont&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bdi" title="The HTML &lt;bdi&gt; Element (or Bi-Directional Isolation Element) isolates a span of text that might be formatted in a different direction from other text outside it.">&lt;bdi&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bdo" title="The HTML &lt;bdo&gt; Element (or HTML bidirectional override element) is used to override the current directionality of text. It causes the directionality of the characters to be ignored in favor of the specified directionality.">&lt;bdo&gt;</a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bgsound" title="The HTML Background Sound Element () is an Internet Explorer element associating a background sound with a page.">&lt;bgsound&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/big" title="The HTML Big Element (&lt;big&gt;) makes the text font size one size bigger (for example, from small to medium, or from large to x-large) up to the browser&#39;s maximum font size.">&lt;big&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blink" title="The HTML Blink Element (&lt;blink&gt;) is a non-standard element causing the enclosed text to flash slowly.">&lt;blink&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote" title="The HTML &lt;blockquote&gt; Element (or HTML Block Quotation Element) indicates that the enclosed text is an extended quotation. Usually, this is rendered visually by indentation (see Notes for how to change it). A URL for the source of the quotation may be given using the cite attribute, while a text representation of the source can be given using the &lt;cite&gt; element.">&lt;blockquote&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body" title="The HTML &lt;body&gt; Element represents the content of an HTML document. There can be only one &lt;body&gt; element in a document.">&lt;body&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br" title="The HTML &lt;br&gt; Element (or HTML Line Break Element) produces a line break in text (carriage-return). It is useful for writing a poem or an address, where the division of lines is significant.">&lt;br&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button" title="The HTML &lt;button&gt; Element represents a clickable button.">&lt;button&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" title="The HTML &lt;canvas&gt; Element can be used to draw graphics via scripting (usually JavaScript). For example, it can be used to draw graphs, make photo compositions or even perform animations. You may (and should) provide alternate content inside the &lt;canvas&gt; block. That content will be rendered both on older browsers that don&#39;t support canvas and in browsers with JavaScript disabled.">&lt;canvas&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption" title="The HTML &lt;caption&gt; Element (or HTML Table Caption Element) represents the title of a table. Though it is always the first descendant of a &lt;table&gt;, its styling, using CSS, may place it elsewhere, relative to the table.">&lt;caption&gt;</a></li><li><span class="sidebar-icon"><span title="This deprecated API should no longer be used, but will probably still work."><i class="icon-thumbs-down-alt"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/center" title="The HTML Center Element (&lt;center&gt;) is a block-level element that can contain paragraphs and other block-level and inline elements. The entire content of this element is centered horizontally within its containing element (typically, the &lt;body&gt;).">&lt;center&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite" title="The HTML Citation Element (&lt;cite&gt;) represents a reference to a creative work. It must include the title of a work or a URL reference, which may be in an abbreviated form according to the conventions used for the addition of citation metadata.">&lt;cite&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code" title="Summary">&lt;code&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/col" title="The HTML Table Column Element (&lt;col&gt;) defines a column within a table and is used for defining common semantics on all common cells. It is generally found within a &lt;colgroup&gt; element.">&lt;col&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/colgroup" title="The HTML Table Column Group Element (&lt;colgroup&gt;) defines a group of columns within a table.">&lt;colgroup&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/command" title="The command element represents a command which the user can invoke.">&lt;command&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/content" title="The HTML &lt;content&gt; element is used inside of Shadow DOM as an insertion point. It is not intended to be used in ordinary HTML. It is used with Web Components.">&lt;content&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/data" title="The HTML &lt;data&gt; Element links a given content with a machine-readable translation. If the content is time- or date-related, the &lt;time&gt; must be used.">&lt;data&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist" title="The HTML Datalist Element (&lt;datalist&gt;) contains a set of &lt;option&gt; elements that represent the values available for other controls.">&lt;datalist&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dd" title="The HTML Description Element (&lt;dd&gt;) indicates the description of a term in a description list (&lt;dl&gt;) element. This element can occur only as a child element of a definition list and it must follow a &lt;dt&gt; element.">&lt;dd&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del" title="The HTML Deleted Text Element (&lt;del&gt;) represents a range of text that has been deleted from a document. This element is often (but need not be) rendered with strike-through text.">&lt;del&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details" title="The HTML Details Element (&lt;details&gt;) is used as a disclosure widget from which the user can retrieve additional information.">&lt;details&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dfn" title="The HTML Definition Element (&lt;dfn&gt;) represents the defining instance of a term.">&lt;dfn&gt;</a></li><li><span class="sidebar-icon"><span title="This is an experimental API that should not be used in production code."><i class="icon-beaker"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog" title="The HTML &lt;dialog&gt; element represents a dialog box or other interactive component, such as an inspector or window. &lt;form&gt; elements can be integrated within a dialog by specifying them with the attribute method=&quot;dialog&quot;. When such a form is submitted, the dialog is closed with a returnValue attribute set to the value of the submit button used.">&lt;dialog&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dir" title="The HTML directory element (&lt;dir&gt;) represents a directory, namely a collection of filenames.">&lt;dir&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div" title="The HTML &lt;div&gt; element (or HTML Document Division Element) is the generic container for flow content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element (such as &lt;article&gt; or &lt;nav&gt;) is appropriate.">&lt;div&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl" title="The HTML &lt;dl&gt; Element (or HTML Description List Element) encloses a list of pairs of terms and descriptions. Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs).">&lt;dl&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dt" title="The HTML &lt;dt&gt; element (or HTML Definition Term Element) identifies a term in a definition list. This element can occur only as a child element of a &lt;dl&gt;. It is usually followed by a &lt;dd&gt; element; however, multiple &lt;dt&gt; elements in a row indicate several terms that are all defined by the immediate next &lt;dd&gt; element.">&lt;dt&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/element" title="The HTML &lt;element&gt; element is used to define new custom DOM elements.">&lt;element&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em" title="The HTML Emphasis Element (&lt;em&gt;) marks text that has stress emphasis. The &lt;em&gt; element can be nested, with each level of nesting indicating a greater degree of emphasis.">&lt;em&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed" title="The HTML &lt;embed&gt; Element represents an integration point for an external application or interactive content (in other words, a plug-in).">&lt;embed&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset" title="The HTML &lt;fieldset&gt; element is used to group several controls as well as labels (&lt;label&gt;) within a web form.">&lt;fieldset&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption" title="The HTML &lt;figcaption&gt; Element represents a caption or a legend associated with a figure or an illustration described by the rest of the data of the &lt;figure&gt; element which is its immediate ancestor which means &lt;figcaption&gt; can be the first or last element inside a &lt;figure&gt; block. Also, the HTML Figcaption Element is optional; if not provided, then the parent figure element will have no caption.">&lt;figcaption&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure" title="The HTML &lt;figure&gt; Element represents self-contained content, frequently with a caption (&lt;figcaption&gt;), and is typically referenced as a single unit. While it is related to the main flow, its position is independent of the main flow. Usually this is an image, an illustration, a diagram, a code snippet, or a schema that is referenced in the main text, but that can be moved to another page or to an appendix without affecting the main flow.">&lt;figure&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/font" title="The HTML Font Element (&lt;font&gt;) defines the font size, color and face for its content.">&lt;font&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer" title="The HTML &lt;footer&gt; element represents a footer for its nearest sectioning content or sectioning root element. A footer typically contains information about the author of the section, copyright data or links to related documents.">&lt;footer&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form" title="The HTML &lt;form&gt; element represents a document section that contains interactive controls to submit information to a web server.">&lt;form&gt;</a></li><li><span class="sidebar-icon"><span title="This deprecated API should no longer be used, but will probably still work."><i class="icon-thumbs-down-alt"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/frame" title="&lt;frame&gt; is an HTML element which defines a particular area in which another HTML document can be displayed. A frame should be used within a &lt;frameset&gt;.">&lt;frame&gt;</a></li><li><span class="sidebar-icon"><span title="This deprecated API should no longer be used, but will probably still work."><i class="icon-thumbs-down-alt"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/frameset" title="&lt;frameset&gt; is an HTML element which is used to contain &lt;frame&gt; elements.">&lt;frameset&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head" title="The HTML &lt;head&gt; element provides general information (metadata) about the document, including its title and links to/definitions of scripts and style sheets.">&lt;head&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header" title="The HTML &lt;header&gt; Element represents a group of introductory or navigational aids. It may contain some heading elements but also other elements like a logo, wrapped section&#39;s header, a search form, and so on.">&lt;header&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hgroup" title="The HTML &lt;hgroup&gt; Element (HTML Headings Group Element) represents the heading of a section. It defines a single title that participates in the outline of the document as the heading of the implicit or explicit section that it belongs to.">&lt;hgroup&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr" title="The HTML &lt;hr&gt; element represents a thematic break between paragraph-level elements (for example, a change of scene in a story, or a shift of topic with a section). In previous versions of HTML, it represented a horizontal rule. It may still be displayed as a horizontal rule in visual browsers, but is now defined in semantic terms, rather than presentational terms.">&lt;hr&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html" title="The HTML &lt;html&gt; element (or HTML root element) represents the root of an HTML document. All other elements must be descendants of this element.">&lt;html&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i" title="The HTML &lt;i&gt; Element represents a range of text that is set off from the normal text for some reason, for example, technical terms, foreign language phrases, or fictional character thoughts. It is typically displayed in italic type.">&lt;i&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" title="The HTML Inline Frame Element (&lt;iframe&gt;) represents a nested browsing context, effectively embedding another HTML page into the current page. In HTML 4.01, a document may contain a head and a body or a head and a frame-set, but not both a body and a frame-set. However, an &lt;iframe&gt; can be used within a normal document body. Each browsing context has its own session history and active document. The browsing context that contains the embedded content is called the parent browsing context. The top-level browsing context (which has no parent) is typically the browser window.">&lt;iframe&gt;</a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/image" title="The HTML &lt;image&gt; element was an experimental element designed to display pictures. It never was implemented and the standard &lt;img&gt; element must be used.">&lt;image&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img" title="The HTML Image Element (&lt;img&gt;) represents an image in the document.">&lt;img&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" title="The HTML &lt;input&gt; element is used to create interactive controls for web-based forms in order to accept data from the user. How an &lt;input&gt; works varies considerably depending on the value of its type attribute.">&lt;input&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins" title="The HTML &lt;ins&gt; Element (or HTML Inserted Text) HTML represents a range of text that has been added to a document.">&lt;ins&gt;</a></li><li><span class="sidebar-icon"><span title="This deprecated API should no longer be used, but will probably still work."><i class="icon-thumbs-down-alt"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/isindex" title="&lt;isindex&gt; is an HTML element which is used for putting a text field in the document for querying document. &lt;isindex&gt; is intented to use inside of &lt;head&gt; element by W3C, however browsers provide support wherever it is used in the document.">&lt;isindex&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd" title="The HTML Keyboard Input Element (&lt;kbd&gt;) represents user input and produces an inline element displayed in the browser&#39;s default monospace font.">&lt;kbd&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/keygen" title="The HTML &lt;keygen&gt; element exists to facilitate generation of key material, and submission of the public key as part of an HTML form. This mechanism is designed for use with Web-based certificate management systems. It is expected that the &lt;keygen&gt; element will be used in an HTML form along with other information needed to construct a certificate request, and that the result of the process will be a signed certificate.">&lt;keygen&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label" title="The HTML Label Element (&lt;label&gt;) represents a caption for an item in a user interface. It can be associated with a control either by placing the control element inside the &lt;label&gt; element, or by using the for attribute. Such a control is called the labeled control of the label element.">&lt;label&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend" title="The HTML &lt;legend&gt; Element (or HTML Legend Field Element) represents a caption for the content of its parent &lt;fieldset&gt;.">&lt;legend&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li" title="The HTML List Item Element (&lt;li&gt;) is used to represent an item in a list. It must be contained in a parent element: an ordered list (&lt;ol&gt;), an unordered list (&lt;ul&gt;), or a menu (&lt;menu&gt;). In menus and unordered lists, list items are usually displayed using bullet points. In ordered lists, they are usually displayed with an ascending counter on the left, such as a number or letter.">&lt;li&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link" title="The HTML &lt;link&gt; element specifies relationships between the current document and an external resource. Possible uses for this element include defining a relational framework for navigation. This Element is most used to link to style sheets.">&lt;link&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/listing" title="The HTML Listing Element (&lt;listing&gt;) renders text between the start and end tags without interpreting the HTML in between and using a monospaced font. The HTML 2 standard recommended that lines shouldn&#39;t be broken when not greater than 132 characters.">&lt;listing&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/main" title="The HTML &lt;main&gt; element represents the main content of  the &lt;body&gt; of a document or application. The main content area consists of content that is directly related to, or expands upon the central topic of a document or the central functionality of an application. This content should be unique to the document, excluding any content that is repeated across a set of documents such as sidebars, navigation links, copyright information, site logos, and search forms (unless the document&#39;s main function is as a search form).">&lt;main&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/map" title="The HTML &lt;map&gt; element is used with &lt;area&gt; elements to define an image map (a clickable link area).">&lt;map&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark" title="The HTML Mark Element (&lt;mark&gt;) represents highlighted text, i.e., a run of text marked for reference purpose, due to its relevance in a particular context. For example it can be used in a page showing search results to highlight every instance of the searched-for word.">&lt;mark&gt;</a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/marquee" title="The HTML &lt;marquee&gt; element is used to insert a scrolling area of text.">&lt;marquee&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu" title="The HTML &lt;menu&gt; element represents a group of commands that a user can perform or activate. This includes both list menus, which might appear across the top of a screen, as well as context menus, such as those that might appear underneath a button after it has been clicked.">&lt;menu&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menuitem" title="The HTML &lt;menuitem&gt; element represents a command that a user is able to invoke through a popup menu. This includes context menus, as well as menus that might be attached to a menu button.">&lt;menuitem&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta" title="The HTML &lt;meta&gt; element represents any metadata information that cannot be represented by one of the other HTML meta-related elements (&lt;base&gt;, &lt;link&gt;, &lt;script&gt;, &lt;style&gt; or &lt;title&gt;).">&lt;meta&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter" title="The HTML &lt;meter&gt; Element represents either a scalar value within a known range or a fractional value.">&lt;meter&gt;</a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/multicol" title="The HTML &lt;multicol&gt; element was an experimental element designed to allow multi-column layouts. It never got any significant traction and is not implemented in any major browsers.">&lt;multicol&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav" title="The HTML Navigation Element (&lt;nav&gt;) represents a section of a page that links to other pages or to parts within the page: a section with navigation links.">&lt;nav&gt;</a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nobr" title="The HTML &lt;nobr&gt; element prevents a text from breaking into a new line automatically, so it is displayed on one long line and scrolling might be necessary. This tag is not standard HTML and should not be used.">&lt;nobr&gt;</a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><span class="sidebar-icon"><span title="This deprecated API should no longer be used, but will probably still work."><i class="icon-thumbs-down-alt"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noembed" title="The &lt;noembed&gt; element is a deprecated and non-standard way to provide alternative, or &quot;fallback&quot;, content for browsers that do not support the &lt;embed&gt; element or do not support embedded content an author wishes to use.">&lt;noembed&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noframes" title="&lt;noframes&gt; is an HTML element which is used to supporting browsers which are not able to support &lt;frame&gt; elements or configured to do so.">&lt;noframes&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript" title="The HTML &lt;noscript&gt; Element defines a section of html to be inserted if a script type on the page is unsupported or if scripting is currently turned off in the browser.">&lt;noscript&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object" title="The HTML Embedded Object Element (&lt;object&gt;) represents an external resource, which can be treated as an image, a nested browsing context, or a resource to be handled by a plugin.">&lt;object&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol" title="The HTML &lt;ol&gt; Element (or HTML Ordered List Element) represents an ordered list of items. Typically, ordered-list items are displayed with a preceding numbering, which can be of any form, like numerals, letters or Romans numerals or even simple bullets. This numbered style is not defined in the HTML description of the page, but in its associated CSS, using the list-style-type property.">&lt;ol&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup" title="In a Web form, the HTML &lt;optgroup&gt; element  creates a grouping of options within a &lt;select&gt; element.">&lt;optgroup&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option" title="In a Web form, the HTML &lt;option&gt; element is used to create a control representing an item within a &lt;select&gt;, an &lt;optgroup&gt; or a &lt;datalist&gt; HTML5 element.">&lt;option&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output" title="The HTML &lt;output&gt; element represents the result of a calculation or user action.">&lt;output&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p" title="The HTML &lt;p&gt; element (or HTML Paragraph Element) represents a paragraph of text.">&lt;p&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/param" title="The HTML &lt;param&gt; Element (or HTML Parameter Element) defines parameters for &lt;object&gt;.">&lt;param&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture" title="The HTML &lt;picture&gt; element is a container used to specify multiple &lt;source&gt;s for a specific &lt;img&gt; contained in it. The browser will choose the most suitable source according to the current layout of the page (the constraints of the box the image will appear in) and the device it will be displayed on (e.g. a normal or hiDPI device).">&lt;picture&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/plaintext" title="The HTML Plaintext Element (&lt;plaintext&gt;) renders everything following the start tag as raw text, without interpreting any HTML. There is no closing tag, since everything after it is considered raw text.">&lt;plaintext&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre" title="The HTML Preformatted Text (&lt;pre&gt;) represents preformatted text. Text within this element is typically displayed in a non-proportional font exactly as it is laid out in the file. Whitespaces inside this element are displayed as typed.">&lt;pre&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress" title="The HTML &lt;progress&gt; Element is used to view the completion progress of a task. While the specifics of how it&#39;s displayed is left up to the browser developer, it&#39;s typically displayed as a progress bar. Javascript can be used to manipulate the value of progress bar.">&lt;progress&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q" title="The HTML Quote Element (&lt;q&gt;) indicates that the enclosed text is a short inline quotation. This element is intended for short quotations that don&#39;t require paragraph breaks; for long quotations use &lt;blockquote&gt; element.">&lt;q&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rp" title="The HTML &lt;rp&gt; element is used to provide fall-back parenthesis for browsers non-supporting ruby annotations. Ruby annotations are for showing pronounciation of East Asian characters, like using Japanese furigana or Taiwainese bopomofo characters. The &lt;rp&gt; element is used in the case of lack of &lt;ruby&gt; element support its content has what should be displayed in order to indicate the presence of a ruby annotation, usually parentheses.">&lt;rp&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rt" title="The HTML &lt;rt&gt; Element embraces pronunciation of characters presented in a ruby annotations, which are used to describe the pronunciation of East Asian characters. This element is always used inside a &lt;ruby&gt; element.">&lt;rt&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rtc" title="The HTML &lt;rtc&gt; Element embraces semantic annotations of characters presented in a ruby of &lt;rb&gt; elements used inside of &lt;ruby&gt; element. &lt;rb&gt; elements can have both pronunciation (&lt;rt&gt; and semantic (&lt;rtc&gt;) annotations.">&lt;rtc&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ruby" title="The HTML &lt;ruby&gt; Element represents a ruby annotation. Ruby annotations are for showing pronunciation of East Asian characters.">&lt;ruby&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s" title="The HTML Strikethrough Element (&lt;s&gt;) renders text with a strikethrough, or a line through it. Use the &lt;s&gt; element to represent things that are no longer relevant or no longer accurate. However, &lt;s&gt; is not appropriate when indicating document edits; for that, use the &lt;del&gt; and &lt;ins&gt; elements, as appropriate.">&lt;s&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp" title="The HTML &lt;samp&gt; element is an element intended to identify sample output from a computer program. It is usually displayed in the browser&#39;s default monotype font (such as Lucida Console).">&lt;samp&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script" title="The HTML Script Element (&lt;script&gt;) is used to embed or reference an executable script within an HTML or XHTML document.">&lt;script&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section" title="The HTML Section Element (&lt;section&gt;) represents a generic section of a document, i.e., a thematic grouping of content, typically with a heading. Each &lt;section&gt; should be identified, typically by including a heading (&lt;h1&gt;-&lt;h6&gt; element) as a child of the &lt;section&gt; element.">&lt;section&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select" title="The HTML select (&lt;select&gt;) element represents a control that presents a menu of options. The options within the menu are represented by &lt;option&gt; elements, which can be grouped by &lt;optgroup&gt; elements. Options can be pre-selected for the user.">&lt;select&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Shadow" title="The HTML &lt;shadow&gt; element is used as a shadow DOM insertion point. You might use it if you have created multiple shadow roots under a shadow host. It is not useful in ordinary HTML. It is used with Web Components.">&lt;shadow&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small" title="The HTML Small Element (&lt;small&gt;) makes the text font size one size smaller (for example, from large to medium, or from small to x-small) down to the browser&#39;s minimum font size.  In HTML5, this element is repurposed to represent side-comments and small print, including copyright and legal text, independent of its styled presentation.">&lt;small&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source" title="The HTML &lt;source&gt; element is used to specify multiple media resources for &lt;picture&gt;, &lt;audio&gt; and &lt;video&gt; elements. It is an empty element. It is commonly used to serve the same media in multiple formats supported by different browsers.">&lt;source&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/spacer" title="&lt;spacer&gt; is an HTML element which is used for inserting white spaces to web pages. It was created by NetScape for achieving same effect as a single-pixel layout GIF image, which was something web designers used to use to add white spaces to web pages, without actually using a GIF. However &lt;spacer&gt; is not supported by any major browser and same effects can be created with various CSS rules. In Mozilla applications, support for this element was removed in Gecko 2.0. Therefore usage of &lt;spacer&gt; is unnecessary.">&lt;spacer&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span" title="The HTML &lt;span&gt; element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. &lt;span&gt; is very much like a &lt;div&gt; element, but &lt;div&gt; is a block-level element whereas a &lt;span&gt; is an inline element.">&lt;span&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strike" title="The HTML Strikethrough Element (&lt;strike&gt;) renders text with a strikethrough, or a line through it.">&lt;strike&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong" title="The HTML Strong Element (&lt;strong&gt;) gives text strong importance, and is typically displayed in bold.">&lt;strong&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style" title="The HTML &lt;style&gt; element contains style information for a document, or part of a document. By default, the style instructions written inside that element are expected to be CSS.">&lt;style&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub" title="The HTML Subscript Element (&lt;sub&gt;) defines a span of text that should be displayed, for typographic reasons, lower, and often smaller, than the main span of text.">&lt;sub&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary" title="The HTML summary element (&lt;summary&gt;) is used as a summary, caption, or legend for the content of a &lt;details&gt; element.">&lt;summary&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup" title="The HTML Superscript Element (&lt;sup&gt;) defines a span of text that should be displayed, for typographic reasons, higher, and often smaller, than the main span of text.">&lt;sup&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table" title="The HTML Table Element (&lt;table&gt;) represents data in two dimensions or more.">&lt;table&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody" title="The HTML Table Body Element () defines one or more &lt;tr&gt; element data-rows to be the body of its parent &lt;table&gt; element (as long as no &lt;tr&gt; elements are immediate children of that table element.)  In conjunction with a preceding &lt;thead&gt; and/or &lt;tfoot&gt; element, &lt;tbody&gt; provides additional semantic information for devices such as printers and displays. Of the parent table&#39;s child elements, &lt;tbody&gt; represents the content which, when longer than a page, will most likely differ for each page printed; while the content of &lt;thead&gt; and &lt;tfoot&gt; will be the same or similar for each page printed. For displays, &lt;tbody&gt; will enable separate scrolling of the &lt;thead&gt;, &lt;tfoot&gt;, and &lt;caption&gt; elements of the same parent &lt;table&gt; element.  Note that unlike the &lt;thead&gt;, &lt;tfoot&gt;, and &lt;caption&gt; elements however, multiple &lt;tbody&gt; elements are permitted (if consecutive), allowing the data-rows in long tables to be divided into different sections, each separately formatted as needed.">&lt;tbody&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td" title="The Table cell HTML element (&lt;td&gt;) defines a cell of a table that contains data. It participates in the table model.">&lt;td&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template" title="The HTML template element &lt;template&gt; is a mechanism for holding client-side content that is not to be rendered when a page is loaded but may subsequently be instantiated during runtime using JavaScript. ">&lt;template&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea" title="The HTML &lt;textarea&gt; element represents a multi-line plain-text editing control.">&lt;textarea&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot" title="The HTML Table Foot Element (&lt;tfoot&gt;) defines a set of rows summarizing the columns of the table.">&lt;tfoot&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th" title="The HTML Table Header Cell Element (&lt;th&gt;) defines a cell that is a header for a group of cells of a table. The group of cells that the header refers to is defined by the scope and headers attribute.">&lt;th&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead" title="The HTML Table Head Element (&lt;thead&gt;) defines a set of rows defining the head of the columns of the table.">&lt;thead&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time" title="The HTML &lt;time&gt; element represents either a time on a 24-hour clock or a precise date in the Gregorian calendar (with optional time and timezone information).">&lt;time&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title" title="The HTML &lt;title&gt; element defines the title of the document, shown in a browser&#39;s title bar or on the page&#39;s tab. It can only contain text and any contained tags are not interpreted.">&lt;title&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr" title="The HTML Table Row Element (&lt;tr&gt;) defines a row of cells in a table. Those can be a mix of &lt;td&gt; and &lt;th&gt; elements.">&lt;tr&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track" title="The HTML &lt;track&gt; element is used as a child of the media elements—&lt;audio&gt; and &lt;video&gt;. It lets you specify timed text tracks (or time-based data), for example to automatically handle subtitles. The tracks are formatted in WebVTT format (.vtt files) — Web Video Text Tracks.">&lt;track&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tt" title="The HTML Teletype Text Element (&lt;tt&gt;) produces an inline element displayed in the browser&#39;s default monotype font. This element was intended to style text as it would display on a fixed width display, such as a teletype. It probably is more common to display fixed width type using the &lt;code&gt; element.">&lt;tt&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u" title="The HTML Underline Element (&lt;u&gt;) renders text with an underline, a line under the baseline of its content.">&lt;u&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul" title="The HTML unordered list element (&lt;ul&gt;) represents an unordered list of items, namely a collection of items that do not have a numerical ordering, and their order in the list is meaningless. Typically, unordered-list items are displayed with a bullet, which can be of several forms, like a dot, a circle or a squared. The bullet style is not defined in the HTML description of the page, but in its associated CSS, using the list-style-type property.">&lt;ul&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var" title="The HTML Variable Element (&lt;var&gt;) represents a variable in a mathematical expression or a programming context.">&lt;var&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video" title="The HTML &lt;video&gt; element is used to embed video content. It may contain several video sources, represented using the src attribute or the &lt;source&gt; element; the browser will choose the most suitable one.">&lt;video&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr" title="The Word Break Opportunity (&lt;wbr&gt;) HTML element represents a position within text where the browser may optionally break a line, though its line-breaking rules would not otherwise create a break at that location.">&lt;wbr&gt;</a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/xmp" title="The HTML Example Element (&lt;xmp&gt;) renders text between the start and end tags without interpreting the HTML in between and using a monospaced font. The HTML2 specification recommended that it should be rendered wide enough to allow 80 characters per line.">&lt;xmp&gt;</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements" title="Heading elements implement six levels of document headings, &lt;h1&gt; is the most important and &lt;h6&gt; is the least. A heading element briefly describes the topic of the section it introduces. Heading information may be used by user agents, for example, to construct a table of contents for a document automatically.">Heading elements</a></li></ol>
+  </li>
+  <li data-default-state="open" class="toggleable current" data-closed=""><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-down"></i>Global attributes</a>
+   <ol class="toggle-container" aria-expanded="true" style="display: block;"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes" title="Global attributes may be specified on all HTML elements, even those not specified in the standard. That means that any non-standard elements must still permit these attributes, even though using those elements means that the document is no longer HTML5-compliant. For example, HTML5-compliant browsers hide content marked as &lt;foo hidden&gt;...&lt;foo&gt;, even though &lt;foo&gt; is not a valid HTML element."><code>Global attributes</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey" title="The accesskey global attribute provides a hint for generating a keyboard shortcut for the current element. This attribute consists of a space-separated list of characters (one single Unicode code point). The browser uses the first one that exists on the computer keyboard layout."><code>accesskey</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class" title="The class global attribute is a space-separated list of the classes of the element. Classes allows CSS and Javascript to select and access specific elements via the class selectors or functions like the DOM method document.getElementsByClassName."><code>class</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable" title="The contenteditable global attribute is an enumerated attribute indicating if the element should be editable by the user. If so, the browser modifies its widget to allow editing. The attribute must take one of the following values:"><code>contenteditable</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contextmenu" title="The contextmenu global attribute is the id of an &lt;menu&gt; to us as the contextual menu for this element."><code>contextmenu</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-%2A" title="The data-* global attributes form a class of attributes, called custom data attributes, allows proprietary information to be exchanged between the HTML and its DOM representation that may be used by scripts. All such custom data are available via the HTMLElement interface of the element the attribute is set on. The HTMLElement.dataset property gives access to them.
+ The * may be replaced by any name following the production rule of xml names with the following restrictions:"><code>data-*</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir" title="The dir global attribute is an enumerated attribute indicates the directionality of the element&#39;s text. It can have the following values:"><code>dir</code></a></li><li><span class="sidebar-icon"><span title="This is an experimental API that should not be used in production code."><i class="icon-beaker"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable" title="The draggable global attribute is an enumerated attribute indicates whether the element can be dragged, using the Drag and Drop API. It can have the following values:"><code>draggable</code></a></li><li><span class="sidebar-icon"><span title="This is an experimental API that should not be used in production code."><i class="icon-beaker"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dropzone" title="The dropzone global attribute is an enumerated attribute indicating what types of content can be dropped on an element, using the Drag and Drop API. It can have the following values:"><code>dropzone</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden" title="The hidden global attribute is a Boolean attribute indicating that the element is not yet, or is no longer, relevant. For example, it can be used to hide elements of the page that can&#39;t be used until the login process has been completed. The browser won&#39;t render such elements."><code>hidden</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id" title="The id global attribute defines a unique identifier (ID) which must be unique in the whole document. Its purpose is to identify the element when linking (using a fragment identifier), scripting, or styling (with CSS)."><code>id</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang" title="The lang global attribute participates in defining the language of the element, the language that non-editable elements are written in or the language that editable elements should be written in. The tag contains one single entry value in the format defines in the Tags for Identifying Languages (BCP47) IETF document. If the tag content is the empty string the language is set to unknown; if the tag content is not valid, regarding to BCP47, it is set to invalid."><code>lang</code></a></li><li><span class="sidebar-icon"><span title="This is an experimental API that should not be used in production code."><i class="icon-beaker"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/spellcheck" title="The spellcheck global attribute is an enumerated attribute defines whether the element may be checked for spelling errors. It may have the following values:"><code>spellcheck</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/style" title="The style global attribute contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the &lt;style&gt; element have mainly the purpose of allowing for quick styling, for example for testing purposes."><code>style</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex" title="The tabindex global attribute is an integer indicating if the element can take input focus (is focusable), if it should participate to sequential keyboard navigation, and if so, at what position. It can take several values:"><code>tabindex</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title" title="The title global attribute contains a text representing advisory information related to the element it belongs to. Such information can typically, but not necessarily, be presented to the user as a tooltip. Here are some typical uses of this attribute:"><code>title</code></a></li><li><span class="sidebar-icon"><span title="This is an experimental API that should not be used in production code."><i class="icon-beaker"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/translate" title="The translate global attribute is an enumerated attribute that is used to specify whether an element&#39;s attribute values and the values of its Text node children are to be translated when the page is localized, or whether to leave them unchanged. It can have the following values:"><code>translate</code></a></li></ol>
+  </li>
+  <li><strong><a href="https://developer.mozilla.org/en-US/docs/MDN">Documentation:</a></strong></li>
+  <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>Useful lists</a>
+   <ol class="toggle-container" style="display: none;">
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Index">All pages index</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/tag/HTML">Pages tagged "HTML"</a></li>
+   </ol>
+  </li>
+  <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey#" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>Contribute</a>
+   <ol class="toggle-container" style="display: none;">
+    <li><a href="https://developer.mozilla.org/en-US/docs/MDN/Doc_status/HTML">HTML doc status</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/MDN">The MDN project</a></li>
+   </ol>
+  </li>
+ </ol>
+
+  </div>
+
+
+                <!-- approvals -->
+
+
+
+
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div> <!-- ends "main-content" -->
+
+  <menu type="context" id="edit-history-menu">
+    <menuitem data-action="/en-US/docs/Web/HTML/Global_attributes/accesskey$edit" label="Edit page"></menuitem>
+    <menuitem data-action="/en-US/docs/Web/HTML/Global_attributes/accesskey$history" label="View page history"></menuitem>
+  </menu>
+
+  </div></main>
+
+  <!-- Footer -->
+  <footer><div class="center">
+    <div class="column-container">
+      <div class="column-main">
+
+        <div class="contentinfo">
+          <p>© 2005-2016 Mozilla Developer Network and individual contributors.</p> <p>Content is available under <a href="https://developer.mozilla.org/en-US/docs/MDN/About#Copyrights_and_licenses">these licenses</a>.</p>
+          <ul>
+            <li><a href="https://developer.mozilla.org/docs/MDN/About">About MDN</a></li>
+            <li><a href="https://www.mozilla.org/about/legal/terms/mozilla">Terms</a></li>
+            <li><a href="https://www.mozilla.org/privacy/websites/">Privacy</a></li>
+            <li><a href="https://www.mozilla.org/privacy/websites/#cookies">Cookies</a></li>
+            <li><a href="https://github.com/mozilla/kuma">Contribute to the code</a></li>
+          </ul>
+        <p></p>
+
+        </div>
+      </div>
+      <div class="column-strip">
+
+
+
+    <form class="languages go" method="get" action="https://developer.mozilla.org/en-US/docs/Web">
+      <label for="language">Other languages:</label>
+      <select id="language" class="wiki-l10n" name="next" dir="ltr">
+        <option value="/en-US/docs/Web/HTML/Global_attributes/accesskey" selected="">
+          English (US)
+        </option>
+
+          <option value="/bn-BD/docs/Web/HTML/Global_attributes/accesskey">
+            বাংলা (বাংলাদেশ)
+          </option>
+          <option value="/es/docs/Web/HTML/Atributos_Globales/accesskey">
+            Español
+          </option>
+          <option value="/fr/docs/Web/HTML/Attributs_globaux/accesskey">
+            Français
+          </option>
+          <option value="/ja/docs/Web/HTML/Global_attributes/accesskey">
+            日本語
+          </option>
+      </select>
+      <noscript>&lt;button type="submit"&gt;Go&lt;/button&gt;</noscript>
+    </form>
+
+
+
+      </div>
+    </div>
+  </div></footer>
+
+  <!-- site js -->
+
+
+    <!--[if lte IE 8]><script type="text/javascript" src="https://developer.cdn.mozilla.net/static/build/js/selectivizr.091e18cf669b.js" charset="utf-8"></script><![endif]-->
+
+    <form id="_persona_login" method="post" action="https://developer.mozilla.org/users/persona/signin" data-csrf-token-url="/users/persona/csrf" data-request="{&quot;siteName&quot;: &quot;Mozilla Developer Network&quot;, &quot;siteLogo&quot;: &quot;/static/img/opengraph-logo.png&quot;}" data-persona-script="https://login.persona.org/include.js">
+  <input type="hidden" name="csrfmiddlewaretoken" value="" id="_persona_csrf_token">
+  <input type="hidden" name="next" value="" id="_persona_next_url">
+  <input type="hidden" name="process" value="" id="_persona_process">
+  <input type="hidden" name="assertion" id="_persona_assertion">
+</form>
+
+
+    <script type="text/javascript" src="./accesskey - HTML _ MDN_files/main.a7b27a25fb9c.js" charset="utf-8"></script>
+
+      <script>
+        if(window.mdn && mdn.analytics) mdn.analytics.trackOutboundLinks();
+      </script>
+
+
+    <script type="text/javascript" src="./accesskey - HTML _ MDN_files/javascript.b28203373cc1.js"></script>
+
+    <script async="" type="text/javascript" src="./accesskey - HTML _ MDN_files/wiki.bd71ca9fd27d.js" charset="utf-8"></script>
+
+
+
+
+  <script async="" type="text/javascript" src="./accesskey - HTML _ MDN_files/helpfulness.7b208a764d28.js" charset="utf-8"></script>
+
+
+
+
+
+</body></html>

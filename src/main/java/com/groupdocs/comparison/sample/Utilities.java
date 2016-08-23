@@ -9,7 +9,7 @@ import java.io.File;
  * The type Utilities.
  * @author Aleksey Permyakov
  */
-class Utilities {
+public class Utilities {
     /**
      * The constant PROJECT_PATH.
      */
@@ -40,11 +40,11 @@ class Utilities {
         license.setLicense(LICENSE_PATH);
     }
 
-    static String getStoragePath(String fileName) {
+    public static String getStoragePath(String fileName) {
         return STORAGE_PATH + "\\" + fileName;
     }
 
-    static String getOutputPath(String fileName) {
+    public static String getOutputPath(String fileName) {
         return OUTPUT_PATH + "\\" + fileName;
     }
 }
