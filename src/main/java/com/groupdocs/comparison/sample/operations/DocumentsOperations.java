@@ -2,6 +2,7 @@ package com.groupdocs.comparison.sample.operations;
 
 import com.groupdocs.comparison.Comparison;
 import com.groupdocs.comparison.common.ComparisonType;
+import com.groupdocs.comparison.common.FileType;
 import com.groupdocs.comparison.common.comparisonsettings.*;
 import com.groupdocs.comparison.html.ComparisonHtmlDocument;
 import com.groupdocs.comparison.html.contracts.IComparisonHtmlDocument;
@@ -262,7 +263,7 @@ public class DocumentsOperations {
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
         Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Slides);
+        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Slides, FileType.Undefined);
 
         System.out.println(result.available());
     }

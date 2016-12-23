@@ -259,7 +259,7 @@ public class OptionsOperations {
 //        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.pdf")));
     }
 
-    public static void compareTwoPresentationAutoShapes() {
+    public static void compareTwoPresentationAutoShapes() throws Exception {
 
         // Creating Slides
         ComparisonSlideBase sourceSlide = new ComparisonSlide();
@@ -391,7 +391,7 @@ public class OptionsOperations {
 //        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.pdf")));
     }
 
-    public static void compareTwoPresentationRows() {
+    public static void compareTwoPresentationRows() throws Exception {
 
         // Creating Rows
         ComparisonRowBase sourceRow = new com.groupdocs.comparison.slides.ComparisonRow(new double[] {200, 200}, 50);
@@ -421,7 +421,7 @@ public class OptionsOperations {
 //        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.html")));
     }
 
-    public static void compareTwoPresentationTables() {
+    public static void compareTwoPresentationTables() throws Exception {
         // Creating Tables
         ComparisonTableBase sourceTable = new com.groupdocs.comparison.slides.ComparisonTable(100, 100, new double[] {200, 200}, new double[] {50, 50});
         ComparisonParagraphBase sourceParagraph00 = new com.groupdocs.comparison.slides.ComparisonParagraph();
