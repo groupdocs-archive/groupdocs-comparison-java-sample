@@ -22,8 +22,10 @@ import com.groupdocs.comparison.words.contracts.nodes.*;
 import com.groupdocs.comparison.words.nodes.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
+import static com.groupdocs.comparison.sample.Utilities.getOutputPath;
 import static com.groupdocs.comparison.sample.Utilities.getStoragePath;
 
 /**
@@ -495,5 +497,37 @@ public class OptionsOperations {
         result.getDocument().save(arrayOutputStream);
         System.out.println(arrayOutputStream.toByteArray().length);
 //        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.html")));
+    }
+
+    public static void compareTwoObjects() throws Exception {
+        //Create new document
+        IComparisonDocument sourceDoc = new ComparisonDocument();
+        IComparisonTable sourceTable = new ComparisonTable(new double[] { 100 }, new double[] { 20, 20 });
+        IComparisonParagraph paragraph = new ComparisonParagraph();
+        paragraph.addRun("This is cell.");
+        sourceTable.getColumns()[0].getCells()[0].appendChild(paragraph);
+        paragraph = new ComparisonParagraph();
+        paragraph.addRun("This is Cell of source table.");
+        sourceTable.getColumns()[0].getCells()[1].appendChild(paragraph);
+        sourceDoc.getSections()[0].getBody().appendChild(sourceTable);
+
+        IComparisonDocument targetDoc = new ComparisonDocument();
+        IComparisonTable targetTable = new ComparisonTable(new double[] { 100 }, new double[] { 20, 20 });
+        paragraph = new ComparisonParagraph();
+        paragraph.addRun("This is cell.");
+        targetTable.getColumns()[0].getCells()[0].appendChild(paragraph);
+        paragraph = new ComparisonParagraph();
+        paragraph.addRun("This is Cell of target table.");
+        targetTable.getColumns()[0].getCells()[1].appendChild(paragraph);
+        targetDoc.getSections()[0].getBody().appendChild(targetTable);
+
+        WordsComparisonSettings settings = new WordsComparisonSettings();
+
+        IWordsCompareResult compareResult = sourceDoc.compareWith(targetDoc, settings);
+
+        //Get document from compare result and save document
+        final String outFile = getOutputPath("file.docx");
+        compareResult.getDocument().save(outFile, ComparisonSaveFormat.Docx);
+        System.out.println(new File(outFile).length());
     }
 }

@@ -103,26 +103,38 @@ public class Main {
         OptionsOperations.compareTwoWordDocuments("source.docx", "target.docx");
         OptionsOperations.compareTwoWordParagraphs();
         OptionsOperations.compareTwoWordCells();
-        OptionsOperations.compareTwoWordColumns();
-        OptionsOperations.compareTwoWordRows();
-        OptionsOperations.compareTwoWordTables();
+
+          // Look at OptionsOperations.compareTwoObjects
+//        OptionsOperations.compareTwoWordColumns();
+//        OptionsOperations.compareTwoWordRows();
+//        OptionsOperations.compareTwoWordTables();
+
+        OptionsOperations.compareTwoObjects();
+
         OptionsOperations.compareTwoWorkbookDocuments("source.xlsx", "target.xlsx");
         OptionsOperations.compareTwoWorkbookWorksheets("source.xlsx", "target.xlsx");
-        OptionsOperations.compareTwoWorkbookCells("source.xlsx", "target.xlsx");
+
+        // Look at OptionsOperations.compareTwoObjects
+//        OptionsOperations.compareTwoWorkbookCells("source.xlsx", "target.xlsx");
+
         OptionsOperations.compareTwoPdfDocuments("source.pdf", "target.pdf");
         OptionsOperations.compareTwoPresentationDocuments("source.pptx", "target.pptx");
         OptionsOperations.compareTwoPresentationAutoShapes();
         OptionsOperations.compareTwoPresentationAutoShapes2();
-        OptionsOperations.compareTwoPresentationParagraphs();
+
+        // Look at OptionsOperations.compareTwoObjects
+//        OptionsOperations.compareTwoPresentationParagraphs();
+
         OptionsOperations.compareTwoPresentationCells();
         OptionsOperations.compareTwoPresentationColumns();
         OptionsOperations.compareTwoPresentationRows();
-        OptionsOperations.compareTwoPresentationTables();
+
+        // Look at OptionsOperations.compareTwoObjects
+//        OptionsOperations.compareTwoPresentationTables();
+
         OptionsOperations.compareTwoTextDocuments("source.txt", "target.txt");
         OptionsOperations.compareTwoHtmlDocuments("source.html", "target.html");
 
         System.out.println();
-
-
     }
 }
