@@ -28,16 +28,23 @@ public class Utilities {
     private static String LICENSE_PATH = STORAGE_PATH + "\\GroupDocs.Total.Java.lic";
 
     static {
-        final File sp = new File(STORAGE_PATH);
-        final File op = new File(OUTPUT_PATH);
+        final java.io.File sp = new java.io.File(STORAGE_PATH);
+        final java.io.File op = new java.io.File(OUTPUT_PATH);
+        final java.io.File lcp = new java.io.File(LICENSE_PATH);
+        if (!lcp.exists()) {
+            LICENSE_PATH = System.getenv("GROUPDOCS_TOTAL");
+            System.out.println("License file does not exists! Using license from %GROUPDOCS_TOTAL% ...");
+        }
         if ((!sp.exists() && !sp.mkdirs()) || (!op.exists() && !op.mkdirs())) {
             System.err.println("Can't create data directories!!!");
         }
     }
 
     static void applyLicense() {
-        License license = new License();
-        license.setLicense(LICENSE_PATH);
+        License lic = new License();
+        if (LICENSE_PATH != null && new File(LICENSE_PATH).exists()) {
+            lic.setLicense(LICENSE_PATH);
+        }
     }
 
     public static String getStoragePath(String fileName) {
