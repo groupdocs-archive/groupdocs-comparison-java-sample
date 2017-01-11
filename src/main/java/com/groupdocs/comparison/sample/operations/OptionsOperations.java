@@ -24,6 +24,8 @@ import com.groupdocs.comparison.words.nodes.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.groupdocs.comparison.sample.Utilities.getOutputPath;
 import static com.groupdocs.comparison.sample.Utilities.getStoragePath;
@@ -94,13 +96,13 @@ public class OptionsOperations {
     public static void compareTwoWordColumns() throws Exception {
 
         // Creating Columns
-        IComparisonColumn sourceColumn = new ComparisonColumn(100, new double[] { 20,20 });
+        IComparisonColumn sourceColumn = new ComparisonColumn(100, new double[]{20, 20});
         IComparisonParagraph paragraph = sourceColumn.getCells()[0].addParagraph();
         paragraph.addRun("This is cell.");
         paragraph = sourceColumn.getCells()[1].addParagraph();
         paragraph.addRun("This is Cell of source table.");
 
-        IComparisonColumn targetColumn = new ComparisonColumn(100, new double[] { 20,20 });
+        IComparisonColumn targetColumn = new ComparisonColumn(100, new double[]{20, 20});
         paragraph = targetColumn.getCells()[0].addParagraph();
         paragraph.addRun("This is cell.");
         paragraph = targetColumn.getCells()[1].addParagraph();
@@ -120,13 +122,13 @@ public class OptionsOperations {
     public static void compareTwoWordRows() throws Exception {
 
         // Creating Rows
-        IComparisonRow sourceRow = new ComparisonRow(new double[] { 100, 100 }, 20);
+        IComparisonRow sourceRow = new ComparisonRow(new double[]{100, 100}, 20);
         IComparisonParagraph paragraph = sourceRow.getCells()[0].addParagraph();
         paragraph.addRun("This is cell.");
         paragraph = sourceRow.getCells()[1].addParagraph();
         paragraph.addRun("This is Cell of source table.");
 
-        IComparisonRow targetRow = new ComparisonRow(new double[] { 100, 100 }, 20);
+        IComparisonRow targetRow = new ComparisonRow(new double[]{100, 100}, 20);
         paragraph = targetRow.getCells()[0].addParagraph();
         paragraph.addRun("This is cell.");
         paragraph = targetRow.getCells()[1].addParagraph();
@@ -144,24 +146,24 @@ public class OptionsOperations {
     }
 
     public static void compareTwoWordTables() throws Exception {
-        
+
         // Creating Tables
-        IComparisonTable sourceTable = new ComparisonTable(new double[]{100,100}, new double[] { 20, 20 });
+        IComparisonTable sourceTable = new ComparisonTable(new double[]{100, 100}, new double[]{20, 20});
         IComparisonParagraph paragraph = sourceTable.getRows()[0].getCells()[0].addParagraph();
         paragraph.addRun("This is cell.");
         paragraph = sourceTable.getRows()[0].getCells()[1].addParagraph();
         paragraph.addRun("This is Cell of source table.");
         paragraph = sourceTable.getRows()[1].getCells()[0].addParagraph();
         paragraph.addRun("This is Cel of tble.");
-        
-        IComparisonTable targetTable = new ComparisonTable(new double[]{100,100}, new double[] { 20, 20 });
+
+        IComparisonTable targetTable = new ComparisonTable(new double[]{100, 100}, new double[]{20, 20});
         paragraph = targetTable.getRows()[0].getCells()[0].addParagraph();
         paragraph.addRun("This is cell.");
         paragraph = targetTable.getRows()[0].getCells()[1].addParagraph();
         paragraph.addRun("This is Cell of target table.");
         paragraph = targetTable.getRows()[1].getCells()[0].addParagraph();
         paragraph.addRun("This is Cell of table.");
-        
+
         // Creating settings for comparison of Tables
         WordsComparisonSettings settings = new WordsComparisonSettings();
         // Comparing Tables
@@ -218,7 +220,7 @@ public class OptionsOperations {
 
         // Compare cells
         CellsComparisonSettings settings = new CellsComparisonSettings();
-        final ICellsCompareResult result = source.getWorksheets()[0].getCellRange().get_Item("A6").compareWith(target.getWorksheets()[0].getCellRange().get_Item("A6"), settings);
+        final ICellsCompareResult result = source.getWorksheets()[0].getCellRange().getItem("A6").compareWith(target.getWorksheets()[0].getCellRange().getItem("A6"), settings);
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getWorkbook().save(arrayOutputStream, ComparisonSaveFormat.Docx);
@@ -366,21 +368,21 @@ public class OptionsOperations {
     public static void compareTwoPresentationColumns() throws Exception {
 
         // Creating Columns
-        ComparisonColumnBase sourceColumn = new com.groupdocs.comparison.slides.ComparisonColumn(new double[] {50, 50}, 200);
+        ComparisonColumnBase sourceColumn = new com.groupdocs.comparison.slides.ComparisonColumn(new double[]{50, 50}, 200);
         ComparisonParagraphBase sourceParagraph0 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         sourceParagraph0.setText("This is first cell in source Column.");
-        sourceColumn.get_Item(0).getTextFrame().getParagraphs().add(sourceParagraph0);
+        sourceColumn.getItem(0).getTextFrame().getParagraphs().add(sourceParagraph0);
         ComparisonParagraphBase sourceParagraph1 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         sourceParagraph1.setText("This is second cell in source Column.");
-        sourceColumn.get_Item(1).getTextFrame().getParagraphs().add(sourceParagraph1);
+        sourceColumn.getItem(1).getTextFrame().getParagraphs().add(sourceParagraph1);
 
-        ComparisonColumnBase targetColumn = new com.groupdocs.comparison.slides.ComparisonColumn(new double[] {50, 50}, 200);
+        ComparisonColumnBase targetColumn = new com.groupdocs.comparison.slides.ComparisonColumn(new double[]{50, 50}, 200);
         ComparisonParagraphBase targetParagraph0 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         targetParagraph0.setText("This is first cell in target Column.");
-        targetColumn.get_Item(0).getTextFrame().getParagraphs().add(targetParagraph0);
+        targetColumn.getItem(0).getTextFrame().getParagraphs().add(targetParagraph0);
         ComparisonParagraphBase targetParagraph1 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         targetParagraph1.setText("This is second cell in target Column.");
-        targetColumn.get_Item(1).getTextFrame().getParagraphs().add(targetParagraph1);
+        targetColumn.getItem(1).getTextFrame().getParagraphs().add(targetParagraph1);
 
         // Creating settings for comparison of Columns
         SlidesComparisonSettings SlidesComparisonSettings = new SlidesComparisonSettings();
@@ -396,21 +398,21 @@ public class OptionsOperations {
     public static void compareTwoPresentationRows() throws Exception {
 
         // Creating Rows
-        ComparisonRowBase sourceRow = new com.groupdocs.comparison.slides.ComparisonRow(new double[] {200, 200}, 50);
+        ComparisonRowBase sourceRow = new com.groupdocs.comparison.slides.ComparisonRow(new double[]{200, 200}, 50);
         ComparisonParagraphBase sourceParagraph0 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         sourceParagraph0.setText("This is first cell in source Row.");
-        sourceRow.get_Item(0).getTextFrame().getParagraphs().add(sourceParagraph0);
+        sourceRow.getItem(0).getTextFrame().getParagraphs().add(sourceParagraph0);
         ComparisonParagraphBase sourceParagraph1 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         sourceParagraph1.setText("This is second cell in source Row.");
-        sourceRow.get_Item(1).getTextFrame().getParagraphs().add(sourceParagraph1);
+        sourceRow.getItem(1).getTextFrame().getParagraphs().add(sourceParagraph1);
 
-        ComparisonRowBase targetRow = new com.groupdocs.comparison.slides.ComparisonRow(new double[] {200, 200}, 50);
+        ComparisonRowBase targetRow = new com.groupdocs.comparison.slides.ComparisonRow(new double[]{200, 200}, 50);
         ComparisonParagraphBase targetParagraph0 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         targetParagraph0.setText("This is first cell in target Row.");
-        targetRow.get_Item(0).getTextFrame().getParagraphs().add(targetParagraph0);
+        targetRow.getItem(0).getTextFrame().getParagraphs().add(targetParagraph0);
         ComparisonParagraphBase targetParagraph1 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         targetParagraph1.setText("This is second cell in target Row.");
-        targetRow.get_Item(1).getTextFrame().getParagraphs().add(targetParagraph1);
+        targetRow.getItem(1).getTextFrame().getParagraphs().add(targetParagraph1);
 
         // Creating settings for comparison of Rows
         SlidesComparisonSettings SlidesComparisonSettings = new SlidesComparisonSettings();
@@ -425,33 +427,33 @@ public class OptionsOperations {
 
     public static void compareTwoPresentationTables() throws Exception {
         // Creating Tables
-        ComparisonTableBase sourceTable = new com.groupdocs.comparison.slides.ComparisonTable(100, 100, new double[] {200, 200}, new double[] {50, 50});
+        ComparisonTableBase sourceTable = new com.groupdocs.comparison.slides.ComparisonTable(100, 100, new double[]{200, 200}, new double[]{50, 50});
         ComparisonParagraphBase sourceParagraph00 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         sourceParagraph00.setText("This is first cell in source table.");
-        sourceTable.get_Item(0, 0).getTextFrame().getParagraphs().add(sourceParagraph00);
+        sourceTable.getItem(0, 0).getTextFrame().getParagraphs().add(sourceParagraph00);
         ComparisonParagraphBase sourceParagraph01 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         sourceParagraph01.setText("This is second cell in source table.");
-        sourceTable.get_Item(0, 1).getTextFrame().getParagraphs().add(sourceParagraph01);
+        sourceTable.getItem(0, 1).getTextFrame().getParagraphs().add(sourceParagraph01);
         ComparisonParagraphBase sourceParagraph10 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         sourceParagraph10.setText("This is third cell in source table.");
-        sourceTable.get_Item(1, 0).getTextFrame().getParagraphs().add(sourceParagraph10);
+        sourceTable.getItem(1, 0).getTextFrame().getParagraphs().add(sourceParagraph10);
         ComparisonParagraphBase sourceParagraph11 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         sourceParagraph11.setText("This is fourth cell in source table.");
-        sourceTable.get_Item(1, 1).getTextFrame().getParagraphs().add(sourceParagraph11);
+        sourceTable.getItem(1, 1).getTextFrame().getParagraphs().add(sourceParagraph11);
 
-        ComparisonTableBase targetTable = new com.groupdocs.comparison.slides.ComparisonTable(100, 100, new double[] {200, 200}, new double[] {50, 50});
+        ComparisonTableBase targetTable = new com.groupdocs.comparison.slides.ComparisonTable(100, 100, new double[]{200, 200}, new double[]{50, 50});
         ComparisonParagraphBase targetParagraph00 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         targetParagraph00.setText("This is first cell in target table.");
-        targetTable.get_Item(0, 0).getTextFrame().getParagraphs().add(targetParagraph00);
+        targetTable.getItem(0, 0).getTextFrame().getParagraphs().add(targetParagraph00);
         ComparisonParagraphBase targetParagraph01 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         targetParagraph01.setText("This is second cell in target table.");
-        targetTable.get_Item(0, 1).getTextFrame().getParagraphs().add(targetParagraph01);
+        targetTable.getItem(0, 1).getTextFrame().getParagraphs().add(targetParagraph01);
         ComparisonParagraphBase targetParagraph10 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         targetParagraph10.setText("This is third cell in target table.");
-        targetTable.get_Item(1, 0).getTextFrame().getParagraphs().add(targetParagraph10);
+        targetTable.getItem(1, 0).getTextFrame().getParagraphs().add(targetParagraph10);
         ComparisonParagraphBase targetParagraph11 = new com.groupdocs.comparison.slides.ComparisonParagraph();
         targetParagraph11.setText("This is fourth cell in target table.");
-        targetTable.get_Item(1, 1).getTextFrame().getParagraphs().add(targetParagraph11);
+        targetTable.getItem(1, 1).getTextFrame().getParagraphs().add(targetParagraph11);
 
         // Creating settings for comparison of Tables
         SlidesComparisonSettings SlidesComparisonSettings = new SlidesComparisonSettings();
@@ -502,7 +504,7 @@ public class OptionsOperations {
     public static void compareTwoObjects() throws Exception {
         //Create new document
         IComparisonDocument sourceDoc = new ComparisonDocument();
-        IComparisonTable sourceTable = new ComparisonTable(new double[] { 100 }, new double[] { 20, 20 });
+        IComparisonTable sourceTable = new ComparisonTable(new double[]{100}, new double[]{20, 20});
         IComparisonParagraph paragraph = new ComparisonParagraph();
         paragraph.addRun("This is cell.");
         sourceTable.getColumns()[0].getCells()[0].appendChild(paragraph);
@@ -512,7 +514,7 @@ public class OptionsOperations {
         sourceDoc.getSections()[0].getBody().appendChild(sourceTable);
 
         IComparisonDocument targetDoc = new ComparisonDocument();
-        IComparisonTable targetTable = new ComparisonTable(new double[] { 100 }, new double[] { 20, 20 });
+        IComparisonTable targetTable = new ComparisonTable(new double[]{100}, new double[]{20, 20});
         paragraph = new ComparisonParagraph();
         paragraph.addRun("This is cell.");
         targetTable.getColumns()[0].getCells()[0].appendChild(paragraph);
@@ -529,5 +531,58 @@ public class OptionsOperations {
         final String outFile = getOutputPath("file.docx");
         compareResult.getDocument().save(outFile, ComparisonSaveFormat.Docx);
         System.out.println(new File(outFile).length());
+    }
+
+    public static void compareSourceDocumentWithTwoTargetDocuments(String sourceName, String target1Name, String target2Name) throws Exception {
+        final String sourcePath = getStoragePath(sourceName);
+        final String target1Path = getStoragePath(target1Name);
+        final String target2Path = getStoragePath(target2Name);
+
+        // Create list of targets documents
+        List<IComparisonDocument> ListOfTargetDocuments = new ArrayList<IComparisonDocument>();
+
+        // Open documents
+        ComparisonDocument source = new ComparisonDocument(sourcePath);
+        ComparisonDocument target1 = new ComparisonDocument(target1Path);
+        ComparisonDocument target2 = new ComparisonDocument(target2Path);
+
+        // Add target documents in list
+        ListOfTargetDocuments.add(target1);
+        ListOfTargetDocuments.add(target2);
+
+        // Call method MultiCompareWith.
+        IWordsCompareResult result = source.multiCompareWith(ListOfTargetDocuments, new WordsComparisonSettings());
+
+        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+        result.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println(arrayOutputStream.toByteArray().length);
+    }
+
+    public static void compareSourceDocumentWithThreeTargetDocuments(String sourceName, String target1Name, String target2Name, String target3Name) throws Exception {
+        final String sourcePath = getStoragePath(sourceName);
+        final String target1Path = getStoragePath(target1Name);
+        final String target2Path = getStoragePath(target2Name);
+        final String target3Path = getStoragePath(target3Name);
+
+        // Create list of targets documents
+        List<IComparisonDocument> ListOfTargetDocuments = new ArrayList<IComparisonDocument>();
+
+        // Open documents
+        ComparisonDocument source = new ComparisonDocument(sourcePath);
+        ComparisonDocument target1 = new ComparisonDocument(target1Path);
+        ComparisonDocument target2 = new ComparisonDocument(target2Path);
+        ComparisonDocument target3 = new ComparisonDocument(target3Path);
+
+        // Add target documents in list
+        ListOfTargetDocuments.add(target1);
+        ListOfTargetDocuments.add(target2);
+        ListOfTargetDocuments.add(target3);
+
+        // Call method MultiCompareWith.
+        IWordsCompareResult result = source.multiCompareWith(ListOfTargetDocuments, new WordsComparisonSettings());
+
+        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+        result.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println(arrayOutputStream.toByteArray().length);
     }
 }

@@ -135,6 +135,9 @@ public class Main {
         OptionsOperations.compareTwoTextDocuments("source.txt", "target.txt");
         OptionsOperations.compareTwoHtmlDocuments("source.html", "target.html");
 
+        OptionsOperations.compareSourceDocumentWithTwoTargetDocuments("multi-source.docx", "multi-target1.docx", "multi-target2.docx");
+        OptionsOperations.compareSourceDocumentWithThreeTargetDocuments("multi-source.docx", "multi-target1.docx", "multi-target2.docx", "multi-target3.docx");
+
         System.out.println();
     }
 }
