@@ -20,9 +20,11 @@ import com.groupdocs.comparison.words.contracts.IWordsCompareResult;
 import com.groupdocs.comparison.words.contracts.enums.ComparisonSaveFormat;
 import com.groupdocs.comparison.words.contracts.nodes.*;
 import com.groupdocs.comparison.words.nodes.*;
+import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +50,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoWordDocuments.docx")));
     }
 
     public static void compareTwoWordParagraphs() throws Exception {
@@ -68,7 +70,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoWordParagraphs.docx")));
     }
 
     public static void compareTwoWordCells() throws Exception {
@@ -90,7 +92,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoWordCells.docx")));
     }
 
     public static void compareTwoWordColumns() throws Exception {
@@ -116,7 +118,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoWordColumns.docx")));
     }
 
     public static void compareTwoWordRows() throws Exception {
@@ -142,7 +144,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoWordRows.docx")));
     }
 
     public static void compareTwoWordTables() throws Exception {
@@ -172,7 +174,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoWordTables.docx")));
     }
 
     public static void compareTwoWorkbookDocuments(String sourceName, String targetName) throws Exception {
@@ -184,12 +186,12 @@ public class OptionsOperations {
         ComparisonWorkbook target = new ComparisonWorkbook(targetPath);
 
         // Call method CompareWith.
-        ICellsCompareResult result = source.compareWith(target, new CellsComparisonSettings());
+        ICellsCompareResult result = source.compareWith(target, new CellsComparisonSettings()); // FIXME: 18.01.2017 Bug
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        result.getWorkbook().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        result.getWorkbook().save(arrayOutputStream, com.groupdocs.comparison.cells.contracts.enums.ComparisonSaveFormat.Xlsx);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoWorkbookDocuments.xlsx")));
     }
 
     public static void compareTwoWorkbookWorksheets(String sourceName, String targetName) throws Exception {
@@ -205,9 +207,9 @@ public class OptionsOperations {
         ICellsCompareResult result = source.getWorksheets()[1].compareWith(target.getWorksheets()[1], settings);
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        result.getWorkbook().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        result.getWorkbook().save(arrayOutputStream, com.groupdocs.comparison.cells.contracts.enums.ComparisonSaveFormat.Xlsx);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoWorkbookWorksheets.xlsx")));
     }
 
     public static void compareTwoWorkbookCells(String sourceName, String targetName) throws Exception {
@@ -223,9 +225,9 @@ public class OptionsOperations {
         final ICellsCompareResult result = source.getWorksheets()[0].getCellRange().getItem("A6").compareWith(target.getWorksheets()[0].getCellRange().getItem("A6"), settings);
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        result.getWorkbook().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        result.getWorkbook().save(arrayOutputStream, com.groupdocs.comparison.cells.contracts.enums.ComparisonSaveFormat.Pdf);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoWorkbookCells.pdf")));
     }
 
     public static void compareTwoPdfDocuments(String sourceName, String targetName) throws Exception {
@@ -242,7 +244,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.saveTo(arrayOutputStream);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoPdfDocuments.pdf")));
     }
 
     public static void compareTwoPresentationDocuments(String sourceName, String targetName) throws Exception {
@@ -256,11 +258,10 @@ public class OptionsOperations {
         // Call method CompareWith.
         ISlidesCompareResult result = source.compareWith(target, new SlidesComparisonSettings());
 
-
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoPresentationDocuments.pdf")));
     }
 
     public static void compareTwoPresentationAutoShapes() throws Exception {
@@ -290,7 +291,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoPresentationAutoShapes.pdf")));
     }
 
     public static void compareTwoPresentationAutoShapes2() throws Exception {
@@ -316,7 +317,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoPresentationAutoShapes2.pdf")));
     }
 
     public static void compareTwoPresentationParagraphs() throws Exception {
@@ -336,7 +337,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoPresentationParagraphs.pdf")));
     }
 
     public static void compareTwoPresentationCells() throws Exception {
@@ -362,7 +363,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoPresentationCells.pdf")));
     }
 
     public static void compareTwoPresentationColumns() throws Exception {
@@ -392,7 +393,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoPresentationColumns.pdf")));
     }
 
     public static void compareTwoPresentationRows() throws Exception {
@@ -422,7 +423,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Html);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.html")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoPresentationRows.html")));
     }
 
     public static void compareTwoPresentationTables() throws Exception {
@@ -464,7 +465,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Html);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.html")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoPresentationTables.html")));
     }
 
     public static void compareTwoTextDocuments(String sourceName, String targetName) throws IOException {
@@ -481,7 +482,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getTextFile().save(arrayOutputStream);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.txt")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoTextDocuments.html")));
     }
 
     public static void compareTwoHtmlDocuments(String sourceName, String targetName) throws Exception {
@@ -498,7 +499,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getDocument().save(arrayOutputStream);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.html")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareTwoHtmlDocuments.html")));
     }
 
     public static void compareTwoObjects() throws Exception {
@@ -528,7 +529,7 @@ public class OptionsOperations {
         IWordsCompareResult compareResult = sourceDoc.compareWith(targetDoc, settings);
 
         //Get document from compare result and save document
-        final String outFile = getOutputPath("file.docx");
+        final String outFile = getOutputPath("oo_compareareTwoObjects.docx");
         compareResult.getDocument().save(outFile, ComparisonSaveFormat.Docx);
         System.out.println(new File(outFile).length());
     }
@@ -556,6 +557,7 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
         System.out.println(arrayOutputStream.toByteArray().length);
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareSourceDocumentWithTwoTargetDocuments.docx")));
     }
 
     public static void compareSourceDocumentWithThreeTargetDocuments(String sourceName, String target1Name, String target2Name, String target3Name) throws Exception {
@@ -584,5 +586,6 @@ public class OptionsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
         System.out.println(arrayOutputStream.toByteArray().length);
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("oo_compareareSourceDocumentWithThreeTargetDocuments.docx")));
     }
 }

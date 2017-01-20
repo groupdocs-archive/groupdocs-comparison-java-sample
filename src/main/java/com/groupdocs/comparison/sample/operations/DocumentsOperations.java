@@ -9,10 +9,7 @@ import com.groupdocs.comparison.html.contracts.IComparisonHtmlDocument;
 import com.groupdocs.comparison.html.contracts.IHtmlCompareResult;
 import org.apache.commons.io.IOUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 
 import static com.groupdocs.comparison.sample.Utilities.getOutputPath;
 import static com.groupdocs.comparison.sample.Utilities.getStoragePath;
@@ -35,7 +32,6 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath);
 
         System.out.println(result.available());
-//        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.docx")));
     }
 
     public static void compareTwoHtml(String sourceName, String targetName) throws Exception {
@@ -52,7 +48,7 @@ public class DocumentsOperations {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getDocument().save(arrayOutputStream);
         System.out.println(arrayOutputStream.toByteArray().length);
-//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("test.html")));
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("do_compareTwoHtml.html")));
     }
 
     public static void compareTwoPdfFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -84,7 +80,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Pdf, new PdfComparisonSettings());
 
         System.out.println(result.available());
-//        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPdfFromStreamsWithSettings.pdf")));
     }
 
     public static void compareTwoPdfFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -116,7 +112,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Pdf);
 
         System.out.println(result.available());
-//        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPdfFromStreams.pdf")));
     }
 
     public static void compareTwoPdfWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -140,7 +136,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Pdf, new PdfComparisonSettings());
 
         System.out.println(result.available());
-//        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPdfWithSettings.pdf")));
     }
 
     public static void compareTwoPdfWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -164,7 +160,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Pdf);
 
         System.out.println(result.available());
-//        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.pdf")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPdf.pdf")));
     }
 
     public static void compareTwoPresentationsFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -197,7 +193,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Slides, new SlidesComparisonSettings());
 
         System.out.println(result.available());
-//        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.pptx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPresentationsFromStreamsWithSettings.pptx")));
     }
 
     public static void compareTwoPresentationsFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -229,7 +225,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Slides);
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.pptx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPresentationsFromStreams.pptx")));
     }
 
     public static void compareTwoPresentationsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -253,7 +249,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Slides, new SlidesComparisonSettings());
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.pptx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPresentationsWithSettings.pptx")));
     }
 
     public static void compareTwoPresentationsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -277,7 +273,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Slides);
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.pptx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPresentations.pptx")));
     }
 
     public static void compareTwoTextsFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -310,7 +306,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text, new TextComparisonSettings());
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.txt")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoTextsFromStreamsWithSettings.html")));
     }
 
     public static void compareTwoTextsFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -341,7 +337,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Text);
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.txt")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoTextsFromStreams.html")));
     }
 
     public static void compareTwoTextsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -365,7 +361,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Text, new TextComparisonSettings());
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.txt")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoTextsWithSettings.html")));
     }
 
     public static void compareTwoTextsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -389,7 +385,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Text);
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.txt")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoTexts.html")));
     }
 
     public static void compareTwoWordsFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -421,7 +417,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Words, new WordsComparisonSettings());
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWordsFromStreamsWithSettings.docx")));
     }
 
     public static void compareTwoWordsFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -453,7 +449,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Words);
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWordsFromStreams.docx")));
     }
 
     public static void compareTwoWordsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -477,7 +473,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words, new WordsComparisonSettings());
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWordsWithSettings.docx")));
     }
 
     public static void compareTwoWordsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -501,7 +497,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words);
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.docx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWords.docx")));
     }
 
     public static void compareTwoWorkbooksFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -533,7 +529,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Cells, new CellsComparisonSettings());
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.xlsx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWorkbooksFromStreamsWithSettings.xlsx")));
     }
 
     public static void compareTwoWorkbooksFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -565,7 +561,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Cells);
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.xlsx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWorkbooksFromStreams.xlsx")));
     }
 
     public static void compareTwoWorkbooksWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
@@ -589,7 +585,7 @@ public class DocumentsOperations {
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells, new CellsComparisonSettings());
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.xlsx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWorkbooksWithSettings.xlsx")));
     }
 
     public static void compareTwoWorkbooksWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
@@ -610,9 +606,9 @@ public class DocumentsOperations {
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
         Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells);
+        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells); // FIXME: 18.01.2017 Bug
 
         System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("test.xlsx")));
+        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWorkbooks.xlsx")));
     }
 }

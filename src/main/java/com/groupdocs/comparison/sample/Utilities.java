@@ -47,8 +47,12 @@ public class Utilities {
         }
     }
 
-    public static String getStoragePath(String fileName) {
-        return STORAGE_PATH + "\\" + fileName;
+    public static String getStoragePath(String fileName, String... subDirectories) {
+        StringBuilder builder = new StringBuilder(STORAGE_PATH);
+        for (String part : subDirectories) {
+            builder.append(File.separator).append(part);
+        }
+        return builder.append(File.separator).append(fileName).toString();
     }
 
     public static String getOutputPath(String fileName) {
