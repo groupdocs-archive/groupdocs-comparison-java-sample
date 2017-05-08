@@ -46,6 +46,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -66,6 +67,7 @@ public class DocumentsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getDocument().save(arrayOutputStream);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
@@ -86,6 +88,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Pdf, new PdfComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -104,6 +107,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Pdf, new PdfComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -124,6 +128,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Pdf);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -142,6 +147,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Pdf);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -158,6 +164,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Pdf, new PdfComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -172,6 +179,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Pdf, new PdfComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -188,6 +196,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Pdf);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -202,6 +211,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Pdf);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -222,6 +232,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Slides, new SlidesComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -241,6 +252,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Slides, new SlidesComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -261,6 +273,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Slides);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -279,6 +292,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Slides);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -295,6 +309,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Slides, new SlidesComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -309,6 +324,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Slides, new SlidesComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -325,6 +341,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Slides, FileType.Undefined);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -339,6 +356,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Slides);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -359,6 +377,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text, new TextComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -378,6 +397,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text, new TextComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -398,6 +418,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -415,6 +436,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Text);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -431,6 +453,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Text, new TextComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -445,6 +468,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Text, new TextComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -461,6 +485,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Text);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -475,6 +500,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Text);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -495,6 +521,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Words, new WordsComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -513,6 +540,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Words, new WordsComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -533,6 +561,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Words);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -551,6 +580,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Words);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -567,6 +597,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words, new WordsComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -581,6 +612,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words, new WordsComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -597,6 +629,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -611,6 +644,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -631,6 +665,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Cells, new CellsComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -649,6 +684,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Cells, new CellsComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -669,6 +705,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Cells);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -687,6 +724,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Cells);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -703,6 +741,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Cells, new CellsComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -717,6 +756,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells, new CellsComparisonSettings());
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
@@ -733,6 +773,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Cells);
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
     }
 
@@ -747,6 +788,7 @@ public class DocumentsOperationsTests {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells); // FIXME: 18.01.2017 Bug
 
+        System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
         IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }

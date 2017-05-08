@@ -22,6 +22,7 @@ import com.groupdocs.comparison.words.contracts.enums.ComparisonSaveFormat;
 import com.groupdocs.comparison.words.contracts.nodes.*;
 import com.groupdocs.comparison.words.nodes.*;
 import org.apache.commons.io.IOUtils;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -34,6 +35,7 @@ import java.util.List;
 
 import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
 import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
+import static com.groupdocs.comparison.sample.Utilities.applyLicense;
 import static org.junit.Assert.assertFalse;
 
 
@@ -41,10 +43,16 @@ import static org.junit.Assert.assertFalse;
  * @author Aleksey Permyakov on 10.08.2016.
  */
 public class OptionsOperationsTests {
+
+    @Before
+    public void before() {
+        applyLicense();
+    }
+
     @Test
-     public void testCompareTwoWordDocuments() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.docx", targetName = "target.docx", resultName = "oo_testCompareTwoWordDocuments.docx";
+    public void testCompareTwoWordDocuments() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "oo_testCompareTwoWordDocuments.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -57,13 +65,14 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoWordParagraphs() throws Exception {
-       Utilities.showTestHeader();
+    public void testCompareTwoWordParagraphs() throws Exception {
+        Utilities.showTestHeader();
         final String resultName = "oo_testCompareTwoWordParagraphs.docx";
 
         // Creating Paragraphs
@@ -80,13 +89,14 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoWordCells() throws Exception {
-       Utilities.showTestHeader();
+    public void testCompareTwoWordCells() throws Exception {
+        Utilities.showTestHeader();
         final String resultName = "oo_testCompareTwoWordCells.docx";
 
         // Creating Cells
@@ -105,13 +115,14 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoWordColumns() throws Exception {
-       Utilities.showTestHeader();
+    public void testCompareTwoWordColumns() throws Exception {
+        Utilities.showTestHeader();
         final String resultName = "oo_testCompareTwoWordColumns.docx";
 
         // Creating Columns
@@ -134,13 +145,14 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoWordRows() throws Exception {
-       Utilities.showTestHeader();
+    public void testCompareTwoWordRows() throws Exception {
+        Utilities.showTestHeader();
         final String resultName = "oo_testCompareTwoWordRows.docx";
 
         // Creating Rows
@@ -163,13 +175,14 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoWordTables() throws Exception {
-       Utilities.showTestHeader();
+    public void testCompareTwoWordTables() throws Exception {
+        Utilities.showTestHeader();
         final String resultName = "oo_testCompareTwoWordTables.docx";
 
         // Creating Tables
@@ -196,14 +209,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoWorkbookDocuments() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "oo_testCompareTwoWorkbookDocuments.xlsx";
+    public void testCompareTwoWorkbookDocuments() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "oo_testCompareTwoWorkbookDocuments.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -216,14 +230,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getWorkbook().save(arrayOutputStream, com.groupdocs.comparison.cells.contracts.enums.ComparisonSaveFormat.Xlsx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoWorkbookWorksheets() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "oo_testCompareTwoWorkbookWorksheets.xlsx";
+    public void testCompareTwoWorkbookWorksheets() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "oo_testCompareTwoWorkbookWorksheets.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -237,14 +252,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getWorkbook().save(arrayOutputStream, com.groupdocs.comparison.cells.contracts.enums.ComparisonSaveFormat.Xlsx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoWorkbookCells() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "oo_testCompareTwoWorkbookCells.xlsx";
+    public void testCompareTwoWorkbookCells() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "oo_testCompareTwoWorkbookCells.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -258,14 +274,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getWorkbook().save(arrayOutputStream, com.groupdocs.comparison.cells.contracts.enums.ComparisonSaveFormat.Pdf);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoPdfDocuments() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "oo_testCompareTwoPdfDocuments.pdf";
+    public void testCompareTwoPdfDocuments() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "oo_testCompareTwoPdfDocuments.pdf";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -278,14 +295,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.saveTo(arrayOutputStream);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoPresentationDocuments() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationDocuments.pptx";
+    public void testCompareTwoPresentationDocuments() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationDocuments.pptx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -298,14 +316,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoPresentationAutoShapes() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationAutoShapes.pptx";
+    public void testCompareTwoPresentationAutoShapes() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationAutoShapes.pptx";
 
 //        // Creating Slides
 //        ComparisonSlideBase sourceSlide = new ComparisonSlide();
@@ -336,9 +355,9 @@ public class OptionsOperationsTests {
     }
 
     @Test
-     public void testCompareTwoPresentationAutoShapes2() throws Exception {
-       Utilities.showTestHeader();
-       final String resultName = "oo_testCompareTwoPresentationAutoShapes2.pptx";
+    public void testCompareTwoPresentationAutoShapes2() throws Exception {
+        Utilities.showTestHeader();
+        final String resultName = "oo_testCompareTwoPresentationAutoShapes2.pptx";
 
         // Creating AutoShapes
         ComparisonAutoShapeBase sourceAutoShape = new ComparisonAutoShape(100, 100, 500, 300);
@@ -360,14 +379,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoPresentationParagraphs() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationParagraphs.pptx";
+    public void testCompareTwoPresentationParagraphs() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationParagraphs.pptx";
 
         // Creating Paragraphs
         ComparisonParagraphBase sourceParagraph = new com.groupdocs.comparison.slides.ComparisonParagraph();
@@ -383,14 +403,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoPresentationCells() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationCells.pptx";
+    public void testCompareTwoPresentationCells() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationCells.pptx";
 
         // Creating cells
         ComparisonCellBase sourceCell = new com.groupdocs.comparison.slides.ComparisonCell(200, 50, 0, 0);
@@ -412,14 +433,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoPresentationColumns() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationColumns.pptx";
+    public void testCompareTwoPresentationColumns() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationColumns.pptx";
 
         // Creating Columns
         ComparisonColumnBase sourceColumn = new com.groupdocs.comparison.slides.ComparisonColumn(new double[]{50, 50}, 200);
@@ -445,14 +467,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Pdf);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoPresentationRows() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationRows.pptx";
+    public void testCompareTwoPresentationRows() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationRows.pptx";
 
         // Creating Rows
         ComparisonRowBase sourceRow = new com.groupdocs.comparison.slides.ComparisonRow(new double[]{200, 200}, 50);
@@ -478,14 +501,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Html);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoPresentationTables() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationTables.pptx";
+    public void testCompareTwoPresentationTables() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationTables.pptx";
         // Creating Tables
         ComparisonTableBase sourceTable = new com.groupdocs.comparison.slides.ComparisonTable(100, 100, new double[]{200, 200}, new double[]{50, 50});
         ComparisonParagraphBase sourceParagraph00 = new com.groupdocs.comparison.slides.ComparisonParagraph();
@@ -523,14 +547,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         compareResult.getPresentation(true).save(arrayOutputStream, com.groupdocs.comparison.slides.contracts.enums.ComparisonSaveFormat.Html);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoTextDocuments() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.txt", targetName = "target.txt", resultName = "oo_testCompareTwoTextDocuments.txt";
+    public void testCompareTwoTextDocuments() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.txt", targetName = "target.txt", resultName = "oo_testCompareTwoTextDocuments.txt";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -543,15 +568,16 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getTextFile().save(arrayOutputStream);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
     @Ignore // FIXME: 08.05.2017 too long
-     public void testCompareTwoHtmlDocuments() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.html", targetName = "target.html", resultName = "oo_testCompareTwoHtmlDocuments.html";
+    public void testCompareTwoHtmlDocuments() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.html", targetName = "target.html", resultName = "oo_testCompareTwoHtmlDocuments.html";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -564,14 +590,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getDocument().save(arrayOutputStream);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareTwoObjects() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "source.docx", targetName = "target.docx", resultName = "oo_testCompareTwoObjects.docx";
+    public void testCompareTwoObjects() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "oo_testCompareTwoObjects.docx";
         //Create new document
         IComparisonDocument sourceDoc = new ComparisonDocument();
         IComparisonTable sourceTable = new ComparisonTable(new double[]{100}, new double[]{20, 20});
@@ -600,13 +627,14 @@ public class OptionsOperationsTests {
         //Get document from compare result and save document
         final String outFile = getOutputPath(resultName);
         compareResult.getDocument().save(outFile, ComparisonSaveFormat.Docx);
+        System.out.println("Stream size: " + new File(outFile).length());
         assertFalse("Result stream is empty", new File(outFile).length() == 0);
     }
 
     @Test
-     public void testCompareSourceDocumentWithTwoTargetDocuments() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "multi-source.docx", target1Name = "multi-target1.docx", target2Name = "multi-target2.docx", resultName = "oo_testCompareSourceDocumentWithTwoTargetDocuments.docx";
+    public void testCompareSourceDocumentWithTwoTargetDocuments() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "multi-source.docx", target1Name = "multi-target1.docx", target2Name = "multi-target2.docx", resultName = "oo_testCompareSourceDocumentWithTwoTargetDocuments.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String target1Path = getStoragePath(target1Name);
         final String target2Path = getStoragePath(target2Name);
@@ -628,14 +656,15 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
-     public void testCompareSourceDocumentWithThreeTargetDocuments() throws Exception {
-       Utilities.showTestHeader();
-       final String sourceName = "multi-source.docx", target1Name = "multi-target1.docx", target2Name = "multi-target2.docx", target3Name = "multi-target3.docx", resultName = "oo_testCompareSourceDocumentWithThreeTargetDocuments.docx";
+    public void testCompareSourceDocumentWithThreeTargetDocuments() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "multi-source.docx", target1Name = "multi-target1.docx", target2Name = "multi-target2.docx", target3Name = "multi-target3.docx", resultName = "oo_testCompareSourceDocumentWithThreeTargetDocuments.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String target1Path = getStoragePath(target1Name);
         final String target2Path = getStoragePath(target2Name);
@@ -660,6 +689,7 @@ public class OptionsOperationsTests {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getDocument().save(arrayOutputStream, ComparisonSaveFormat.Docx);
+        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
         assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }

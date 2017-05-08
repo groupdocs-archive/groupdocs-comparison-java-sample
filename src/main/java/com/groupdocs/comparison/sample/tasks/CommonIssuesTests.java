@@ -37,6 +37,7 @@ public class CommonIssuesTests {
 
         final InputStream compareResult = comp.compare(sourcePath, targetPath, resultPath, ComparisonType.Pdf);
 
+        System.out.println("Stream size: " + compareResult.available());
         assertFalse("Result stream is empty", compareResult.available() == 0);
         IOUtils.copy(compareResult, new FileOutputStream(getOutputPath(resultName)));
     }
