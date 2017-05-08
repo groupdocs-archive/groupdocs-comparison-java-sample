@@ -51,6 +51,7 @@ public class TestRunner {
     public static void applyLicense() {
         License lic = new License();
         if (LICENSE_PATH != null && new File(LICENSE_PATH).exists()) {
+            System.out.println("Using license: " + LICENSE_PATH);
             lic.setLicense(LICENSE_PATH);
         }
     }

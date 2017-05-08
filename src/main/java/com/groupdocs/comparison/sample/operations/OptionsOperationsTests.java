@@ -33,9 +33,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.groupdocs.comparison.sample.TestRunner.applyLicense;
 import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
 import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
-import static com.groupdocs.comparison.sample.Utilities.applyLicense;
 import static org.junit.Assert.assertFalse;
 
 

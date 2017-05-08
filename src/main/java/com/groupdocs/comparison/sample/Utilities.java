@@ -54,14 +54,6 @@ public class Utilities {
     }
 
     /**
-     * Set product's license
-     */
-    public static void applyLicense() {
-        License lic = new License();
-        lic.setLicense(System.getenv("GROUPDOCS_TOTAL"));
-    }
-
-    /**
      * Save file in html form
      * @param filename Save as provided String
      * @param content  Html contents in String form

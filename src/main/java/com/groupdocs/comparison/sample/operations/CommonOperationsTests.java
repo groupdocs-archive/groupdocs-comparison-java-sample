@@ -13,9 +13,9 @@ import org.junit.Test;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+import static com.groupdocs.comparison.sample.TestRunner.applyLicense;
 import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
 import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
-import static com.groupdocs.comparison.sample.Utilities.applyLicense;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
