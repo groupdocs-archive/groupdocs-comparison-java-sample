@@ -7,18 +7,33 @@ import com.groupdocs.comparison.common.comparisonsettings.*;
 import com.groupdocs.comparison.html.ComparisonHtmlDocument;
 import com.groupdocs.comparison.html.contracts.IComparisonHtmlDocument;
 import com.groupdocs.comparison.html.contracts.IHtmlCompareResult;
+import com.groupdocs.comparison.sample.Utilities;
 import org.apache.commons.io.IOUtils;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.*;
 
-import static com.groupdocs.comparison.sample.Utilities.getOutputPath;
-import static com.groupdocs.comparison.sample.Utilities.getStoragePath;
+import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
+import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
+import static com.groupdocs.comparison.sample.Utilities.applyLicense;
+import static org.junit.Assert.assertFalse;
 
 /**
  * @author Aleksey Permyakov on 10.08.2016.
  */
-public class DocumentsOperations {
-    public static void compareTwoHtmlFromStreams(String sourceName, String targetName, String resultName) throws Exception {
+public class DocumentsOperationsTests {
+
+    @Before
+    public void before() {
+        applyLicense();
+    }
+
+    @Test
+    public void testCompareTwoHtmlFromStreams() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.html", targetName = "target.html", resultName = "do_testCompareTwoHtmlFromStreams.html";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -31,10 +46,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoHtml(String sourceName, String targetName) throws Exception {
+    @Test
+    @Ignore // FIXME: 08.05.2017 too long
+    public void testCompareTwoHtml() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.html", targetName = "target.html", resultName = "do_testCompareTwoHtml.html";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -47,11 +66,14 @@ public class DocumentsOperations {
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getDocument().save(arrayOutputStream);
-        System.out.println(arrayOutputStream.toByteArray().length);
-        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath("do_compareTwoHtml.html")));
+        assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
+        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoPdfFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+    public void testCompareTwoPdfFromStreamsWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreamsWithResultPathAndSettings.pdf";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -64,10 +86,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Pdf, new PdfComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoPdfFromStreamsWithSettings(String sourceName, String targetName) throws Exception {
+    @Test
+    public void testCompareTwoPdfFromStreamsWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreamsWithSettings.pdf";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -79,11 +104,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Pdf, new PdfComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPdfFromStreamsWithSettings.pdf")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoPdfFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+    public void testCompareTwoPdfFromStreamsWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreamsWithResultPath.pdf";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -96,10 +124,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Pdf);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoPdfFromStreams(String sourceName, String targetName) throws Exception {
+    @Test
+    public void testCompareTwoPdfFromStreams() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreams.pdf";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -111,11 +142,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Pdf);
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPdfFromStreams.pdf")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoPdfWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+    public void testCompareTwoPdfWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfWithResultPathAndSettings.pdf";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -124,10 +158,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Pdf, new PdfComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoPdfWithSettings(String sourceName, String targetName) throws Exception {
+    @Test
+    public void testCompareTwoPdfWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfWithSettings.pdf";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -135,11 +172,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Pdf, new PdfComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPdfWithSettings.pdf")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoPdfWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+    public void testCompareTwoPdfWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfWithResultPath.pdf";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -148,10 +188,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Pdf);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoPdf(String sourceName, String targetName) throws Exception {
+    @Test
+    public void testCompareTwoPdf() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdf.pdf";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -159,11 +202,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Pdf);
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPdf.pdf")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoPresentationsFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+    public void testCompareTwoPresentationsFromStreamsWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreamsWithResultPathAndSettings.pptx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -176,10 +222,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Slides, new SlidesComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoPresentationsFromStreamsWithSettings(String sourceName, String targetName) throws Exception {
+    @Test
+    public void testCompareTwoPresentationsFromStreamsWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreamsWithSettings.pptx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -192,11 +241,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Slides, new SlidesComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPresentationsFromStreamsWithSettings.pptx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoPresentationsFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+    public void testCompareTwoPresentationsFromStreamsWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreamsWithResultPath.pptx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -209,10 +261,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Slides);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoPresentationsFromStreams(String sourceName, String targetName) throws Exception {
+    @Test
+    public void testCompareTwoPresentationsFromStreams() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreams.pptx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -224,11 +279,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Slides);
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPresentationsFromStreams.pptx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoPresentationsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+    public void testCompareTwoPresentationsWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsWithResultPathAndSettings.pptx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -237,10 +295,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Slides, new SlidesComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoPresentationsWithSettings(String sourceName, String targetName) throws Exception {
+    @Test
+    public void testCompareTwoPresentationsWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsWithSettings.pptx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -248,11 +309,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Slides, new SlidesComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPresentationsWithSettings.pptx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoPresentationsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoPresentationsWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsWithResultPath.pptx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -261,10 +325,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Slides, FileType.Undefined);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoPresentations(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoPresentations() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentations.pptx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -272,11 +339,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Slides);
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoPresentations.pptx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoTextsFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoTextsFromStreamsWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreamsWithResultPathAndSettings.txt";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -289,10 +359,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text, new TextComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoTextsFromStreamsWithSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoTextsFromStreamsWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreamsWithSettings.txt";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -305,11 +378,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text, new TextComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoTextsFromStreamsWithSettings.html")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoTextsFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoTextsFromStreamsWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreamsWithResultPath.txt";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -322,10 +398,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoTextsFromStreams(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoTextsFromStreams() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreams.txt";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -336,11 +415,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Text);
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoTextsFromStreams.html")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoTextsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoTextsWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsWithResultPathAndSettings.txt";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -349,10 +431,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Text, new TextComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoTextsWithSettings(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoTextsWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsWithSettings.txt";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -360,11 +445,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Text, new TextComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoTextsWithSettings.html")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoTextsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoTextsWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsWithResultPath.txt";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -373,10 +461,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Text);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoTexts(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoTexts() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTexts.txt";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -384,11 +475,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Text);
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoTexts.html")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoWordsFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoWordsFromStreamsWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreamsWithResultPathAndSettings.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -401,10 +495,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Words, new WordsComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoWordsFromStreamsWithSettings(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoWordsFromStreamsWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreamsWithSettings.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -416,11 +513,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Words, new WordsComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWordsFromStreamsWithSettings.docx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoWordsFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoWordsFromStreamsWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreamsWithResultPath.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -433,10 +533,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Words);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoWordsFromStreams(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoWordsFromStreams() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreams.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -448,11 +551,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Words);
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWordsFromStreams.docx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoWordsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoWordsWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsWithResultPathAndSettings.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -461,10 +567,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words, new WordsComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoWordsWithSettings(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoWordsWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsWithSettings.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -472,11 +581,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words, new WordsComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWordsWithSettings.docx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoWordsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoWordsWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsWithResultPath.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -485,10 +597,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoWords(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoWords() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWords.docx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -496,11 +611,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words);
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWords.docx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoWorkbooksFromStreamsWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoWorkbooksFromStreamsWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithResultPathAndSettings.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -513,10 +631,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Cells, new CellsComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoWorkbooksFromStreamsWithSettings(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoWorkbooksFromStreamsWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithSettings.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -528,11 +649,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Cells, new CellsComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWorkbooksFromStreamsWithSettings.xlsx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoWorkbooksFromStreamsWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoWorkbooksFromStreamsWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithResultPath.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -545,10 +669,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Cells);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoWorkbooksFromStreams(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoWorkbooksFromStreams() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreams.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -560,11 +687,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Cells);
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWorkbooksFromStreams.xlsx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoWorkbooksWithResultPathAndSettings(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoWorkbooksWithResultPathAndSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksWithResultPathAndSettings.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -573,10 +703,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Cells, new CellsComparisonSettings());
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoWorkbooksWithSettings(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoWorkbooksWithSettings() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksWithSettings.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -584,11 +717,14 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells, new CellsComparisonSettings());
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWorkbooksWithSettings.xlsx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 
-    public static void compareTwoWorkbooksWithResultPath(String sourceName, String targetName, String resultName) throws Exception {
+    @Test
+     public void testCompareTwoWorkbooksWithResultPath() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksWithResultPath.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
@@ -597,10 +733,13 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Cells);
 
-        System.out.println(result.available());
+        assertFalse("Result stream is empty", result.available() == 0);
     }
 
-    public static void compareTwoWorkbooks(String sourceName, String targetName) throws Exception {
+    @Test
+     public void testCompareTwoWorkbooks() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooks.xlsx";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
@@ -608,7 +747,7 @@ public class DocumentsOperations {
         Comparison comparison = new Comparison();
         InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells); // FIXME: 18.01.2017 Bug
 
-        System.out.println(result.available());
-        IOUtils.copy(result, new FileOutputStream(getOutputPath("do_compareTwoWorkbooks.xlsx")));
+        assertFalse("Result stream is empty", result.available() == 0);
+        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
     }
 }
