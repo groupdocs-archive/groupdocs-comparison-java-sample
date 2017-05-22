@@ -24,6 +24,7 @@ import static org.junit.Assert.assertTrue;
  *
  * @author Aleksey Permyakov
  */
+@SuppressWarnings("all")
 public class CommonOperationsTests {
 
     @Before

@@ -18,6 +18,7 @@ import static org.junit.Assert.assertFalse;
 /**
  * @author Aleksey Permyakov
  */
+@SuppressWarnings("all")
 public class CommonIssuesTests {
 
     @Before
@@ -25,7 +26,7 @@ public class CommonIssuesTests {
         applyLicense();
     }
 
-    @Test
+    @Test // TODO: 22.05.2017 At most 4 elements
     public void testCOMPARISONJAVA107() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "original.pdf", targetName = "updated.pdf", resultName = "COMPARISONJAVA107.pdf";

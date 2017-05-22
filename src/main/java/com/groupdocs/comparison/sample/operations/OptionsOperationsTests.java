@@ -42,6 +42,7 @@ import static org.junit.Assert.assertFalse;
 /**
  * @author Aleksey Permyakov on 10.08.2016.
  */
+@SuppressWarnings("all")
 public class OptionsOperationsTests {
 
     @Before
@@ -226,7 +227,7 @@ public class OptionsOperationsTests {
         ComparisonWorkbook target = new ComparisonWorkbook(targetPath);
 
         // Call method CompareWith.
-        ICellsCompareResult result = source.compareWith(target, new CellsComparisonSettings()); // FIXME: 18.01.2017 Bug
+        ICellsCompareResult result = source.compareWith(target, new CellsComparisonSettings());
 
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         result.getWorkbook().save(arrayOutputStream, com.groupdocs.comparison.cells.contracts.enums.ComparisonSaveFormat.Xlsx);
@@ -321,7 +322,7 @@ public class OptionsOperationsTests {
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
-    @Test
+    @Test // TODO: 22.05.2017 ???
     public void testCompareTwoPresentationAutoShapes() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationAutoShapes.pptx";
@@ -387,7 +388,7 @@ public class OptionsOperationsTests {
     @Test
     public void testCompareTwoPresentationParagraphs() throws Exception {
         Utilities.showTestHeader();
-        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationParagraphs.pptx";
+        final String resultName = "oo_testCompareTwoPresentationParagraphs.pptx";
 
         // Creating Paragraphs
         ComparisonParagraphBase sourceParagraph = new com.groupdocs.comparison.slides.ComparisonParagraph();
@@ -408,10 +409,10 @@ public class OptionsOperationsTests {
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
-    @Test
+    @Test // TODO: 22.05.2017 Specified argument was out of the range of valid values
     public void testCompareTwoPresentationCells() throws Exception {
         Utilities.showTestHeader();
-        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationCells.pptx";
+        final String resultName = "oo_testCompareTwoPresentationCells.pptx";
 
         // Creating cells
         ComparisonCellBase sourceCell = new com.groupdocs.comparison.slides.ComparisonCell(200, 50, 0, 0);
@@ -441,7 +442,7 @@ public class OptionsOperationsTests {
     @Test
     public void testCompareTwoPresentationColumns() throws Exception {
         Utilities.showTestHeader();
-        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationColumns.pptx";
+        final String resultName = "oo_testCompareTwoPresentationColumns.pptx";
 
         // Creating Columns
         ComparisonColumnBase sourceColumn = new com.groupdocs.comparison.slides.ComparisonColumn(new double[]{50, 50}, 200);
@@ -475,7 +476,7 @@ public class OptionsOperationsTests {
     @Test
     public void testCompareTwoPresentationRows() throws Exception {
         Utilities.showTestHeader();
-        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationRows.pptx";
+        final String resultName = "oo_testCompareTwoPresentationRows.pptx";
 
         // Creating Rows
         ComparisonRowBase sourceRow = new com.groupdocs.comparison.slides.ComparisonRow(new double[]{200, 200}, 50);
@@ -506,10 +507,10 @@ public class OptionsOperationsTests {
         IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
-    @Test
+    @Test // TODO: 22.05.2017 Table must contain at least one row and one column
     public void testCompareTwoPresentationTables() throws Exception {
         Utilities.showTestHeader();
-        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "oo_testCompareTwoPresentationTables.pptx";
+        final String resultName = "oo_testCompareTwoPresentationTables.pptx";
         // Creating Tables
         ComparisonTableBase sourceTable = new com.groupdocs.comparison.slides.ComparisonTable(100, 100, new double[]{200, 200}, new double[]{50, 50});
         ComparisonParagraphBase sourceParagraph00 = new com.groupdocs.comparison.slides.ComparisonParagraph();
@@ -574,7 +575,6 @@ public class OptionsOperationsTests {
     }
 
     @Test
-    @Ignore // FIXME: 08.05.2017 too long
     public void testCompareTwoHtmlDocuments() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.html", targetName = "target.html", resultName = "oo_testCompareTwoHtmlDocuments.html";
@@ -598,7 +598,7 @@ public class OptionsOperationsTests {
     @Test
     public void testCompareTwoObjects() throws Exception {
         Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "oo_testCompareTwoObjects.docx";
+        final String resultName = "oo_testCompareTwoObjects.docx";
         //Create new document
         IComparisonDocument sourceDoc = new ComparisonDocument();
         IComparisonTable sourceTable = new ComparisonTable(new double[]{100}, new double[]{20, 20});

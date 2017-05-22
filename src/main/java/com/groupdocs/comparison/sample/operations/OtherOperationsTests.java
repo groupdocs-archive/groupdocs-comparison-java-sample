@@ -8,6 +8,7 @@ import static com.groupdocs.comparison.sample.TestRunner.applyLicense;
 /**
  * @author Aleksey Permyakov on 10.08.2016.
  */
+@SuppressWarnings("all")
 public class OtherOperationsTests {
 
     @Before

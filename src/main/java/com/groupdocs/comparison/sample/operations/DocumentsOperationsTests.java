@@ -23,6 +23,7 @@ import static org.junit.Assert.assertFalse;
 /**
  * @author Aleksey Permyakov on 10.08.2016.
  */
+@SuppressWarnings("all")
 public class DocumentsOperationsTests {
 
     @Before
@@ -51,7 +52,6 @@ public class DocumentsOperationsTests {
     }
 
     @Test
-    @Ignore // FIXME: 08.05.2017 too long
     public void testCompareTwoHtml() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.html", targetName = "target.html", resultName = "do_testCompareTwoHtml.html";
@@ -271,7 +271,7 @@ public class DocumentsOperationsTests {
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
         Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Slides);
+        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Slides, null, FileType.Undefined);
 
         System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
@@ -786,7 +786,7 @@ public class DocumentsOperationsTests {
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
         Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells); // FIXME: 18.01.2017 Bug
+        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells);
 
         System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);
