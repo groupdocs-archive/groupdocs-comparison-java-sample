@@ -1,6 +1,8 @@
 package com.groupdocs.comparison.sample;
 
 import com.groupdocs.comparison.common.license.License;
+import com.groupdocs.comparison.common.logger.ComparisonLogger;
+import com.groupdocs.comparison.common.logger.ConsoleLogger;
 import com.groupdocs.comparison.sample.operations.*;
 import com.groupdocs.comparison.sample.tasks.CommonIssuesTests;
 import org.apache.commons.io.FileUtils;
@@ -19,7 +21,9 @@ public class TestRunner {
     public static String STORAGE_PATH = PROJECT_PATH + "\\Storage";
     public static String OUTPUT_PATH = PROJECT_PATH + "\\Output";
     public static String OUTPUT_HTML_PATH = OUTPUT_PATH + "\\html";
-    public static String OUTPUT_IMAGE_PATH = OUTPUT_PATH + "\\images";
+    public static String OUTPUT_PDF_PATH = OUTPUT_PATH + "\\pdf";
+    public static String OUTPUT_TXT_PATH = OUTPUT_PATH + "\\txt";
+    public static String OUTPUT_CELL_PATH = OUTPUT_PATH + "\\cell";
     public static String LICENSE_PATH = STORAGE_PATH + "\\GroupDocs.Total.Java.lic";
 
     /**
@@ -77,13 +81,23 @@ public class TestRunner {
         final File op = new File(OUTPUT_PATH);
         final File ip = new File(OUTPUT_PATH);
         final File ohp = new File(OUTPUT_HTML_PATH);
-        final File oip = new File(OUTPUT_IMAGE_PATH);
+        final File opp = new File(OUTPUT_PDF_PATH);
+        final File otp = new File(OUTPUT_TXT_PATH);
+        final File ocp = new File(OUTPUT_CELL_PATH);
         final File lcp = new File(LICENSE_PATH);
         if (!lcp.exists()) {
             LICENSE_PATH = System.getenv("GROUPDOCS_VIEWER");
             System.out.println("License file does not exists! Using license from %GROUPDOCS_VIEWER% ...");
         }
-        if ((!sp.exists() && !sp.mkdirs()) || (!op.exists() && !op.mkdirs()) || (!ip.exists() && !ip.mkdirs()) || (!ohp.exists() && !ohp.mkdirs()) || (!oip.exists() && !oip.mkdirs())) {
+        if (
+                (!sp.exists() && !sp.mkdirs()) ||
+                        (!op.exists() && !op.mkdirs()) ||
+                        (!ip.exists() && !ip.mkdirs()) ||
+                        (!ohp.exists() && !ohp.mkdirs()) ||
+                        (!opp.exists() && !opp.mkdirs()) ||
+                        (!otp.exists() && !otp.mkdirs()) ||
+                        (!ocp.exists() && !ocp.mkdirs())
+                ) {
             System.err.println("Can't create data directories!!!");
         }
     }

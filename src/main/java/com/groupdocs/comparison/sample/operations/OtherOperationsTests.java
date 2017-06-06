@@ -1,8 +1,11 @@
 package com.groupdocs.comparison.sample.operations;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 import static com.groupdocs.comparison.sample.TestRunner.applyLicense;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -14,5 +17,10 @@ public class OtherOperationsTests {
     @Before
     public void before() {
         applyLicense();
+    }
+
+    @Test
+    public void testCOMPARISONJAVAXXX() throws Exception {
+        assertTrue(true);
     }
 }

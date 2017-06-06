@@ -10,14 +10,14 @@ import com.groupdocs.comparison.html.contracts.IHtmlCompareResult;
 import com.groupdocs.comparison.sample.Utilities;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
-import static com.groupdocs.comparison.sample.TestRunner.applyLicense;
-import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
-import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
+import static com.groupdocs.comparison.sample.TestRunner.*;
 import static org.junit.Assert.assertFalse;
 
 /**
@@ -416,7 +416,7 @@ public class DocumentsOperationsTests {
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
         Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text);
+        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text, null);
 
         System.out.println("Stream size: " + result.available());
         assertFalse("Result stream is empty", result.available() == 0);

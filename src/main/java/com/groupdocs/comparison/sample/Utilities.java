@@ -1,11 +1,9 @@
 package com.groupdocs.comparison.sample;
 
-import com.groupdocs.comparison.common.license.License;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_HTML_PATH;
-import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_IMAGE_PATH;
+import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_PDF_PATH;
 import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_PATH;
 
 /**
@@ -82,7 +80,7 @@ public class Utilities {
         try {
             // extract the image from stream
             BufferedImage img = ImageIO.read(imageContent);
-            final String path = new File(OUTPUT_IMAGE_PATH).getAbsolutePath() + "\\" + getFileNameWithoutExtension(imageName) + ".png";
+            final String path = new File(OUTPUT_PDF_PATH).getAbsolutePath() + "\\" + getFileNameWithoutExtension(imageName) + ".png";
             new File(path).getParentFile().mkdirs();
             //save the image in the form of jpeg
             ImageIO.write(img, "png", new File(path));
