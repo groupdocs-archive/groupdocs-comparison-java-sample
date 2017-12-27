@@ -8,6 +8,7 @@ import com.groupdocs.comparison.common.ICompareResult;
 import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
 import com.groupdocs.comparison.common.comparisonsettings.ImagingComparisonSettings;
 import com.groupdocs.comparison.common.images.ComparisonSlidesImageSettings;
+import com.groupdocs.comparison.common.license.License;
 import com.groupdocs.comparison.imaging.ComparisonDjvuImage;
 import com.groupdocs.comparison.imaging.contracts.IImageCompareResult;
 import com.groupdocs.comparison.imaging.contracts.IPdfDocument;
@@ -26,12 +27,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.groupdocs.comparison.sample.TestRunner.applyLicense;
-import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
-import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static com.groupdocs.comparison.sample.TestRunner.*;
+import static org.junit.Assert.*;
 
 /**
  * @author Aleksey Permyakov
@@ -81,7 +78,7 @@ public class CommonIssuesTests {
 
     @Test
     public void testCOMPARISONJAVA228() throws Exception {
-        final String sourceName = "source.docx", targetName1 = "target_1.docx", targetName2 = "target_2.docx", targetName3 = "target_3.docx", resultName = "testCOMPARISONJAVA228.docx";
+        final String sourceName = "source.docx", targetName1 = "target_1.docx", targetName2 = "target_2.docx", targetName3 = "target_3.docx", resultName = "COMPARISONJAVA228.docx";
         final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA228");
         final String targetPath1 = getStoragePath(targetName1, "COMPARISONJAVA228");
         final String targetPath2 = getStoragePath(targetName2, "COMPARISONJAVA228");
@@ -148,6 +145,32 @@ public class CommonIssuesTests {
         for (ByteArrayOutputStream arrayOutputStream : imageStream) {
             assertTrue("Image content is empty!", imageStream.size() > 0);
         }
+    }
+
+    @Test
+    public void testCOMPARISONJAVA252() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "output.ppt";
+        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA252");
+        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA252");
+        final String resultPath = getOutputPath(resultName);
+
+        Comparer comparison = new Comparer();
+        final ComparisonSettings comparisonSettings = new ComparisonSettings();
+        ICompareResult result = comparison.compare(new FileInputStream(sourcePath), new FileInputStream(targetPath), comparisonSettings);
+        result.saveDocument(resultPath);
+    }
+
+    /**
+     * Check wheather the license is valid
+     */
+    @Test
+    public void testCOMPARISONJAVA247() throws Exception {
+        Utilities.showTestHeader();
+        unsetLicense();
+        assertFalse(License.isValidLicense());
+        applyLicense();
+        assertTrue(License.isValidLicense());
     }
 
     @Test

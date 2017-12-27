@@ -1,15 +1,17 @@
 package com.groupdocs.comparison.sample;
 
 import com.groupdocs.comparison.common.license.License;
-import com.groupdocs.comparison.common.logger.ComparisonLogger;
-import com.groupdocs.comparison.common.logger.ConsoleLogger;
-import com.groupdocs.comparison.sample.operations.*;
+import com.groupdocs.comparison.sample.operations.CommonOperationsTests;
+import com.groupdocs.comparison.sample.operations.DocumentsOperationsTests;
+import com.groupdocs.comparison.sample.operations.OptionsOperationsTests;
+import com.groupdocs.comparison.sample.operations.OtherOperationsTests;
 import com.groupdocs.comparison.sample.tasks.CommonIssuesTests;
 import org.apache.commons.io.FileUtils;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -60,6 +62,18 @@ public class TestRunner {
         }
     }
 
+    /**
+     * Set product's license
+     */
+    public static void unsetLicense() {
+        License lic = new License();
+        try {
+            lic.setLicense(new ByteArrayInputStream(new byte[0]));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void cleanOutput() throws IOException {
         FileUtils.cleanDirectory(new File(OUTPUT_PATH));
     }
@@ -86,7 +100,7 @@ public class TestRunner {
         final File ocp = new File(OUTPUT_CELL_PATH);
         final File lcp = new File(LICENSE_PATH);
         if (!lcp.exists()) {
-            LICENSE_PATH = System.getenv("GROUPDOCS_VIEWER");
+            LICENSE_PATH = System.getenv("GROUPDOCS_TOTAL");
             System.out.println("License file does not exists! Using license from %GROUPDOCS_VIEWER% ...");
         }
         if (
