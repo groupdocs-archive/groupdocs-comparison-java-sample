@@ -1,20 +1,14 @@
 package com.groupdocs.comparison.sample.operations;
 
-import com.groupdocs.comparison.Comparison;
-import com.groupdocs.comparison.common.ComparisonType;
-import com.groupdocs.comparison.common.FileType;
-import com.groupdocs.comparison.common.comparisonsettings.*;
-import com.groupdocs.comparison.html.ComparisonHtmlDocument;
-import com.groupdocs.comparison.html.contracts.IComparisonHtmlDocument;
-import com.groupdocs.comparison.html.contracts.IHtmlCompareResult;
+import com.groupdocs.comparison.Comparer;
+import com.groupdocs.comparison.common.compareresult.ICompareResult;
+import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
 import com.groupdocs.comparison.sample.Utilities;
-import org.apache.commons.io.IOUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import static com.groupdocs.comparison.sample.TestRunner.*;
@@ -44,32 +38,34 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
+    @Ignore
     public void testCompareTwoHtml() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.html", targetName = "target.html", resultName = "do_testCompareTwoHtml.html";
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
-        // Open two htmlFiels
-        IComparisonHtmlDocument sourceDocument = new ComparisonHtmlDocument(sourcePath);
-        IComparisonHtmlDocument targetDocument = new ComparisonHtmlDocument(targetPath);
-
-        // Call method CompareWith()
-        IHtmlCompareResult result = sourceDocument.compareWith(targetDocument, new HtmlComparisonSettings());
-
-        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        result.getDocument().save(arrayOutputStream);
-        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
-        assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
-        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
+//        // Open two htmlFiels
+//        IComparisonHtmlDocument sourceDocument = new ComparisonHtmlDocument(sourcePath);
+//        IComparisonHtmlDocument targetDocument = new ComparisonHtmlDocument(targetPath);
+//
+//        // Call method CompareWith()
+//        IHtmlCompareResult result = sourceDocument.compareWith(targetDocument, new HtmlComparisonSettings());
+//
+//        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+//        result.getDocument().save(arrayOutputStream);
+//        System.out.println("Stream size: " + arrayOutputStream.toByteArray().length);
+//        assertFalse("Result stream is empty", arrayOutputStream.toByteArray().length == 0);
+//        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
     @Test
@@ -85,11 +81,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Pdf, new PdfComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -104,12 +101,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Pdf, new PdfComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -125,11 +122,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Pdf);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -144,12 +142,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Pdf);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -161,11 +159,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Pdf, new PdfComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -176,12 +175,12 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Pdf, new PdfComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -193,11 +192,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Pdf);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -208,12 +208,12 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Pdf);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -229,11 +229,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Slides, new SlidesComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -249,12 +250,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Slides, new SlidesComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -270,11 +271,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Slides, null, FileType.Undefined);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -289,12 +291,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Slides);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -306,11 +308,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Slides, new SlidesComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -321,12 +324,13 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Slides, new SlidesComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -338,11 +342,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Slides, FileType.Undefined);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -353,12 +358,13 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Slides);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -374,11 +380,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text, new TextComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -394,12 +401,13 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text, new TextComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -415,11 +423,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Text, null);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -433,12 +442,13 @@ public class DocumentsOperationsTests {
         InputStream sourceStream = new FileInputStream(sourcePath);
         InputStream targetStream = new FileInputStream(targetPath);
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Text);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -450,11 +460,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Text, new TextComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -465,12 +476,13 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Text, new TextComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -482,11 +494,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Text);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -497,12 +510,13 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Text);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -518,11 +532,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Words, new WordsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -537,12 +552,13 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Words, new WordsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -558,11 +574,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Words);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -577,12 +594,13 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Words);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -594,11 +612,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words, new WordsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -609,12 +628,13 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words, new WordsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -626,11 +646,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -641,12 +662,13 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -662,11 +684,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Cells, new CellsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -681,12 +704,13 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Cells, new CellsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -702,11 +726,12 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, outputPath, ComparisonType.Cells);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -721,12 +746,13 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourceStream, targetStream, ComparisonType.Cells);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -738,11 +764,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Cells, new CellsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -753,12 +780,13 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells, new CellsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 
     @Test
@@ -770,11 +798,12 @@ public class DocumentsOperationsTests {
         final String outputPath = getOutputPath(resultName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Cells);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -785,11 +814,12 @@ public class DocumentsOperationsTests {
         final String targetPath = getStoragePath(targetName);
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Cells);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        
     }
 }

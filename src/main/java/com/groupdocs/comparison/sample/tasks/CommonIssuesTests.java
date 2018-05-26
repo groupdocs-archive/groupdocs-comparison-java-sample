@@ -1,29 +1,18 @@
 package com.groupdocs.comparison.sample.tasks;
 
 import com.groupdocs.comparison.Comparer;
-import com.groupdocs.comparison.Comparison;
 import com.groupdocs.comparison.MultiComparer;
-import com.groupdocs.comparison.common.ComparisonType;
-import com.groupdocs.comparison.common.ICompareResult;
+import com.groupdocs.comparison.common.compareresult.ICompareResult;
 import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
-import com.groupdocs.comparison.common.comparisonsettings.ImagingComparisonSettings;
-import com.groupdocs.comparison.common.images.ComparisonSlidesImageSettings;
 import com.groupdocs.comparison.common.license.License;
-import com.groupdocs.comparison.imaging.ComparisonDjvuImage;
-import com.groupdocs.comparison.imaging.contracts.IImageCompareResult;
-import com.groupdocs.comparison.imaging.contracts.IPdfDocument;
 import com.groupdocs.comparison.sample.Utilities;
-import com.groupdocs.comparison.slides.ComparisonPresentation;
-import com.groupdocs.comparison.slides.contracts.comparison.ComparisonPresentationBase;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,13 +38,14 @@ public class CommonIssuesTests {
         final String targetPath = getStoragePath(targetName, "COMPARISONJAVA107");
         final String resultPath = getOutputPath(resultName);
 
-        Comparison comp = new Comparison();
+        Comparer comp = new Comparer();
+        ComparisonSettings settings = new ComparisonSettings();
 
-        final InputStream compareResult = comp.compare(sourcePath, targetPath, resultPath, ComparisonType.Pdf);
+        final ICompareResult compareResult = comp.compare(sourcePath, targetPath, settings);
+        compareResult.saveDocument(resultPath);
 
-        System.out.println("Stream size: " + compareResult.available());
-        assertFalse("Result stream is empty", compareResult.available() == 0);
-        IOUtils.copy(compareResult, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + compareResult.getStream().available());
+        assertFalse("Result stream is empty", compareResult.getStream().available() == 0);
     }
 
     @Test
@@ -93,58 +83,6 @@ public class CommonIssuesTests {
         MultiComparer comparer = new MultiComparer();
         ICompareResult result = comparer.compare(sourcePath, targets, new ComparisonSettings());
         result.saveDocument(outputPath);
-    }
-
-    @Test
-    public void testCOMPARISONJAVA229() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.djvu", targetName = "target.djvu", resultName = "COMPARISONJAVA229.pdf";
-        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA229");
-        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA229");
-        final String resultPath = getOutputPath(resultName);
-
-        InputStream sourceStream = new FileInputStream(sourcePath);
-        InputStream targetStream = new FileInputStream(targetPath);
-
-        ComparisonDjvuImage sourceImage = new ComparisonDjvuImage(sourceStream);
-        ComparisonDjvuImage targetImage = new ComparisonDjvuImage(targetStream);
-
-        ImagingComparisonSettings settings = new ImagingComparisonSettings();
-
-        //Compare
-        IImageCompareResult cr = sourceImage.compareWith(targetImage, settings);
-        IPdfDocument resultPdf = cr.getPdfDocument();
-
-        //save results into a file
-        resultPdf.save(resultPath);
-        sourceStream.close();
-        targetStream.close();
-    }
-
-    @Test
-    public void testCOMPARISONJAVA230() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.pptx", resultName = "";
-        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA230");
-        final String resultPath = getOutputPath(resultName);
-
-        //Open  document
-        ComparisonPresentationBase presentation = new ComparisonPresentation(sourcePath);
-        //Set settings
-        ComparisonSlidesImageSettings settings = new ComparisonSlidesImageSettings();
-        //Save as Image
-        presentation.saveAsImages(resultPath, settings);
-
-        ArrayList<ByteArrayOutputStream> imageStream = new ArrayList<ByteArrayOutputStream>();
-        //Open  document
-        ComparisonPresentationBase presentationStream = new ComparisonPresentation(sourcePath);
-        //Set settings
-        ComparisonSlidesImageSettings settingsStream = new ComparisonSlidesImageSettings();
-        //Save as Image
-        presentationStream.saveAsImages(imageStream, settingsStream);
-        for (ByteArrayOutputStream arrayOutputStream : imageStream) {
-            assertTrue("Image content is empty!", imageStream.size() > 0);
-        }
     }
 
     @Test

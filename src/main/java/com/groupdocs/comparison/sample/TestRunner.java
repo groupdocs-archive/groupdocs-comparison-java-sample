@@ -1,12 +1,15 @@
 package com.groupdocs.comparison.sample;
 
 import com.groupdocs.comparison.common.license.License;
+import com.groupdocs.comparison.common.logger.ComparisonLogger;
+import com.groupdocs.comparison.common.logger.ConsoleLogger;
+import com.groupdocs.comparison.common.logger.LoggingLevel;
 import com.groupdocs.comparison.sample.operations.CommonOperationsTests;
 import com.groupdocs.comparison.sample.operations.DocumentsOperationsTests;
-import com.groupdocs.comparison.sample.operations.OptionsOperationsTests;
 import com.groupdocs.comparison.sample.operations.OtherOperationsTests;
 import com.groupdocs.comparison.sample.tasks.CommonIssuesTests;
 import org.apache.commons.io.FileUtils;
+import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -35,12 +38,15 @@ public class TestRunner {
      */
     public static void main(String[] args) throws Exception {
         applyLicense();
+        configureLogging();
         cleanOutput();
 
-        Result result = JUnitCore.runClasses(
+        // https://www.logicbig.com/tutorials/unit-testing/junit/junit-core.html
+        JUnitCore junit = new JUnitCore();
+        junit.addListener(new TextListener(System.out));
+        Result result = junit.run(
                 CommonOperationsTests.class,
                 DocumentsOperationsTests.class,
-                OptionsOperationsTests.class,
                 OtherOperationsTests.class,
                 CommonIssuesTests.class
         );
@@ -52,6 +58,12 @@ public class TestRunner {
 
         System.out.println(String.format("=== SUCCESS: %d, FAIL: %d, IGNORE: %d ===", result.getRunCount(), result.getFailureCount(), result.getIgnoreCount()));
 
+    }
+
+    private static void configureLogging() {
+        // Logging
+        ComparisonLogger.setLogger(new ConsoleLogger(LoggingLevel.Info));
+        com.groupdocs.foundation.utils.LogUtils.setConsoleEnabled(true);
     }
 
     public static void applyLicense() {

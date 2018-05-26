@@ -1,23 +1,14 @@
 package com.groupdocs.comparison.sample.operations;
 
-import com.groupdocs.comparison.Comparison;
-import com.groupdocs.comparison.common.ComparisonType;
-import com.groupdocs.comparison.common.FileType;
-import com.groupdocs.comparison.common.comparisonsettings.WordsComparisonSettings;
+import com.groupdocs.comparison.Comparer;
+import com.groupdocs.comparison.common.compareresult.ICompareResult;
+import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
 import com.groupdocs.comparison.sample.Utilities;
-import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileOutputStream;
-import java.io.InputStream;
-
-import static com.groupdocs.comparison.sample.TestRunner.applyLicense;
-import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
-import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
+import static com.groupdocs.comparison.sample.TestRunner.*;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * The type View generator.
@@ -39,13 +30,13 @@ public class CommonOperationsTests {
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath);
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -56,12 +47,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath);
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -72,12 +64,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, FileType.Docx);
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -88,12 +81,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, new WordsComparisonSettings());
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -104,12 +98,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, new WordsComparisonSettings(), FileType.Docx);
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -120,12 +115,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words);
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -136,12 +132,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words, FileType.Docx);
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -151,13 +148,13 @@ public class CommonOperationsTests {
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, new WordsComparisonSettings());
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -167,13 +164,13 @@ public class CommonOperationsTests {
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words, new WordsComparisonSettings());
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -183,13 +180,13 @@ public class CommonOperationsTests {
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, ComparisonType.Words);
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -200,12 +197,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words, new WordsComparisonSettings());
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -216,12 +214,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, targetPath, outputPath, ComparisonType.Words, new WordsComparisonSettings(), FileType.Docx);
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -232,13 +231,13 @@ public class CommonOperationsTests {
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword);
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -250,12 +249,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, outputPath);
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -267,12 +267,13 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
+        Comparer comparison = new Comparer();
 
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, outputPath, FileType.Docx);
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -284,11 +285,12 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, outputPath, new WordsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -300,11 +302,12 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, outputPath, new WordsComparisonSettings(), FileType.Docx);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -316,11 +319,12 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, outputPath, ComparisonType.Words);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -332,11 +336,12 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, outputPath, ComparisonType.Words, FileType.Docx);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -347,12 +352,12 @@ public class CommonOperationsTests {
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new WordsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -363,12 +368,12 @@ public class CommonOperationsTests {
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, ComparisonType.Words, new WordsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -379,12 +384,12 @@ public class CommonOperationsTests {
         final String sourcePath = getStoragePath(sourceName);
         final String targetPath = getStoragePath(targetName);
 
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, ComparisonType.Words);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(getOutputPath(resultName));
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
-        IOUtils.copy(result, new FileOutputStream(getOutputPath(resultName)));
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -396,11 +401,12 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, outputPath, ComparisonType.Words, new WordsComparisonSettings());
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
     @Test
@@ -412,10 +418,11 @@ public class CommonOperationsTests {
         final String targetPath = getStoragePath(targetName);
         final String outputPath = getOutputPath(resultName);
 
-        Comparison comparison = new Comparison();
-        InputStream result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, outputPath, ComparisonType.Words, new WordsComparisonSettings(), FileType.Docx);
+        Comparer comparison = new Comparer();
+        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
+        result.saveDocument(outputPath);
 
-        System.out.println("Stream size: " + result.available());
-        assertFalse("Result stream is empty", result.available() == 0);
+        System.out.println("Stream size: " + result.getStream().available());
+        assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 }
