@@ -6,7 +6,7 @@
 
     <groupId>com.temporary</groupId>
     <artifactId>groupdocs-comparison-java-sample</artifactId>
-    <version>18.5</version>
+    <version>18.6.2</version>
     <properties>
         <java.version>1.7</java.version>
         <groupdocs.comparison>${project.version}</groupdocs.comparison>

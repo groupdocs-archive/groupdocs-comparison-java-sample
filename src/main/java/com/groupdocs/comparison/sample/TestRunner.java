@@ -1,9 +1,6 @@
 package com.groupdocs.comparison.sample;
 
 import com.groupdocs.comparison.common.license.License;
-import com.groupdocs.comparison.common.logger.ComparisonLogger;
-import com.groupdocs.comparison.common.logger.ConsoleLogger;
-import com.groupdocs.comparison.common.logger.LoggingLevel;
 import com.groupdocs.comparison.sample.operations.CommonOperationsTests;
 import com.groupdocs.comparison.sample.operations.DocumentsOperationsTests;
 import com.groupdocs.comparison.sample.operations.OtherOperationsTests;
@@ -62,8 +59,8 @@ public class TestRunner {
 
     private static void configureLogging() {
         // Logging
-        ComparisonLogger.setLogger(new ConsoleLogger(LoggingLevel.Info));
-        com.groupdocs.foundation.utils.LogUtils.setConsoleEnabled(true);
+//        ComparisonLogger.setLogger(new ConsoleLogger(LoggingLevel.Info));
+//        com.groupdocs.foundation.utils.LogUtils.setConsoleEnabled(true);
     }
 
     public static void applyLicense() {
