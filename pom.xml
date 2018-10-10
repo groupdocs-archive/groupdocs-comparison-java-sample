@@ -6,7 +6,7 @@
 
     <groupId>com.temporary</groupId>
     <artifactId>groupdocs-comparison-java-sample</artifactId>
-    <version>18.6.2</version>
+    <version>18.6.3</version>
     <properties>
         <java.version>1.7</java.version>
         <groupdocs.comparison>${project.version}</groupdocs.comparison>
@@ -89,6 +89,12 @@
             <id>snapshots</id>
             <name>libs-snapshot</name>
             <url>http://maven.aspose.com/artifactory/libs-snapshot</url>
+        </repository>
+        <repository>
+            <snapshots />
+            <id>artifact-groupdocs</id>
+            <name>artifact-groupdocs</name>
+            <url>http://artifact.groupdocs.com/repo/</url>
         </repository>
     </repositories>
 </project>

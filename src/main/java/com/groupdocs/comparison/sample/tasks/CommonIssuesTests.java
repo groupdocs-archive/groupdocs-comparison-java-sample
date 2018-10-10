@@ -2,6 +2,7 @@ package com.groupdocs.comparison.sample.tasks;
 
 import com.groupdocs.comparison.Comparer;
 import com.groupdocs.comparison.MultiComparer;
+import com.groupdocs.comparison.common.changes.ChangeInfo;
 import com.groupdocs.comparison.common.compareresult.ICompareResult;
 import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
 import com.groupdocs.comparison.common.license.License;
@@ -12,8 +13,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -353,6 +356,111 @@ public class CommonIssuesTests {
 
         System.out.println("Finished compare " + result.getChanges().length + " changes.");
         System.out.println("Report written to " + resultPath);
+    }
+
+    @Test
+    public void test9715() throws Exception {
+        Utilities.showTestHeader();
+        final String tmp1Name = "tmp1.txt", tmp2Name = "tmp1.txt", tmp3Name = "tmp2.txt";
+        final String tmp1Path = getStoragePath(tmp1Name, "9715");
+        final String tmp2Path = getStoragePath(tmp2Name, "9715");
+        final String tmp3Path = getStoragePath(tmp3Name, "9715");
+
+//        List<InputStream> targetList = new ArrayList<InputStream>();
+//        List<InputStream> files = new ArrayList<InputStream>();
+//        List<String> passwords = new ArrayList<String>();
+//        List<com.groupdocs.comparison.internal.c.a.m.System.e.q> newFiles = new ArrayList<com.groupdocs.comparison.internal.c.a.m.System.e.q>();
+//        List<String> newPasswords = new ArrayList<String>();
+//        for (int i = 1; i < files.size(); i++) {
+//            newFiles.add(com.groupdocs.comparison.internal.c.a.m.System.e.q.E(files.get(i)));
+//            newPasswords.add(passwords.get(i));
+//        }
+//        // create new comparer
+//        MultiComparer multiComparer = new MultiComparer();
+//        // create setting for comparing
+//        ComparisonSettings settings = new ComparisonSettings();
+//
+//        ICompareResult compareResult = multiComparer.compare(files.get(0), passwords.get(0), newFiles, newPasswords, settings);
+//        final ChangeInfo[] changes = compareResult.getChanges();
+
+//        LogUtils.setConsoleEnabled(true);
+//        LogUtils.setDebugEnabled(true);
+
+        List<String> targetList = new ArrayList<String>();
+        targetList.add(tmp2Path);
+        targetList.add(tmp3Path);
+        // create new comparer
+        MultiComparer multiComparer = new MultiComparer();
+        // create setting for comparing
+        ComparisonSettings settings = new ComparisonSettings();
+
+        ICompareResult compareResult = multiComparer.compare(tmp1Path, targetList, settings);
+        final ChangeInfo[] changes = compareResult.getChanges();
+
+        System.out.println("Finished compare " + changes.length + " changes.");
+    }
+
+    @Test
+    public void testCOMPARISONJAVA374() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA374-output.pdf";
+        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA374");
+        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA374");
+        final String resultPath = getOutputPath(resultName);
+        //
+        final Comparer comparer = new Comparer();
+        // create setting for comparing
+        final ComparisonSettings settings = new ComparisonSettings();
+
+        for (int n = 0; n < 10; n++) {
+            // compare two documents
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        ICompareResult compareResult = comparer.compare(new FileInputStream(sourcePath), null, new FileInputStream(targetPath), null, settings);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+        }
+    }
+
+    @Test
+    public void testCOMPARISONJAVA373() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "karta_izo_parole.docx", targetName = "karta_izo_parole1.docx", resultName = "COMPARISONJAVA373-output.docx";
+        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA373");
+        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA373");
+        final String resultPath = getOutputPath(resultName);
+        //
+        final Comparer comparer = new Comparer();
+        // create setting for comparing
+        final ComparisonSettings settings = new ComparisonSettings();
+
+        ICompareResult compareResult = comparer.compare(new FileInputStream(sourcePath), "parole", new FileInputStream(targetPath), "parole", settings);
+
+        compareResult.saveDocument(resultPath);
+
+    }
+
+    @Test
+    public void testCOMPARISONJAVA372() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "git_internals.pptx", targetName = "git_internals-1.pptx", resultName = "COMPARISONJAVA372-output.pptx";
+        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA372");
+        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA372");
+        final String resultPath = getOutputPath(resultName);
+        //
+        final Comparer comparer = new Comparer();
+        // create setting for comparing
+        final ComparisonSettings settings = new ComparisonSettings();
+
+        ICompareResult compareResult = comparer.compare(sourcePath, targetPath, settings);
+
+        final List<InputStream> images = compareResult.getImages();
+
     }
 
     @Test
