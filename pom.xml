@@ -6,7 +6,7 @@
 
     <groupId>com.temporary</groupId>
     <artifactId>groupdocs-comparison-java-sample</artifactId>
-    <version>18.6.3</version>
+    <version>19.3</version>
     <properties>
         <java.version>1.7</java.version>
         <groupdocs.comparison>${project.version}</groupdocs.comparison>
@@ -61,6 +61,31 @@
                     <executable>maven</executable>
                 </configuration>
             </plugin>
+            <!--&lt;!&ndash; exec:exec &ndash;&gt;-->
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>exec-maven-plugin</artifactId>-->
+                <!--<version>1.3.2</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>exec</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<cleanupDaemonThreads>false</cleanupDaemonThreads>-->
+                    <!--<executable>java</executable>-->
+                    <!--<arguments>-->
+                        <!--<argument>-classpath</argument>-->
+                        <!--<classpath/>-->
+                        <!--<argument>com.groupdocs.comparison.sample.TestRunner</argument>-->
+                    <!--</arguments>-->
+                    <!--<successCodes>-->
+                        <!--<successCode>0</successCode>-->
+                    <!--</successCodes>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -77,6 +102,22 @@
             <url>http://repo1.maven.org/maven2</url>
         </repository>
         <repository>
+            <snapshots/>
+            <id>artifact-groupdocs</id>
+            <name>artifact-groupdocs</name>
+            <url>http://artifact.groupdocs.com/repo/</url>
+        </repository>
+        <repository>
+            <id>repository-groupdocs</id>
+            <name>repository-groupdocs</name>
+            <url>https://repository.groupdocs.com/repo/</url>
+        </repository>
+        <repository>
+            <id>repository-qa-groupdocs</id>
+            <name>repository-qa-groupdocs</name>
+            <url>http://repository-qa.groupdocs.com/repo/</url>
+        </repository>
+        <repository>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -85,16 +126,10 @@
             <url>http://maven.aspose.com/artifactory/libs-release</url>
         </repository>
         <repository>
-            <snapshots />
+            <snapshots/>
             <id>snapshots</id>
             <name>libs-snapshot</name>
             <url>http://maven.aspose.com/artifactory/libs-snapshot</url>
-        </repository>
-        <repository>
-            <snapshots />
-            <id>artifact-groupdocs</id>
-            <name>artifact-groupdocs</name>
-            <url>http://artifact.groupdocs.com/repo/</url>
         </repository>
     </repositories>
 </project>

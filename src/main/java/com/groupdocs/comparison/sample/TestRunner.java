@@ -7,6 +7,7 @@ import com.groupdocs.comparison.sample.operations.OtherOperationsTests;
 import com.groupdocs.comparison.sample.tasks.CommonIssuesTests;
 import org.apache.commons.io.FileUtils;
 import org.junit.internal.TextListener;
+import org.junit.runner.Computer;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -14,6 +15,7 @@ import org.junit.runner.notification.Failure;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * The type TestRunner.
@@ -41,26 +43,26 @@ public class TestRunner {
         // https://www.logicbig.com/tutorials/unit-testing/junit/junit-core.html
         JUnitCore junit = new JUnitCore();
         junit.addListener(new TextListener(System.out));
-        Result result = junit.run(
+        Result result = junit.run(Computer.serial(), // ParallelComputer.methods()
                 CommonOperationsTests.class,
                 DocumentsOperationsTests.class,
                 OtherOperationsTests.class,
                 CommonIssuesTests.class
         );
 
-        for (Failure failure : result.getFailures()) {
-            System.out.println(failure.toString());
-            failure.getException().printStackTrace();
-        }
+        final int runCount = result.getRunCount();
+        final int failureCount = result.getFailureCount();
+        final int ignoreCount = result.getIgnoreCount();
+        System.out.println(String.format("\n===== RUN: %d, SUCCESS: %d, FAIL: %d, IGNORE: %d =====\n", runCount, (runCount - failureCount - ignoreCount), failureCount, ignoreCount));
 
-        System.out.println(String.format("=== SUCCESS: %d, FAIL: %d, IGNORE: %d ===", result.getRunCount(), result.getFailureCount(), result.getIgnoreCount()));
-
+        System.exit(failureCount);
     }
 
     private static void configureLogging() {
         // Logging
 //        ComparisonLogger.setLogger(new ConsoleLogger(LoggingLevel.Info));
-//        com.groupdocs.foundation.utils.LogUtils.setConsoleEnabled(true);
+//        LogUtils.setConsoleEnabled(true);
+//        LogUtils.setEnableShowSkipped(true);
     }
 
     public static void applyLicense() {
@@ -77,7 +79,7 @@ public class TestRunner {
     public static void unsetLicense() {
         License lic = new License();
         try {
-            lic.setLicense(new ByteArrayInputStream(new byte[0]));
+            lic.setLicense((String) null);
         } catch (Exception e) {
             e.printStackTrace();
         }

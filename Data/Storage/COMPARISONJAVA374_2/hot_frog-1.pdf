@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>hot_frog-1.pdf - GroupDocs.Comparison for Java - Lisbon Issue Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="description" content="Redmine" />
+<meta name="keywords" content="issue,bug,tracker" />
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="WZZ2Leiu0KUiQB8v5XIQfixJkSLUJOq0U/ZD/TDQJyckSjkq0JWv13YMdjSNyuQppKkyGeURCsCN3za0TRU8Zw==" />
+<link rel='shortcut icon' href='/themes/PurpleMine2/favicon/favicon.ico?1538237425' />
+<link rel="stylesheet" media="all" href="/stylesheets/jquery/jquery-ui-1.11.0.css?1528612569" />
+<link rel="stylesheet" media="all" href="/themes/PurpleMine2/stylesheets/application.css?1538237425" />
+<link rel="stylesheet" media="all" href="/stylesheets/responsive.css?1528612569" />
+
+<script src="/javascripts/jquery-1.11.1-ui-1.11.0-ujs-3.1.4.js?1528612568"></script>
+<script src="/javascripts/application.js?1528612568"></script>
+<script src="/javascripts/responsive.js?1528612569"></script>
+<script>
+//<![CDATA[
+$(window).load(function(){ warnLeavingUnsaved('The current page contains unsaved text that will be lost if you leave this page.'); });
+//]]>
+</script>
+<script src="/themes/PurpleMine2/javascripts/theme.js?1538237425"></script>
+
+<!-- page specific tags -->
+    <link rel="stylesheet" media="screen" href="/stylesheets/scm.css?1528612569" /></head>
+<body class="theme-Purplemine2 project-groupdocs-comparison-java controller-attachments action-show">
+
+<div id="wrapper">
+
+<div class="flyout-menu js-flyout-menu">
+
+
+        <div class="flyout-menu__search">
+            <form action="/projects/groupdocs-comparison-java/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+            
+            <label class="search-magnifier search-magnifier--flyout" for="flyout-search">&#9906;</label>
+            <input type="text" name="q" id="flyout-search" class="small js-search-input" placeholder="Search" />
+</form>        </div>
+
+        <div class="flyout-menu__avatar ">
+                <a href="/users/90"><img alt="" title="" class="gravatar" srcset="//www.gravatar.com/avatar/5889c7f40c293ef486bfaf2496b14acc?rating=PG&amp;size=160&amp;default= 2x" src="//www.gravatar.com/avatar/5889c7f40c293ef486bfaf2496b14acc?rating=PG&amp;size=80&amp;default=" /></a>
+            <a class="user active" href="/users/90">aleksey.permyakov</a>
+        </div>
+
+        <h3>Project</h3>
+        <span class="js-project-menu"></span>
+
+    <h3>General</h3>
+    <span class="js-general-menu"></span>
+
+    <span class="js-sidebar flyout-menu__sidebar"></span>
+
+    <h3>Profile</h3>
+    <span class="js-profile-menu"></span>
+
+</div>
+
+<div id="wrapper2">
+<div id="wrapper3">
+<div id="top-menu">
+    <div id="account">
+        <ul><li><a class="my-account" href="/my/account">My account</a></li><li><a class="logout" rel="nofollow" data-method="post" href="/logout">Sign out</a></li></ul>    </div>
+    <div id="loggedas">Logged in as <a class="user active" href="/users/90">aleksey.permyakov</a></div>
+    <ul><li><a class="home" href="/">Home</a></li><li><a class="my-page" href="/my/page">My page</a></li><li><a class="projects" href="/projects">Projects</a></li><li><a class="help" href="https://www.redmine.org/guide">Help</a></li></ul></div>
+
+<div id="header">
+
+    <a href="#" class="mobile-toggle-button js-flyout-menu-toggle-button"></a>
+
+    <div id="quick-search">
+        <form action="/projects/groupdocs-comparison-java/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+        <input type="hidden" name="scope" />
+        
+        <label for='q'>
+          <a accesskey="4" href="/projects/groupdocs-comparison-java/search">Search</a>:
+        </label>
+        <input type="text" name="q" id="q" size="20" class="small" accesskey="f" />
+</form>        <div id="project-jump" class="drdn"><span class="drdn-trigger">GroupDocs.Comparison for Java</span><div class="drdn-content"><div class="quick-search"><input type="text" name="q" id="projects-quick-search" value="" class="autocomplete" data-automcomplete-url="/projects/autocomplete.js?jump=issues" autocomplete="off" /></div><div class="drdn-items projects selection"><a title="Aspose for .NET" href="/projects/aspose-net?jump=issues"><span style="padding-left:0px;">Aspose for .NET</span></a><a title="Aspose for Java" href="/projects/aspose-java?jump=issues"><span style="padding-left:0px;">Aspose for Java</span></a><a title="Generic" href="/projects/generic?jump=issues"><span style="padding-left:0px;">Generic</span></a><a title="GroupDocs.Comparison Cloud" href="/projects/groupdocs-comparison-cloud?jump=issues"><span style="padding-left:0px;">GroupDocs.Comparison Cloud</span></a><a title="GroupDocs.Comparison for .NET" href="/projects/groupdocs-comparison-net?jump=issues"><span style="padding-left:0px;">GroupDocs.Comparison for .NET</span></a><a title="GroupDocs.Comparison for Java" class="selected" href="/projects/groupdocs-comparison-java?jump=issues"><span style="padding-left:0px;">GroupDocs.Comparison for Java</span></a><a title="GroupDocs.Foundation" href="/projects/groupdocs-foundation?jump=issues"><span style="padding-left:0px;">GroupDocs.Foundation</span></a><a title="GroupDocs.Viewer Cloud" href="/projects/groupdocs-viewer-cloud?jump=issues"><span style="padding-left:0px;">GroupDocs.Viewer Cloud</span></a><a title="GroupDocs.Viewer for .NET" href="/projects/groupdocs-viewer-net?jump=issues"><span style="padding-left:0px;">GroupDocs.Viewer for .NET</span></a><a title="GroupDocs.Viewer for Java" href="/projects/groupdocs-viewer-java?jump=issues"><span style="padding-left:0px;">GroupDocs.Viewer for Java</span></a></div><div class="drdn-items all-projects selection"><a href="/projects?jump=issues">All Projects</a></div></div></div>
+    </div>
+
+    <h1><span class="current-project">GroupDocs.Comparison for Java</span></h1>
+
+    <div id="main-menu" class="tabs">
+        <ul><li>
+<a id="new-object" onclick="toggleNewObjectDropdown(); return false;" class="new-object" href="#"> + </a>
+<ul class="menu-children"><li><a accesskey="7" class="new-issue-sub" href="/projects/groupdocs-comparison-java/issues/new">New issue</a></li><li><a class="new-issue-category" href="/projects/groupdocs-comparison-java/issue_categories/new">New category</a></li><li><a class="new-version" href="/projects/groupdocs-comparison-java/versions/new">New version</a></li><li><a class="new-timelog" href="/projects/groupdocs-comparison-java/time_entries/new">Log time</a></li></ul>
+</li><li><a class="overview" href="/projects/groupdocs-comparison-java">Overview</a></li><li><a class="weekly" href="/weekly?project_id=groupdocs-comparison-java">Weekly Plan</a></li><li><a class="activity" href="/projects/groupdocs-comparison-java/activity">Activity</a></li><li><a class="roadmap" href="/projects/groupdocs-comparison-java/roadmap">Roadmap</a></li><li><a class="issues selected" href="/projects/groupdocs-comparison-java/issues">Issues</a></li><li><a class="time-entries" href="/projects/groupdocs-comparison-java/time_entries">Spent time</a></li><li><a class="calendar" href="/projects/groupdocs-comparison-java/issues/calendar">Calendar</a></li><li><a class="settings" href="/projects/groupdocs-comparison-java/settings">Settings</a></li></ul>
+        <div class="tabs-buttons" style="display:none;">
+            <button class="tab-left" onclick="moveTabLeft(this); return false;"></button>
+            <button class="tab-right" onclick="moveTabRight(this); return false;"></button>
+        </div>
+    </div>
+</div>
+
+<div id="main" class="nosidebar">
+    <div id="sidebar">
+        
+        
+    </div>
+
+    <div id="content">
+        
+        <div class="contextual">
+  <a class="icon icon-download" href="/attachments/download/1528/hot_frog-1.pdf">Download (76.6 KB)</a></div>
+
+<h2>hot_frog-1.pdf</h2>
+
+<div class="attachments">
+<p>
+   <span class="author"><a class="user active" href="/users/77">Elena Kolesnikova</a>, 2018-11-28 15:11</span></p>
+</div>
+
+  <p class="nodata">
+    No preview available. <a class="icon icon-download" href="/attachments/download/1528/hot_frog-1.pdf">Download</a> the file instead.
+</p>
+
+
+
+
+
+        
+        <div style="clear:both;"></div>
+    </div>
+</div>
+</div>
+
+<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+<div id="ajax-modal" style="display:none;"></div>
+
+<div id="footer">
+  <div class="bgl"><div class="bgr">
+    Powered by <a href="https://bitnami.com/stack/redmine">Bitnami Redmine Stack</a> &copy; 2006-2018 Jean-Philippe Lang
+  </div></div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

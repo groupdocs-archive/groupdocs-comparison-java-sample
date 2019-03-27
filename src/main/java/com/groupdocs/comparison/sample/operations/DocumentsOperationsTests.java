@@ -1,6 +1,7 @@
 package com.groupdocs.comparison.sample.operations;
 
 import com.groupdocs.comparison.Comparer;
+import com.groupdocs.comparison.MultiComparer;
 import com.groupdocs.comparison.common.compareresult.ICompareResult;
 import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
 import com.groupdocs.comparison.sample.Utilities;
@@ -330,7 +331,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -364,7 +364,7 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
+
     }
 
     @Test
@@ -407,7 +407,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -448,7 +447,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -482,7 +480,7 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
+
     }
 
     @Test
@@ -516,7 +514,7 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
+
     }
 
     @Test
@@ -558,7 +556,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -600,7 +597,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -634,7 +630,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -668,7 +663,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -710,7 +704,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -752,7 +745,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -786,7 +778,6 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 
     @Test
@@ -820,6 +811,5 @@ public class DocumentsOperationsTests {
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
-        
     }
 }

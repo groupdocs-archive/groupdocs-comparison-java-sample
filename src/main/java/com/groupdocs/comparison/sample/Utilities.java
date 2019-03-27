@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_HTML_PATH;
 import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_PDF_PATH;
@@ -47,7 +49,7 @@ public class Utilities {
             throw new Exception();
         } catch (Exception e) {
             System.out.println("=====================================================");
-            System.out.println("Running test: " + e.getStackTrace()[1].getMethodName());
+            System.out.println("Running test: " + e.getStackTrace()[1].getMethodName() + " at " + new Date().toString());
         }
     }
 
