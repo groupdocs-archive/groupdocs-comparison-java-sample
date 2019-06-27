@@ -18,12 +18,7 @@ import static org.junit.Assert.assertFalse;
 @SuppressWarnings("all")
 public class CommonOperationsTests {
 
-    @Before
-    public void before() {
-        applyLicense();
-    }
-
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWords() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWords.docx";
@@ -39,7 +34,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPath.docx";
@@ -56,7 +51,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithResultPathAndTargetExtension() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathAndTargetExtension.docx";
@@ -73,7 +68,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathAndSettings.docx";
@@ -90,7 +85,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithResultPathSettingsAndTargetExtension() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathSettingsAndTargetExtension.docx";
@@ -107,7 +102,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithResultPathAndType() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathAndType.docx";
@@ -124,7 +119,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithResultPathTypeAndTargetExtension() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathTypeAndTargetExtension.docx";
@@ -141,7 +136,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithSettings.docx";
@@ -157,7 +152,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithSettingsAndType() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithSettingsAndType.docx";
@@ -173,7 +168,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithType() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithType.docx";
@@ -189,7 +184,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithResultPathSettingsAndType() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathSettingsAndType.docx";
@@ -206,7 +201,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoWordsWithResultPathSettingsTypeAndExtension() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathSettingsTypeAndExtension.docx";
@@ -223,7 +218,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWords() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWords.docx";
@@ -240,7 +235,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPath.docx";
@@ -258,7 +253,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithResultPathAndTargetExtension() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathAndTargetExtension.docx";
@@ -276,7 +271,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathAndSettings.docx";
@@ -293,7 +288,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithResultPathSettingsAndTargetExtension() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathSettingsAndTargetExtension.docx";
@@ -310,7 +305,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithResultPathAndType() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathAndType.docx";
@@ -327,7 +322,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithResultPathTypeAndTargetExtension() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathTypeAndTargetExtension.docx";
@@ -344,7 +339,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithSettings.docx";
@@ -360,7 +355,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithSettingsAndType() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithSettingsAndType.docx";
@@ -376,7 +371,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithType() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithType.docx";
@@ -392,7 +387,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithResultPathSettingsAndType() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathSettingsAndType.docx";
@@ -409,7 +404,7 @@ public class CommonOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoEncryptedWordsWithResultPathSettingsTypeAndTargetExtension() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathSettingsTypeAndTargetExtension.docx";

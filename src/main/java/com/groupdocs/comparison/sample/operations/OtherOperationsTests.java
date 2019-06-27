@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.groupdocs.comparison.sample.TestRunner.applyLicense;
 import static org.junit.Assert.assertTrue;
 
 
@@ -14,12 +13,7 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings("all")
 public class OtherOperationsTests {
 
-    @Before
-    public void before() {
-        applyLicense();
-    }
-
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVAXXX() throws Exception {
         assertTrue(true);
     }

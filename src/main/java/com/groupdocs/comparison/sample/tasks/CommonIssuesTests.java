@@ -32,7 +32,7 @@ public class CommonIssuesTests {
         applyLicense();
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA107() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "original.pdf", targetName = "updated.pdf", resultName = "COMPARISONJAVA107.pdf";
@@ -50,7 +50,7 @@ public class CommonIssuesTests {
         assertFalse("Result stream is empty", compareResult.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA226() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "COMPARISONJAVA226.docx";
@@ -68,7 +68,7 @@ public class CommonIssuesTests {
         IOUtils.copy(resultStream, new FileOutputStream(resultPath));
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA228() throws Exception {
         final String sourceName = "source.docx", targetName1 = "target_1.docx", targetName2 = "target_2.docx", targetName3 = "target_3.docx", resultName = "COMPARISONJAVA228.docx";
         final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA228");
@@ -87,7 +87,7 @@ public class CommonIssuesTests {
         result.saveDocument(outputPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA252() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "COMPARISONJAVA252-output.ppt";
@@ -104,7 +104,7 @@ public class CommonIssuesTests {
     /**
      * Check wheather the license is valid
      */
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA247() throws Exception {
         Utilities.showTestHeader();
         unsetLicense();
@@ -113,7 +113,7 @@ public class CommonIssuesTests {
         assertTrue(License.isValidLicense());
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA419() throws Exception {
         Utilities.showTestHeader();
         {
@@ -162,7 +162,7 @@ public class CommonIssuesTests {
         }
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA418() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "Test.pdf", targetName = "Test_Copy.pdf", resultName = "COMPARISONJAVA418-output.pdf";
@@ -175,7 +175,7 @@ public class CommonIssuesTests {
         result.saveDocument(resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA383() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA383-output.pdf";
@@ -188,7 +188,7 @@ public class CommonIssuesTests {
         result.saveDocument(resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA381() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA381-output.pdf";
@@ -201,7 +201,7 @@ public class CommonIssuesTests {
         result.saveDocument(resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA380() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA380-output.pdf";
@@ -214,7 +214,7 @@ public class CommonIssuesTests {
         result.saveDocument(resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA377() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.html", targetName = "target.html", resultName = "COMPARISONJAVA377-output.html";
@@ -223,11 +223,11 @@ public class CommonIssuesTests {
         final String resultPath = getOutputPath(resultName);
         // Create instance of Comparer and call method
         Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
+        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings()); // TODO: DEBUG 19.6
         result.saveDocument(resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     @Ignore
     public void testCOMPARISONJAVA231() throws Exception {
         Utilities.showTestHeader();
@@ -241,7 +241,7 @@ public class CommonIssuesTests {
         result.saveDocument(resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA420() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA420-output.pdf";
@@ -261,7 +261,7 @@ public class CommonIssuesTests {
         System.out.println("Report written to " + resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA421() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA421-output.pdf";
@@ -274,7 +274,7 @@ public class CommonIssuesTests {
         result.saveDocument(resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA425() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA425-output.pdf";
@@ -294,7 +294,7 @@ public class CommonIssuesTests {
         System.out.println("Report written to " + resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA426() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA426-output.pdf";
@@ -314,7 +314,7 @@ public class CommonIssuesTests {
         System.out.println("Report written to " + resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA430() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA430-output.pdf";
@@ -335,7 +335,7 @@ public class CommonIssuesTests {
         System.out.println("Report written to " + resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA431() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA431-output.pdf";
@@ -356,7 +356,7 @@ public class CommonIssuesTests {
         System.out.println("Report written to " + resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA374() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA374-output.pdf";
@@ -375,7 +375,7 @@ public class CommonIssuesTests {
                 @Override
                 public void run() {
                     try {
-                        ICompareResult compareResult = comparer.compare(new FileInputStream(sourcePath), null, new FileInputStream(targetPath), null, settings);
+                        ICompareResult compareResult = comparer.compare(new FileInputStream(sourcePath), null, new FileInputStream(targetPath), null, settings); // TODO: DEBUG 19.6
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                         fail();
@@ -393,7 +393,7 @@ public class CommonIssuesTests {
         }
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA374_2() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "hot_frog.pdf", targetName = "hot_frog-1.pdf", resultName = "COMPARISONJAVA374_2-output.pdf";
@@ -431,7 +431,7 @@ public class CommonIssuesTests {
         }
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA373() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "karta_izo_parole.docx", targetName = "karta_izo_parole1.docx", resultName = "COMPARISONJAVA373-output.docx";
@@ -448,7 +448,7 @@ public class CommonIssuesTests {
         compareResult.saveDocument(resultPath);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA372() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "git_internals.pptx", targetName = "git_internals-1.pptx", resultName = "COMPARISONJAVA372-output.pptx";
@@ -465,7 +465,7 @@ public class CommonIssuesTests {
         final List<InputStream> images = compareResult.getImages();
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA379() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "hot_frog.pdf", targetName = "hot_frog-1.pdf", resultName = "COMPARISONJAVA379-output.pptx";
@@ -486,7 +486,7 @@ public class CommonIssuesTests {
         System.out.println("Changes count - " + changes.length);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA376() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "letter.txt", targetName = "letter2.txt", resultName = "COMPARISONJAVA376-output.pptx";
@@ -510,7 +510,7 @@ public class CommonIssuesTests {
         }
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA447() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA447-output.pdf";
@@ -527,7 +527,7 @@ public class CommonIssuesTests {
         assertEquals(0, result.getCountOfErrors());
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCOMPARISONJAVA78() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source50p.pdf", targetName = "target50p.pdf", resultName = "COMPARISONJAVA78-output.pdf";
@@ -553,7 +553,7 @@ public class CommonIssuesTests {
         }
     }
 
-//    @Test
+//    @Test(timeout = 300000)
 //    public void testCOMPARISONJAVAXXX() throws Exception {
 //        //
 //    }

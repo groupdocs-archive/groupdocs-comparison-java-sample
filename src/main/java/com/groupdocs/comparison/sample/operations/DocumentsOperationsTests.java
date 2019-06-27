@@ -2,6 +2,7 @@ package com.groupdocs.comparison.sample.operations;
 
 import com.groupdocs.comparison.Comparer;
 import com.groupdocs.comparison.MultiComparer;
+import com.groupdocs.comparison.common.PageImage;
 import com.groupdocs.comparison.common.compareresult.ICompareResult;
 import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
 import com.groupdocs.comparison.sample.Utilities;
@@ -9,8 +10,11 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import static com.groupdocs.comparison.sample.TestRunner.*;
 import static org.junit.Assert.assertFalse;
@@ -21,12 +25,7 @@ import static org.junit.Assert.assertFalse;
 @SuppressWarnings("all")
 public class DocumentsOperationsTests {
 
-    @Before
-    public void before() {
-        applyLicense();
-    }
-
-    @Test
+    @Test(timeout = 420000)
     public void testCompareTwoHtmlFromStreams() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.html", targetName = "target.html", resultName = "do_testCompareTwoHtmlFromStreams.html";
@@ -40,14 +39,14 @@ public class DocumentsOperationsTests {
 
         // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
         Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings()); // TODO: DEBUG 19.6
         result.saveDocument(outputPath);
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     @Ignore
     public void testCompareTwoHtml() throws Exception {
         Utilities.showTestHeader();
@@ -69,7 +68,7 @@ public class DocumentsOperationsTests {
 //        IOUtils.write(arrayOutputStream.toByteArray(), new FileOutputStream(getOutputPath(resultName)));
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPdfFromStreamsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreamsWithResultPathAndSettings.pdf";
@@ -90,7 +89,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPdfFromStreamsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreamsWithSettings.pdf";
@@ -110,7 +109,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPdfFromStreamsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreamsWithResultPath.pdf";
@@ -131,7 +130,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPdfFromStreams() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreams.pdf";
@@ -151,7 +150,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPdfWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfWithResultPathAndSettings.pdf";
@@ -168,7 +167,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPdfWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfWithSettings.pdf";
@@ -184,7 +183,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPdfWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfWithResultPath.pdf";
@@ -201,7 +200,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPdf() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdf.pdf";
@@ -217,7 +216,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPresentationsFromStreamsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreamsWithResultPathAndSettings.pptx";
@@ -238,7 +237,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPresentationsFromStreamsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreamsWithSettings.pptx";
@@ -259,7 +258,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPresentationsFromStreamsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreamsWithResultPath.pptx";
@@ -280,7 +279,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPresentationsFromStreams() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreams.pptx";
@@ -300,7 +299,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPresentationsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsWithResultPathAndSettings.pptx";
@@ -317,7 +316,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
     public void testCompareTwoPresentationsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsWithSettings.pptx";
@@ -333,7 +332,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoPresentationsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsWithResultPath.pptx";
@@ -350,7 +349,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoPresentations() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentations.pptx";
@@ -367,7 +366,7 @@ public class DocumentsOperationsTests {
 
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoTextsFromStreamsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreamsWithResultPathAndSettings.txt";
@@ -381,14 +380,14 @@ public class DocumentsOperationsTests {
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
         Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings()); // TODO: DEBUG 19.6
         result.saveDocument(outputPath);
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 420000)
      public void testCompareTwoTextsFromStreamsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreamsWithSettings.txt";
@@ -402,14 +401,14 @@ public class DocumentsOperationsTests {
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
         Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings()); // TODO: DEBUG 19.6
         result.saveDocument(outputPath);
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 420000)
      public void testCompareTwoTextsFromStreamsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreamsWithResultPath.txt";
@@ -423,14 +422,14 @@ public class DocumentsOperationsTests {
 
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
         Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings()); // TODO: DEBUG 19.6
         result.saveDocument(outputPath);
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoTextsFromStreams() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreams.txt";
@@ -442,14 +441,14 @@ public class DocumentsOperationsTests {
         InputStream targetStream = new FileInputStream(targetPath);
         // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
         Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings());
+        ICompareResult result = comparison.compare(sourceStream, targetStream, new ComparisonSettings()); // TODO: DEBUG 19.6
         result.saveDocument(getOutputPath(resultName));
 
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoTextsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsWithResultPathAndSettings.txt";
@@ -466,7 +465,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoTextsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsWithSettings.txt";
@@ -483,7 +482,7 @@ public class DocumentsOperationsTests {
 
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoTextsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsWithResultPath.txt";
@@ -500,7 +499,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoTexts() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTexts.txt";
@@ -517,7 +516,7 @@ public class DocumentsOperationsTests {
 
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWordsFromStreamsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreamsWithResultPathAndSettings.docx";
@@ -538,7 +537,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWordsFromStreamsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreamsWithSettings.docx";
@@ -558,7 +557,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWordsFromStreamsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreamsWithResultPath.docx";
@@ -579,7 +578,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWordsFromStreams() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreams.docx";
@@ -599,7 +598,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWordsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsWithResultPathAndSettings.docx";
@@ -616,7 +615,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWordsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsWithSettings.docx";
@@ -632,7 +631,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWordsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsWithResultPath.docx";
@@ -649,7 +648,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWords() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWords.docx";
@@ -665,7 +664,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWorkbooksFromStreamsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithResultPathAndSettings.xlsx";
@@ -686,7 +685,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWorkbooksFromStreamsWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithSettings.xlsx";
@@ -706,7 +705,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWorkbooksFromStreamsWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithResultPath.xlsx";
@@ -727,7 +726,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWorkbooksFromStreams() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreams.xlsx";
@@ -747,7 +746,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWorkbooksWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksWithResultPathAndSettings.xlsx";
@@ -764,7 +763,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWorkbooksWithSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksWithSettings.xlsx";
@@ -780,7 +779,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWorkbooksWithResultPath() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksWithResultPath.xlsx";
@@ -797,7 +796,7 @@ public class DocumentsOperationsTests {
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
 
-    @Test
+    @Test(timeout = 300000)
      public void testCompareTwoWorkbooks() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooks.xlsx";
