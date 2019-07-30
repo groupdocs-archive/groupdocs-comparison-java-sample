@@ -7,6 +7,7 @@ import com.groupdocs.comparison.common.compareresult.ICompareResult;
 import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
 import com.groupdocs.comparison.common.license.License;
 import com.groupdocs.comparison.sample.Utilities;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -553,7 +554,141 @@ public class CommonIssuesTests {
         }
     }
 
-//    @Test(timeout = 300000)
+    @Test(timeout = 300000)
+    public void testCOMPARISONJAVA698() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "candy.pdf", targetName = "candy-1.pdf", resultName = "COMPARISONJAVA698-output.pdf";
+        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA698");
+        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA698");
+        final String resultPath = getOutputPath(resultName);
+
+        Comparer comparer = new Comparer();
+
+        ComparisonSettings settings = new ComparisonSettings();
+        settings.setShowDeletedContent(false);
+        settings.setStyleChangeDetection(true);
+        settings.setCalculateComponentCoordinates(true);
+        ICompareResult compareResult1 = comparer.compare(sourcePath, "", targetPath, "", settings);
+        ICompareResult compareResult = compareResult1;
+        Comparer comparer1 = new Comparer();
+
+        ComparisonSettings settings1 = new ComparisonSettings();
+        settings1.setShowDeletedContent(false);
+        settings1.setStyleChangeDetection(true);
+        settings1.setCalculateComponentCoordinates(true);
+        ICompareResult compareResult2 = comparer1.compare(targetPath, "", sourcePath, "", settings1);
+        ICompareResult compareRevers = compareResult2;
+
+        try {
+            FileUtils.writeByteArrayToFile(new File(resultPath), IOUtils.toByteArray(compareResult.getStream()));
+            System.out.println("Result file: " + resultPath);
+            compareResult.getStream().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ChangeInfo[] changes = compareResult.getChanges();
+        for (int i = 0; i < changes.length; i++) {
+            ChangeInfo change = changes[i];
+            System.out.println(change.getType() + " - " + change.getText() + " - " + change.getPageInfo().getId());
+        }
+
+        System.out.println("------");
+        changes = compareRevers.getChanges();
+        for (int i = 0; i < changes.length; i++) {
+            ChangeInfo change = changes[i];
+            System.out.println(change.getType() + " - " + change.getText() + " - " + change.getPageInfo().getId());
+        }
+    }
+
+    @Test(timeout = 300000)
+    public void testCOMPARISONJAVA699() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "123.docx", targetName = "123_-_Copy.docx", resultName = "COMPARISONJAVA699-output.docx";
+        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA699");
+        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA699");
+        final String resultPath = getOutputPath(resultName);
+
+        Comparer comparer = new Comparer();
+
+        ComparisonSettings settings = new ComparisonSettings();
+        settings.setShowDeletedContent(false);
+        settings.setStyleChangeDetection(true);
+        settings.setCalculateComponentCoordinates(true);
+        ICompareResult compareResult1 = comparer.compare(sourcePath, "", targetPath, "", settings);
+        ICompareResult compareResult = compareResult1;
+        Comparer comparer1 = new Comparer();
+
+        ComparisonSettings settings1 = new ComparisonSettings();
+        settings1.setShowDeletedContent(false);
+        settings1.setStyleChangeDetection(true);
+        settings1.setCalculateComponentCoordinates(true);
+        ICompareResult compareResult2 = comparer1.compare(targetPath, "", sourcePath, "", settings1);
+        ICompareResult compareRevers = compareResult2;
+
+        try {
+            FileUtils.writeByteArrayToFile(new File(resultPath), IOUtils.toByteArray(compareResult.getStream()));
+            System.out.println("Result file: " + resultPath);
+            compareResult.getStream().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ChangeInfo[] changes = compareResult.getChanges();
+        for (int i = 0; i < changes.length; i++) {
+            ChangeInfo change = changes[i];
+            System.out.println(change.getType() + " - " + change.getText() + " - " + change.getPageInfo().getId());
+        }
+
+        System.out.println("------");
+        changes = compareRevers.getChanges();
+        for (int i = 0; i < changes.length; i++) {
+            ChangeInfo change = changes[i];
+            System.out.println(change.getType() + " - " + change.getText() + " - " + change.getPageInfo().getId());
+        }
+    }
+
+    @Test(timeout = 300000)
+    public void testCOMPARISONJAVA459() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "signature.html", targetName = "viewer.html", resultName = "COMPARISONJAVA459-output.html";
+        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA459");
+        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA459");
+        final String resultPath = getOutputPath(resultName);
+        //
+        Comparer comparer = new Comparer();
+        // create setting for comparing
+        ComparisonSettings settings = new ComparisonSettings();
+
+        // compare two documents
+        ICompareResult compare = comparer.compare(sourcePath, targetPath, settings);
+
+        if (compare != null) {
+            compare.saveDocument(resultPath);
+        }
+    }
+
+    @Test(timeout = 300000)
+    public void testCOMPARISONJAVA375() throws Exception {
+        Utilities.showTestHeader();
+        final String sourceName = "hot_frog.pdf", targetName = "hot_frog-1.pdf", resultName = "COMPARISONJAVA375-output.pdf";
+        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA375");
+        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA375");
+        final String resultPath = getOutputPath(resultName);
+        //
+        Comparer comparer = new Comparer();
+        // create setting for comparing
+        ComparisonSettings settings = new ComparisonSettings();
+
+        // compare two documents
+        ICompareResult compare = comparer.compare(sourcePath, targetPath, settings);
+
+        if (compare != null) {
+            compare.saveDocument(resultPath);
+        }
+    }
+
+    //    @Test(timeout = 300000)
 //    public void testCOMPARISONJAVAXXX() throws Exception {
 //        //
 //    }

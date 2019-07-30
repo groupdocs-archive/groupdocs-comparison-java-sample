@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title>GroupDocs.Viewer</title>
+		<link type="text/css" rel="stylesheet" href="packages/common/css/all.min.css"/>
+		<link type="text/css" rel="stylesheet" href="packages/common/css/v4-shims.min.css">
+		<link type="text/css" rel="stylesheet" href="packages/common/css/swiper.min.css">
+		<link type="text/css" rel="stylesheet" href="packages/common/css/circle-progress.css"/>
+		<link type="text/css" rel="stylesheet" href="packages/viewer/css/viewer.css"/>
+		<link type="text/css" rel="stylesheet" href="packages/viewer/css/viewer.mobile.css"/>
+		<link type="text/css" rel="stylesheet" href="packages/viewer/css/viewer-dark.css"/>
+		<script type="text/javascript" src="packages/common/js/jquery.min.js"></script>
+		<script type="text/javascript" src="packages/common/js/swiper.min.js"></script>
+		<script type="text/javascript" src="packages/common/js/es6-promise.auto.js"></script>
+		<script type="text/javascript" src="packages/viewer/js/viewer.js"></script>
+	</head>
+	<body>
+		<div id="element"></div>
+		<script type="text/javascript">
+            var host = !window.location.hostname ? 'localhost' : window.location.hostname;
+			$('#element').viewer({
+				applicationPath: 'http://' + host + ':8080/viewer/',
+			    defaultDocument: '',			  
+			    preloadPageCount: 0,
+			    rewrite: true,
+			    zoom: true,
+			    pageSelector: true,
+			    search: true,
+			    thumbnails: true,
+			    rotate: true,
+			    download: true,
+			    upload: true,
+			    print: true,
+			    browse: true,
+				htmlMode: true
+			});
+		</script>
+	</body>
+</html>
