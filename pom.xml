@@ -102,12 +102,6 @@
             <url>http://repo1.maven.org/maven2</url>
         </repository>
         <repository>
-            <snapshots/>
-            <id>artifact-groupdocs</id>
-            <name>artifact-groupdocs</name>
-            <url>http://artifact.groupdocs.com/repo/</url>
-        </repository>
-        <repository>
             <id>repository-groupdocs</id>
             <name>repository-groupdocs</name>
             <url>https://repository.groupdocs.com/repo/</url>

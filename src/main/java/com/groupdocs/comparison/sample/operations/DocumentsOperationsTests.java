@@ -649,22 +649,6 @@ public class DocumentsOperationsTests {
     }
 
     @Test(timeout = 300000)
-     public void testCompareTwoWords() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWords.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-
-        // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(getOutputPath(resultName));
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
-    }
-
-    @Test(timeout = 300000)
      public void testCompareTwoWorkbooksFromStreamsWithResultPathAndSettings() throws Exception {
         Utilities.showTestHeader();
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithResultPathAndSettings.xlsx";

@@ -9,13 +9,12 @@ import org.apache.commons.io.FileUtils;
 import org.junit.internal.TextListener;
 import org.junit.runner.Computer;
 import org.junit.runner.JUnitCore;
+import org.junit.runner.Request;
 import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.lang.reflect.Method;
 
 /**
  * The type TestRunner.
@@ -32,6 +31,7 @@ public class TestRunner {
 
     /**
      * The entry point of application.
+     *
      * @param args the input arguments
      * @throws Exception the exception
      */
@@ -41,14 +41,45 @@ public class TestRunner {
         cleanOutput();
 
         // https://www.logicbig.com/tutorials/unit-testing/junit/junit-core.html
-        JUnitCore junit = new JUnitCore();
-        junit.addListener(new TextListener(System.out));
-        Result result = junit.run(Computer.serial(), // ParallelComputer.methods()
+        Class<?>[] testClasses = {
                 CommonOperationsTests.class,
                 DocumentsOperationsTests.class,
                 OtherOperationsTests.class,
                 CommonIssuesTests.class
-        );
+        };
+
+        Result result;
+        if (args.length == 0) {
+            JUnitCore junit = new JUnitCore();
+            junit.addListener(new TextListener(System.out));
+            result = junit.run(Computer.serial(), testClasses); // ParallelComputer.methods()
+        } else {
+            final String testName = args[0];
+            Class<?> clazz = null;
+            for (Class<?> testClass : testClasses) {
+                try {
+                    final Method testMethod = testClass.getDeclaredMethod(testName);
+                    if (testMethod != null) {
+                        if (clazz != null) {
+                            System.err.println("The test '" + testName + "' CAN NOT be run because there are few classes with the same test name!");
+                            System.exit(-1);
+                        } else {
+                            clazz = testClass;
+                        }
+                    }
+                } catch (NoSuchMethodException e) {
+                    // pass
+                }
+            }
+            if (clazz == null) {
+                System.err.println("The test '" + testName + "' was not found!");
+                System.exit(-2);
+            }
+            final Request request = Request.method(clazz, testName);
+            JUnitCore junit = new JUnitCore();
+            junit.addListener(new TextListener(System.out));
+            result = junit.run(request);
+        }
 
         final int runCount = result.getRunCount();
         final int failureCount = result.getFailureCount();
@@ -122,7 +153,7 @@ public class TestRunner {
                         (!opp.exists() && !opp.mkdirs()) ||
                         (!otp.exists() && !otp.mkdirs()) ||
                         (!ocp.exists() && !ocp.mkdirs())
-                ) {
+        ) {
             System.err.println("Can't create data directories!!!");
         }
     }
