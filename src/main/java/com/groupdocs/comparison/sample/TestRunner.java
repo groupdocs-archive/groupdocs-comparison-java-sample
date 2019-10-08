@@ -101,6 +101,7 @@ public class TestRunner {
         if (LICENSE_PATH != null && new File(LICENSE_PATH).exists()) {
             System.out.println("Using license: " + LICENSE_PATH);
             lic.setLicense(LICENSE_PATH);
+            System.out.println("License is valid: " + License.isValidLicense());
         }
     }
 

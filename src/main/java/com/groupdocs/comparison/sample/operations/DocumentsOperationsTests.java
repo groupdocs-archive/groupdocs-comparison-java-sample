@@ -1,20 +1,14 @@
 package com.groupdocs.comparison.sample.operations;
 
 import com.groupdocs.comparison.Comparer;
-import com.groupdocs.comparison.MultiComparer;
-import com.groupdocs.comparison.common.PageImage;
 import com.groupdocs.comparison.common.compareresult.ICompareResult;
 import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
 import com.groupdocs.comparison.sample.Utilities;
-import org.junit.Before;
+import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.List;
+import java.io.*;
 
 import static com.groupdocs.comparison.sample.TestRunner.*;
 import static org.junit.Assert.assertFalse;

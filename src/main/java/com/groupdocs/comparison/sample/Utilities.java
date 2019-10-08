@@ -5,12 +5,8 @@ import org.apache.commons.io.IOUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_HTML_PATH;
 import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_PDF_PATH;
@@ -114,5 +110,29 @@ public class Utilities {
         } catch (Exception ex) {
             writeLine(ex.getMessage());
         }
+    }
+
+    public static InputStream trimHtmlCommentsAndConditions(InputStream inputStream) throws IOException {
+        final String html = IOUtils.toString(inputStream);
+        inputStream.close();
+        return new ByteArrayInputStream(html
+                .replaceAll("<!--\\s*\\[if [!\\w\\d\\s]+\\\\]\\s*>[^\\[]+<!\\s*\\[endif\\\\]\\s*-->", "")
+                .replaceAll("<!--\\s*[^>]+\\s*-->", "")
+                .getBytes());
+    }
+
+    public static String trimHtmlCommentsAndConditions(String filePath) throws IOException {
+        final InputStream inputStream = trimHtmlCommentsAndConditions(new FileInputStream(filePath));
+        FileOutputStream outputStream = null;
+        final File tempFile;
+        try {
+            tempFile = File.createTempFile("tmp", filePath.substring(filePath.lastIndexOf(".")));
+            outputStream = new FileOutputStream(tempFile);
+            IOUtils.copy(inputStream, outputStream);
+        } finally {
+            inputStream.close();
+            outputStream.close();
+        }
+        return tempFile.getAbsolutePath();
     }
 }
