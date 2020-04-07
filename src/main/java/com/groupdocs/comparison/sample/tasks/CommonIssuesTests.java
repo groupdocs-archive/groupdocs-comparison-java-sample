@@ -3,6 +3,7 @@ package com.groupdocs.comparison.sample.tasks;
 import com.groupdocs.comparison.Comparer;
 import com.groupdocs.comparison.MultiComparer;
 import com.groupdocs.comparison.changes.ChangeInfo;
+import com.groupdocs.comparison.changes.ComparisonAction;
 import com.groupdocs.comparison.common.TypeChanged;
 import com.groupdocs.comparison.common.compareresult.ICompareResult;
 import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
@@ -689,7 +690,6 @@ public class CommonIssuesTests {
         }
     }
 
-
     @Ignore("There is a bug with HTML comments in Comparison for .NET")
     @Test(timeout = 420000)
     public void testBugInDotNetWithCommentsinHtmlFiles() throws Exception {
@@ -711,6 +711,24 @@ public class CommonIssuesTests {
         System.out.println("Stream size: " + result.getStream().available());
         assertFalse("Result stream is empty", result.getStream().available() == 0);
     }
+
+    @Test(timeout = 300000)
+    public void testCOMPARISONJAVA774() throws Exception {
+        showTestHeader();
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "COMPARISONJAVA774-output.docx";
+        final String sourcePath = getStoragePath(sourceName, "COMPARISONJAVA774");
+        final String targetPath = getStoragePath(targetName, "COMPARISONJAVA774");
+        final String resultPath = getOutputPath(resultName);
+        //
+        Comparer comparer = new Comparer();
+        ICompareResult result = comparer.compare(sourcePath, targetPath, new ComparisonSettings());
+        ChangeInfo[] changes = result.getChanges();
+        changes[0].setAction(ComparisonAction.REJECT);
+        result.updateChanges(changes);
+        result.saveDocument(resultPath);
+        // TODO: Check everything
+    }
+
 
     //    @Test(timeout = 300000)
 //    public void testCOMPARISONJAVAXXX() throws Exception {
