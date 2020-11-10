@@ -1,20 +1,30 @@
 package com.groupdocs.comparison.sample;
 
-import com.groupdocs.comparison.common.license.License;
+import com.groupdocs.comparison.license.License;
+import com.groupdocs.comparison.sample.common.AccessibleTests;
+import com.groupdocs.comparison.sample.common.FileFormatTests;
 import com.groupdocs.comparison.sample.operations.CommonOperationsTests;
 import com.groupdocs.comparison.sample.operations.DocumentsOperationsTests;
 import com.groupdocs.comparison.sample.operations.OtherOperationsTests;
 import com.groupdocs.comparison.sample.tasks.CommonIssuesTests;
 import org.apache.commons.io.FileUtils;
-import org.junit.internal.TextListener;
-import org.junit.runner.Computer;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Request;
-import org.junit.runner.Result;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+import org.testng.TestNG;
+import org.testng.xml.XmlClass;
+import org.testng.xml.XmlInclude;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 /**
  * The type TestRunner.
@@ -40,60 +50,56 @@ public class TestRunner {
         configureLogging();
         cleanOutput();
 
-        // https://www.logicbig.com/tutorials/unit-testing/junit/junit-core.html
-        Class<?>[] testClasses = {
+        final List<Class<?>> testClasses = Arrays.asList(
+                AccessibleTests.class,
+                FileFormatTests.class,
                 CommonOperationsTests.class,
                 DocumentsOperationsTests.class,
                 OtherOperationsTests.class,
                 CommonIssuesTests.class
-        };
+        );
 
-        Result result;
-        if (args.length == 0) {
-            JUnitCore junit = new JUnitCore();
-            junit.addListener(new TextListener(System.out));
-            result = junit.run(Computer.serial(), testClasses); // ParallelComputer.methods()
-        } else {
-            final String testName = args[0];
-            Class<?> clazz = null;
-            for (Class<?> testClass : testClasses) {
+        TestNG testNG = new TestNG();
+        XmlSuite suite = new XmlSuite();
+        testNG.setDefaultSuiteName("groupdocs-comparison-java-sample");
+        testNG.addListener(new CustomTestListener());
+
+        for (Class<?> clazz : testClasses) {
+            XmlTest test = new XmlTest(suite);
+            if (args.length == 0) {
+                final XmlClass xmlClass = new XmlClass(clazz);
+                test.setName(clazz.getCanonicalName());
+                test.getXmlClasses().add(xmlClass);
+            } else if (args.length == 1) {
                 try {
-                    final Method testMethod = testClass.getDeclaredMethod(testName);
-                    if (testMethod != null) {
-                        if (clazz != null) {
-                            System.err.println("The test '" + testName + "' CAN NOT be run because there are few classes with the same test name!");
-                            System.exit(-1);
-                        } else {
-                            clazz = testClass;
-                        }
-                    }
+                    clazz.getDeclaredMethod(args[0]);
+                    test.setName(args[0]);
+                    final XmlClass xmlClass = new XmlClass(clazz);
+                    xmlClass.setIncludedMethods(Collections.singletonList(new XmlInclude(args[0])));
+                    test.getXmlClasses().add(xmlClass);
+
+                    break;
                 } catch (NoSuchMethodException e) {
-                    // pass
+                    // continue;
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            } else {
+                System.err.println("Sample supports running all tests (no command line arguments) or one test (one command line argument)");
+                System.exit(2);
             }
-            if (clazz == null) {
-                System.err.println("The test '" + testName + "' was not found!");
-                System.exit(-2);
-            }
-            final Request request = Request.method(clazz, testName);
-            JUnitCore junit = new JUnitCore();
-            junit.addListener(new TextListener(System.out));
-            result = junit.run(request);
         }
 
-        final int runCount = result.getRunCount();
-        final int failureCount = result.getFailureCount();
-        final int ignoreCount = result.getIgnoreCount();
-        System.out.println(String.format("\n===== RUN: %d, SUCCESS: %d, FAIL: %d, IGNORE: %d =====\n", runCount, (runCount - failureCount - ignoreCount), failureCount, ignoreCount));
+        testNG.setXmlSuites(Collections.singletonList(suite));
+        testNG.run();
 
-        System.exit(failureCount);
+        if (testNG.hasFailure()) {
+            System.exit(1);
+        }
     }
 
     private static void configureLogging() {
         // Logging
-//        ComparisonLogger.setLogger(new ConsoleLogger(LoggingLevel.Info));
-//        LogUtils.setConsoleEnabled(true);
-//        LogUtils.setEnableShowSkipped(true);
     }
 
     public static void applyLicense() {
@@ -101,7 +107,7 @@ public class TestRunner {
         if (LICENSE_PATH != null && new File(LICENSE_PATH).exists()) {
             System.out.println("Using license: " + LICENSE_PATH);
             lic.setLicense(LICENSE_PATH);
-            System.out.println("License is valid: " + License.isValidLicense());
+//            System.out.println("License is valid: " + License.isValidLicense());
         }
     }
 
@@ -121,16 +127,16 @@ public class TestRunner {
         FileUtils.cleanDirectory(new File(OUTPUT_PATH));
     }
 
-    public static String getStoragePath(String fileName, String... subDirectories) {
+    public static Path getStoragePath(String fileName, String... subDirectories) {
         StringBuilder builder = new StringBuilder(STORAGE_PATH);
         for (String part : subDirectories) {
             builder.append(File.separator).append(part);
         }
-        return builder.append(File.separator).append(fileName).toString();
+        return Paths.get(builder.append(File.separator).append(fileName).toString());
     }
 
-    public static String getOutputPath(String fileName) {
-        return OUTPUT_PATH + File.separator + fileName;
+    public static Path getOutputPath(String fileName) {
+        return Paths.get(OUTPUT_PATH + File.separator + fileName);
     }
 
     static {
@@ -156,6 +162,44 @@ public class TestRunner {
                         (!ocp.exists() && !ocp.mkdirs())
         ) {
             System.err.println("Can't create data directories!!!");
+        }
+    }
+
+    private static class CustomTestListener implements ITestListener {
+        @Override
+        public void onTestStart(ITestResult result) {
+            System.out.println("=====================================================");
+            System.out.println("Running test: " + result.getMethod().getMethodName() + " at " + new Date().toString());
+        }
+
+        @Override
+        public void onTestSuccess(ITestResult result) {
+
+        }
+
+        @Override
+        public void onTestFailure(ITestResult result) {
+
+        }
+
+        @Override
+        public void onTestSkipped(ITestResult result) {
+
+        }
+
+        @Override
+        public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+
+        }
+
+        @Override
+        public void onStart(ITestContext context) {
+
+        }
+
+        @Override
+        public void onFinish(ITestContext context) {
+
         }
     }
 }

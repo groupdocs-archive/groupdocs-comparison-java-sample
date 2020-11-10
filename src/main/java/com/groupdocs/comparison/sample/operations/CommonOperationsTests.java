@@ -1,14 +1,24 @@
 package com.groupdocs.comparison.sample.operations;
 
 import com.groupdocs.comparison.Comparer;
-import com.groupdocs.comparison.common.compareresult.ICompareResult;
-import com.groupdocs.comparison.common.comparisonsettings.ComparisonSettings;
-import com.groupdocs.comparison.sample.Utilities;
-import org.junit.Before;
-import org.junit.Test;
+import com.groupdocs.comparison.ComparerSettings;
+import com.groupdocs.comparison.license.Metered;
+import com.groupdocs.comparison.options.CompareOptions;
+import com.groupdocs.comparison.options.load.LoadOptions;
+import com.groupdocs.comparison.sample.config.TestNGSetUp;
+import org.testng.Assert;
+import org.testng.SkipException;
+import org.testng.annotations.Test;
 
-import static com.groupdocs.comparison.sample.TestRunner.*;
-import static org.junit.Assert.assertFalse;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
+import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
 
 /**
  * The type View generator.
@@ -16,408 +26,477 @@ import static org.junit.Assert.assertFalse;
  * @author Aleksey Permyakov
  */
 @SuppressWarnings("all")
-public class CommonOperationsTests {
+public class CommonOperationsTests extends TestNGSetUp {
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWords() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWords.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
+    @Test
+    public void testMeteredLicenseAndLimits() {
+        if (Boolean.parseBoolean("true")) { // Not ot comment sources below
+            throw new SkipException("publicKey and privateKey must be set");
+        }
+        String publicKey = "*****"; // Your public license key
+        String privateKey = "*****"; // Your private license key
+        Metered metered = new Metered();
+        metered.setMeteredKey(publicKey, privateKey);
+        System.out.println("License set successfully.");
 
-        Comparer comparison = new Comparer();
+        // Get amount (MB) consumed
+        double amountConsumed = Metered.getConsumptionQuantity();
+        System.out.println("Amount (MB) consumed: " + amountConsumed);
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(getOutputPath(resultName));
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        // Get count of credits consumed
+        double creditsConsumed = Metered.getConsumptionCredit();
+        System.out.println("Credits consumed: " + creditsConsumed);
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithResultPath() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPath.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+    // region docx
 
-        Comparer comparison = new Comparer();
+    @Test
+    public void testCompareTwoWordsWithString() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithString.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(outputPath);
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString())) {
+            comparer.add(targetPath.toAbsolutePath().toString());
+            comparer.compare();
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithResultPathAndTargetExtension() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathAndTargetExtension.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+    @Test
+    public void testCompareTwoWordsWithPath() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithPath.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
 
-        Comparer comparison = new Comparer();
-
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(outputPath);
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+            comparer.compare();
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithResultPathAndSettings() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathAndSettings.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+    @Test
+    public void testCompareTwoWordsWithStream() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStream.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
 
-        Comparer comparison = new Comparer();
-
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(outputPath);
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
+             InputStream targetStream = new FileInputStream(targetPath.toFile());
+             Comparer comparer = new Comparer(sourceStream)) {
+            comparer.add(targetStream);
+            comparer.compare();
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithResultPathSettingsAndTargetExtension() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathSettingsAndTargetExtension.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+    @Test
+    public void testCompareTwoWordsWithStringAndResult() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStringAndResult.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
+        try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString())) {
+            comparer.add(targetPath.toAbsolutePath().toString());
+            comparer.compare(resultPath.toAbsolutePath().toString());
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(outputPath);
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithResultPathAndType() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathAndType.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+    @Test
+    public void testCompareTwoWordsWithPathAndResult() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithPathAndResult.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+            comparer.compare(resultPath);
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(outputPath);
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithResultPathTypeAndTargetExtension() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathTypeAndTargetExtension.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+    @Test
+    public void testCompareTwoWordsWithStreamAndResult() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStreamAndResult.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
+        try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
+             InputStream targetStream = new FileInputStream(targetPath.toFile());
+             OutputStream resultStream = new FileOutputStream(resultPath.toFile());
+             Comparer comparer = new Comparer(sourceStream)) {
+            comparer.add(targetStream);
+            comparer.compare(resultStream);
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(outputPath);
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithSettings() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithSettings.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
+    @Test
+    public void testCompareTwoWordsWithStringAndResultAndComparerSettings() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStringAndResultAndComparerSettings.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
+        ComparerSettings comparerSettings = new ComparerSettings();
+        try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), comparerSettings)) {
+            comparer.add(targetPath.toAbsolutePath().toString());
+            comparer.compare(resultPath.toAbsolutePath().toString());
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(getOutputPath(resultName));
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithSettingsAndType() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithSettingsAndType.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
+    @Test
+    public void testCompareTwoWordsWithPathAndResultAndComparerSettings() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithPathAndResultAndComparerSettings.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
+        ComparerSettings comparerSettings = new ComparerSettings();
+        try (Comparer comparer = new Comparer(sourcePath, comparerSettings)) {
+            comparer.add(targetPath);
+            comparer.compare(resultPath);
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(getOutputPath(resultName));
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithType() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithType.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
+    @Test
+    public void testCompareTwoWordsWithStreamAndResultAndComparerSettings() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStreamAndResultAndComparerSettings.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
+        ComparerSettings comparerSettings = new ComparerSettings();
+        try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
+             InputStream targetStream = new FileInputStream(targetPath.toFile());
+             OutputStream resultStream = new FileOutputStream(resultPath.toFile());
+             Comparer comparer = new Comparer(sourceStream, comparerSettings)) {
+            comparer.add(targetStream);
+            comparer.compare(resultStream);
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(getOutputPath(resultName));
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithResultPathSettingsAndType() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathSettingsAndType.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+    @Test
+    public void testCompareTwoWordsWithStringAndResultAndGenerateSummaryPage() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStringAndResultAndGenerateSummaryPage.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
+        try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString())) {
+            comparer.add(targetPath.toAbsolutePath().toString());
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(outputPath);
+            CompareOptions compareOptions = new CompareOptions();
+            compareOptions.setGenerateSummaryPage(true);
+            comparer.compare(resultPath.toAbsolutePath().toString(),
+                    new CompareOptions.Builder()
+                            .setGenerateSummaryPage(true)
+                            .build());
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoWordsWithResultPathSettingsTypeAndExtension() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithResultPathSettingsTypeAndExtension.docx";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+    @Test
+    public void testCompareTwoWordsWithPathAndResultAndGenerateSummaryPage() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithPathAndResultAndGenerateSummaryPage.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
 
-        ICompareResult result = comparison.compare(sourcePath, targetPath, new ComparisonSettings());
-        result.saveDocument(outputPath);
+            comparer.compare(resultPath,
+                    new CompareOptions.Builder()
+                            .setGenerateSummaryPage(true)
+                            .build());
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWords() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWords.docx";
+    @Test
+    public void testCompareTwoWordsWithStreamAndResultAndGenerateSummaryPage() throws Exception {
+        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStreamAndResultAndGenerateSummaryPage.docx";
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
+
+        try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
+             InputStream targetStream = new FileInputStream(targetPath.toFile());
+             OutputStream resultStream = new FileOutputStream(resultPath.toFile());
+             Comparer comparer = new Comparer(sourceStream)) {
+            comparer.add(targetStream);
+            comparer.compare(resultStream,
+                    new CompareOptions.Builder()
+                            .setGenerateSummaryPage(true)
+                            .build());
+
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
+    }
+
+    // endregion
+
+    // region docx with password
+
+    @Test
+    public void testCompareTwoEncryptedWordsWithString() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithString.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
 
-        Comparer comparison = new Comparer();
-
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(getOutputPath(resultName));
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), new LoadOptions(sourcePassword))) {
+            comparer.add(targetPath.toAbsolutePath().toString(), new LoadOptions(targetPassword));
+            comparer.compare();
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithResultPath() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPath.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithPath() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithPath.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
 
-        Comparer comparison = new Comparer();
-
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(outputPath);
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        try (Comparer comparer = new Comparer(sourcePath, new LoadOptions(sourcePassword))) {
+            comparer.add(targetPath, new LoadOptions(targetPassword));
+            comparer.compare();
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithResultPathAndTargetExtension() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathAndTargetExtension.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithStream() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStream.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
 
-        Comparer comparison = new Comparer();
-
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(outputPath);
-
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+        try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
+             InputStream targetStream = new FileInputStream(targetPath.toFile());
+             Comparer comparer = new Comparer(sourceStream, new LoadOptions(sourcePassword))) {
+            comparer.add(targetStream, new LoadOptions(targetPassword));
+            comparer.compare();
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithResultPathAndSettings() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathAndSettings.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithStringAndResult() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStringAndResult.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(outputPath);
+        try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), new LoadOptions(sourcePassword))) {
+            comparer.add(targetPath.toAbsolutePath().toString(), new LoadOptions(targetPassword));
+            comparer.compare(resultPath.toAbsolutePath().toString());
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithResultPathSettingsAndTargetExtension() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathSettingsAndTargetExtension.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithPathAndResult() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithPathAndResult.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(outputPath);
+        try (Comparer comparer = new Comparer(sourcePath, new LoadOptions(sourcePassword))) {
+            comparer.add(targetPath, new LoadOptions(targetPassword));
+            comparer.compare(resultPath);
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithResultPathAndType() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathAndType.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithStreamAndResult() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStreamAndResult.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(outputPath);
+        try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
+             InputStream targetStream = new FileInputStream(targetPath.toFile());
+             OutputStream resultStream = new FileOutputStream(resultPath.toFile());
+             Comparer comparer = new Comparer(sourceStream, new LoadOptions(sourcePassword))) {
+            comparer.add(targetStream, new LoadOptions(targetPassword));
+            comparer.compare(resultStream);
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithResultPathTypeAndTargetExtension() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathTypeAndTargetExtension.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithStringAndResultAndComparerSettings() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStringAndResultAndComparerSettings.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(outputPath);
+        ComparerSettings comparerSettings = new ComparerSettings();
+        try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), new LoadOptions(sourcePassword), comparerSettings)) {
+            comparer.add(targetPath.toAbsolutePath().toString(), new LoadOptions(targetPassword));
+            comparer.compare(resultPath.toAbsolutePath().toString());
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithSettings() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithSettings.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithPathAndResultAndComparerSettings() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithPathAndResultAndComparerSettings.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(getOutputPath(resultName));
+        ComparerSettings comparerSettings = new ComparerSettings();
+        try (Comparer comparer = new Comparer(sourcePath, new LoadOptions(sourcePassword), comparerSettings)) {
+            comparer.add(targetPath, new LoadOptions(targetPassword));
+            comparer.compare(resultPath);
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithSettingsAndType() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithSettingsAndType.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithStreamAndResultAndComparerSettings() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStreamAndResultAndComparerSettings.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(getOutputPath(resultName));
+        ComparerSettings comparerSettings = new ComparerSettings();
+        try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
+             InputStream targetStream = new FileInputStream(targetPath.toFile());
+             OutputStream resultStream = new FileOutputStream(resultPath.toFile());
+             Comparer comparer = new Comparer(sourceStream, new LoadOptions(sourcePassword), comparerSettings)) {
+            comparer.add(targetStream, new LoadOptions(targetPassword));
+            comparer.compare(resultStream);
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithType() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithType.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithStringAndResultAndGenerateSummaryPage() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStringAndResultAndGenerateSummaryPage.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(getOutputPath(resultName));
+        try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), new LoadOptions(sourcePassword))) {
+            comparer.add(targetPath.toAbsolutePath().toString(), new LoadOptions(targetPassword));
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            CompareOptions compareOptions = new CompareOptions();
+            compareOptions.setGenerateSummaryPage(true);
+            comparer.compare(resultPath.toAbsolutePath().toString(),
+                    new CompareOptions.Builder()
+                            .setGenerateSummaryPage(true)
+                            .build());
+
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithResultPathSettingsAndType() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathSettingsAndType.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithPathAndResultAndGenerateSummaryPage() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithPathAndResultAndGenerateSummaryPage.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(outputPath);
+        try (Comparer comparer = new Comparer(sourcePath, new LoadOptions(sourcePassword))) {
+            comparer.add(targetPath, new LoadOptions(targetPassword));
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            comparer.compare(resultPath,
+                    new CompareOptions.Builder()
+                            .setGenerateSummaryPage(true)
+                            .build());
+
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
 
-    @Test(timeout = 300000)
-    public void testCompareTwoEncryptedWordsWithResultPathSettingsTypeAndTargetExtension() throws Exception {
-        Utilities.showTestHeader();
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoEncryptedWordsWithResultPathSettingsTypeAndTargetExtension.docx";
+    @Test
+    public void testCompareTwoEncryptedWordsWithStreamAndResultAndGenerateSummaryPage() throws Exception {
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStreamAndResultAndGenerateSummaryPage.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
-        final String sourcePath = getStoragePath(sourceName);
-        final String targetPath = getStoragePath(targetName);
-        final String outputPath = getOutputPath(resultName);
+        final Path sourcePath = getStoragePath(sourceName);
+        final Path targetPath = getStoragePath(targetName);
+        final Path resultPath = getOutputPath(resultName);
 
-        Comparer comparison = new Comparer();
-        ICompareResult result = comparison.compare(sourcePath, sourcePassword, targetPath, targetPassword, new ComparisonSettings());
-        result.saveDocument(outputPath);
+        try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
+             InputStream targetStream = new FileInputStream(targetPath.toFile());
+             OutputStream resultStream = new FileOutputStream(resultPath.toFile());
+             Comparer comparer = new Comparer(sourceStream, new LoadOptions(sourcePassword))) {
+            comparer.add(targetStream, new LoadOptions(targetPassword));
+            comparer.compare(resultStream,
+                    new CompareOptions.Builder()
+                            .setGenerateSummaryPage(true)
+                            .build());
 
-        System.out.println("Stream size: " + result.getStream().available());
-        assertFalse("Result stream is empty", result.getStream().available() == 0);
+            final long size = Files.size(resultPath);
+            System.out.println("Stream size: " + size);
+            Assert.assertNotEquals(size, 0, "Result is empty");
+        }
     }
+
+    // endregion
 }

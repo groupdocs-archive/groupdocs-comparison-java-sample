@@ -6,11 +6,8 @@ import org.apache.commons.io.IOUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.Date;
 
-import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_HTML_PATH;
-import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_PDF_PATH;
-import static com.groupdocs.comparison.sample.TestRunner.OUTPUT_PATH;
+import static com.groupdocs.comparison.sample.TestRunner.*;
 
 /**
  * The type Utilities.
@@ -38,15 +35,6 @@ public class Utilities {
             template = template.replaceAll("\\{" + Integer.toString(n) + "\\}", params[n].toString());
         }
         System.out.println(template);
-    }
-
-    public static void showTestHeader() {
-        try {
-            throw new Exception();
-        } catch (Exception e) {
-            System.out.println("=====================================================");
-            System.out.println("Running test: " + e.getStackTrace()[1].getMethodName() + " at " + new Date().toString());
-        }
     }
 
     /**
