@@ -150,13 +150,33 @@ public class AccessibleTests extends TestNGSetUp {
     @Test
     public void testComparisonLogging() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(ConsoleLogger.class,
+                "trace",
+                "trace",
+                "isTraceEnabled",
+                "debug",
+                "debug",
+                "isDebugEnabled",
                 "warning",
+                "warning",
+                "isWarningEnabled",
                 "error",
-                "trace")));
+                "error",
+                "isErrorEnabled"
+        )));
         System.out.println(String.format("[OK] %s is accessible", checkMethods(ILogger.class,
-                "error",
+                "trace",
+                "trace",
+                "isTraceEnabled",
+                "debug",
+                "debug",
+                "isDebugEnabled",
                 "warning",
-                "trace")));
+                "warning",
+                "isWarningEnabled",
+                "error",
+                "error",
+                "isErrorEnabled"
+        )));
     }
 
     @Test
