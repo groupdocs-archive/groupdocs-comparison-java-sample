@@ -191,7 +191,7 @@ public class FileFormatTests extends TestNGSetUp {
 
     @Test
     public void testComparePdfAsStream() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "ff_testComparePdfAsStream.html";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "ff_testComparePdfAsStream.pdf";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
         final Path resultPath = getOutputPath(resultName);
@@ -209,7 +209,7 @@ public class FileFormatTests extends TestNGSetUp {
 
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 112930, "Result file has incorrect size");
+            Assert.assertEquals(size, 112919, "Result file has incorrect size");
         }
     }
 
@@ -363,7 +363,7 @@ public class FileFormatTests extends TestNGSetUp {
 
     @Test
     public void testCompareXlsAsStream() throws Exception {
-        final String sourceName = "source.xls", targetName = "target.xls", resultName = "ff_testCompareXlsAsStream.html";
+        final String sourceName = "source.xls", targetName = "target.xls", resultName = "ff_testCompareXlsAsStream.xlsx";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
         final Path resultPath = getOutputPath(resultName);
@@ -381,7 +381,7 @@ public class FileFormatTests extends TestNGSetUp {
 
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
-            Assert.assertTrue(54500 < size && size < 54700, "Result file has incorrect size");
+            Assert.assertTrue(54500 < size && size < 54750, "Result file has incorrect size");
         }
     }
 
@@ -783,7 +783,7 @@ public class FileFormatTests extends TestNGSetUp {
 
     @Test
     public void testCompareOneAsStream() throws Exception {
-        final String sourceName = "source.one", targetName = "target.one", resultName = "ff_testCompareOneAsStream.html";
+        final String sourceName = "source.one", targetName = "target.one", resultName = "ff_testCompareOneAsStream.one";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
         final Path resultPath = getOutputPath(resultName);
@@ -801,7 +801,7 @@ public class FileFormatTests extends TestNGSetUp {
 
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 11384, "Result file has incorrect size");
+            Assert.assertEquals(size, 11288, "Result file has incorrect size");
         }
     }
 
@@ -1028,7 +1028,7 @@ public class FileFormatTests extends TestNGSetUp {
 
     @Test
     public void testCompareMhtmlAsStream() throws Exception {
-        final String sourceName = "source.mhtml", targetName = "target.mhtml", resultName = "ff_testCompareMhtmlAsStream.html";
+        final String sourceName = "source.mhtml", targetName = "target.mhtml", resultName = "ff_testCompareMhtmlAsStream.mhtml";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
         final Path resultPath = getOutputPath(resultName);
@@ -1046,7 +1046,7 @@ public class FileFormatTests extends TestNGSetUp {
 
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
-            Assert.assertTrue(5810 < size && size < 5900, "Result file has incorrect size");
+            Assert.assertTrue(5400 < size && size < 5550, "Result file has incorrect size");
         }
     }
 
@@ -1079,14 +1079,14 @@ public class FileFormatTests extends TestNGSetUp {
         final String sourceName = "source.dcm", targetName = "target.dcm", resultName = "ff_testCompareDcmAsStream.html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
-        final Path resultPath = getOutputPath(resultName);
+        Path resultPath = getOutputPath(resultName);
 
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              OutputStream resultStream = new FileOutputStream(resultPath.toFile());
              Comparer comparer = new Comparer(sourceStream, new ComparerSettings())) {
             comparer.add(targetStream);
-            comparer.compare(resultStream, new CompareOptions.Builder()
+            resultPath = comparer.compare(resultStream, new CompareOptions.Builder()
                     .setGenerateSummaryPage(true)
                     .setDetalisationLevel(DetalisationLevel.High)
                     .setDetectStyleChanges(true)
@@ -1103,14 +1103,14 @@ public class FileFormatTests extends TestNGSetUp {
         final String sourceName = "source.djvu", targetName = "target.djvu", resultName = "ff_testCompareDjvuAsStream.html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
-        final Path resultPath = getOutputPath(resultName);
+        Path resultPath = getOutputPath(resultName);
 
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              OutputStream resultStream = new FileOutputStream(resultPath.toFile());
              Comparer comparer = new Comparer(sourceStream, new ComparerSettings())) {
             comparer.add(targetStream);
-            comparer.compare(resultStream, new CompareOptions.Builder()
+            resultPath = comparer.compare(resultStream, new CompareOptions.Builder()
                     .setGenerateSummaryPage(true)
                     .setDetalisationLevel(DetalisationLevel.High)
                     .setDetectStyleChanges(true)
@@ -1124,17 +1124,17 @@ public class FileFormatTests extends TestNGSetUp {
 
     @Test
     public void testCompareDwgAsStream() throws Exception {
-        final String sourceName = "source.dwg", targetName = "target.dwg", resultName = "ff_testCompareDwgAsStream.html";
+        final String sourceName = "source.dwg", targetName = "target.dwg", resultName = "ff_testCompareDwgAsStream.pdf";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
-        final Path resultPath = getOutputPath(resultName);
+        Path resultPath = getOutputPath(resultName);
 
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              OutputStream resultStream = new FileOutputStream(resultPath.toFile());
              Comparer comparer = new Comparer(sourceStream, new ComparerSettings())) {
             comparer.add(targetStream);
-            comparer.compare(resultStream, new CompareOptions.Builder()
+            resultPath = comparer.compare(resultStream, new CompareOptions.Builder()
                     .setGenerateSummaryPage(true)
                     .setDetalisationLevel(DetalisationLevel.High)
                     .setDetectStyleChanges(true)
@@ -1142,7 +1142,7 @@ public class FileFormatTests extends TestNGSetUp {
 
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 324432, "Result file has incorrect size");
+            Assert.assertEquals(size, 325269, "Result file has incorrect size");
         }
     }
 
@@ -1175,14 +1175,14 @@ public class FileFormatTests extends TestNGSetUp {
         final String sourceName = "source.bmp", targetName = "target.bmp", resultName = "ff_testCompareBmpAsStream.html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
-        final Path resultPath = getOutputPath(resultName);
+        Path resultPath = getOutputPath(resultName);
 
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              OutputStream resultStream = new FileOutputStream(resultPath.toFile());
              Comparer comparer = new Comparer(sourceStream, new ComparerSettings())) {
             comparer.add(targetStream);
-            comparer.compare(resultStream, new CompareOptions.Builder()
+            resultPath = comparer.compare(resultStream, new CompareOptions.Builder()
                     .setGenerateSummaryPage(true)
                     .setDetalisationLevel(DetalisationLevel.High)
                     .setDetectStyleChanges(true)
@@ -1246,7 +1246,7 @@ public class FileFormatTests extends TestNGSetUp {
 
     @Test
     public void testComparePngAsStream() throws Exception {
-        final String sourceName = "source.png", targetName = "target.png", resultName = "ff_testComparePngAsStream.html";
+        final String sourceName = "source.png", targetName = "target.png", resultName = "ff_testComparePngAsStream.pdf";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
         final Path resultPath = getOutputPath(resultName);
@@ -1261,16 +1261,15 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetalisationLevel(DetalisationLevel.High)
                     .setDetectStyleChanges(true)
                     .build());
-
+        }
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
             Assert.assertEquals(size, 174456, "Result file has incorrect size");
-        }
     }
 
     @Test
     public void testCompareEmlAsStream() throws Exception {
-        final String sourceName = "source.eml", targetName = "target.eml", resultName = "ff_testCompareEmlAsStream.html";
+        final String sourceName = "source.eml", targetName = "target.eml", resultName = "ff_testCompareEmlAsStream.eml";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
         final Path resultPath = getOutputPath(resultName);
@@ -1288,13 +1287,13 @@ public class FileFormatTests extends TestNGSetUp {
 
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
-            Assert.assertTrue(2300 < size && size < 2400, "Result file has incorrect size");
+            Assert.assertTrue(1900 < size && size < 2000, "Result file has incorrect size");
         }
     }
 
     @Test
     public void testCompareEmlxAsStream() throws Exception {
-        final String sourceName = "source.emlx", targetName = "target.emlx", resultName = "ff_testCompareEmlxAsStream.html";
+        final String sourceName = "source.emlx", targetName = "target.emlx", resultName = "ff_testCompareEmlxAsStream.emlx";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
         final Path resultPath = getOutputPath(resultName);
@@ -1312,13 +1311,13 @@ public class FileFormatTests extends TestNGSetUp {
 
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
-            Assert.assertTrue(2300 < size && size < 2340, "Result file has incorrect size");
+            Assert.assertTrue(1900 < size && size < 2000, "Result file has incorrect size");
         }
     }
 
     @Test
     public void testCompareMsgAsStream() throws Exception {
-        final String sourceName = "source.msg", targetName = "target.msg", resultName = "ff_testCompareMsgAsStream.html";
+        final String sourceName = "source.msg", targetName = "target.msg", resultName = "ff_testCompareMsgAsStream.msg";
         final Path sourcePath = getStoragePath(sourceName, "formats");
         final Path targetPath = getStoragePath(targetName, "formats");
         final Path resultPath = getOutputPath(resultName);
@@ -1336,7 +1335,7 @@ public class FileFormatTests extends TestNGSetUp {
 
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 16896, "Result file has incorrect size");
+            Assert.assertEquals(size, 15872, "Result file has incorrect size");
         }
     }
 

@@ -182,6 +182,8 @@ public class AccessibleTests extends TestNGSetUp {
     @Test
     public void testComparisonOptions() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(ApplyChangeOptions.class,
+                "isSaveOriginalState",
+                "setSaveOriginalState",
                 "getChanges",
                 "setChanges",
                 "setChanges"
@@ -192,6 +194,18 @@ public class AccessibleTests extends TestNGSetUp {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(CompareOptions.class,
                 "getCalculateCoordinates",
                 "setCalculateCoordinates",
+                "isCompareBookmarks",
+                "setCompareBookmarks",
+                "isCompareDocumentProperty",
+                "setCompareDocumentProperty",
+                "isCompareVariableProperty",
+                "setCompareVariableProperty",
+                "isShowOnlySummaryPage",
+                "setShowOnlySummaryPage",
+                "isExtendedSummaryPage",
+                "setExtendedSummaryPage",
+                "isShowRevisions",
+                "setShowRevisions",
                 "getChangedItemStyle",
                 "setChangedItemStyle",
                 "getDeletedItemStyle",
@@ -250,6 +264,8 @@ public class AccessibleTests extends TestNGSetUp {
                 "setFilter"
         )));
         System.out.println(String.format("[OK] %s is accessible", checkMethods(LoadOptions.class,
+                "getFontDirectories",
+                "setFontDirectories",
                 "getPassword",
                 "setPassword"
         )));
@@ -349,6 +365,8 @@ public class AccessibleTests extends TestNGSetUp {
                 "setStyleChanges",
                 "setTargetText",
                 "getTargetText",
+                "getSourceText",
+                "setSourceText",
                 "getText",
                 "setText",
                 "getType",

@@ -1,6 +1,7 @@
 package com.groupdocs.comparison.sample.tasks;
 
 import com.groupdocs.comparison.Comparer;
+import com.groupdocs.comparison.license.License;
 import com.groupdocs.comparison.options.ApplyChangeOptions;
 import com.groupdocs.comparison.options.CompareOptions;
 import com.groupdocs.comparison.options.load.LoadOptions;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.SkipException;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.awt.*;
@@ -218,6 +220,7 @@ public class CommonIssuesTests extends TestNGSetUp {
     }
 
     @Test
+    @Ignore("COMPARISONJAVA-1185")
     public void testCOMPARISONJAVA231() throws Exception {
         final String sourceName = "compara1.pdf", targetName = "compara2.pdf", resultName = "COMPARISONJAVA231-output.pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA231");
@@ -660,6 +663,7 @@ public class CommonIssuesTests extends TestNGSetUp {
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA867");
         final Path resultPath = TestRunner.getOutputPath(resultName);
 
+        final boolean validLicense = License.isValidLicense();
         TestRunner.unsetLicense(); // it works correctly with valid license
         LOG.debug("Source file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -667,6 +671,9 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
         }
         LOG.debug("Result was saved as '{}'", resultPath);
+        if (validLicense) {
+            TestRunner.applyLicense();
+        }
     }
 
     @Test
@@ -797,9 +804,120 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test
     public void testCOMPARISONJAVA869() throws Exception {
         final String sourceName = "Image-Pen-Old1.doc", targetName = "Image-Pen-New1.doc", resultName = "COMPARISONJAVA869-output.doc";
-        {
+        { // DOC
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA869");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA869");
+            final Path resultPath = TestRunner.getOutputPath(resultName);
+
+            LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+            try (Comparer comparer = new Comparer(sourcePath)) {
+                comparer.add(targetPath);
+
+                CompareOptions compareOptions = new CompareOptions();
+                compareOptions.setDetectStyleChanges(true);
+                compareOptions.setMarkChangedContent(true);
+                comparer.compare(resultPath, compareOptions);
+            }
+            LOG.debug("Result was saved as '{}'", resultPath);
+            // Result content CAN'T contain borders, for doc format changes are marked using different colors
+        }
+        { // DOCX
+            final Path sourcePath = TestRunner.getStoragePath(sourceName + "x", "COMPARISONJAVA869");
+            final Path targetPath = TestRunner.getStoragePath(targetName + "x", "COMPARISONJAVA869");
+            final Path resultPath = TestRunner.getOutputPath(resultName + "x");
+
+            LOG.debug("Source file: {}\nTarget file: {}", sourcePath, targetPath);
+            try (Comparer comparer = new Comparer(sourcePath)) {
+                comparer.add(targetPath);
+                CompareOptions compareOptions = new CompareOptions();
+                compareOptions.setMarkChangedContent(true);
+                comparer.compare(resultPath, compareOptions);
+            }
+            LOG.debug("Result was saved as '{}'", resultPath);
+            // Result document must contain borders around changes
+        }
+//        fail("Manual check required - https://issue.lisbon.dynabic.com/issues/COMPARISONJAVA-869");
+    }
+
+    @Test
+    public void testCOMPARISONJAVA870() throws Exception {
+        final String sourceName = "Reference-Figures-Old2.doc", targetName = "Reference-Figures-New2.doc", resultName = "COMPARISONJAVA870-output.doc";
+        {
+            final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA870");
+            final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA870");
+            final Path resultPath = TestRunner.getOutputPath(resultName);
+
+            LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+            try (Comparer comparer = new Comparer(sourcePath)) {
+                comparer.add(targetPath);
+
+                CompareOptions compareOptions = new CompareOptions();
+                compareOptions.setSensitivityOfComparison(70);
+                comparer.compare(resultPath, compareOptions);
+            }
+            LOG.debug("Result was saved as '{}'", resultPath);
+        }
+        {
+            final Path sourcePath = TestRunner.getStoragePath(sourceName + "x", "COMPARISONJAVA870");
+            final Path targetPath = TestRunner.getStoragePath(targetName + "x", "COMPARISONJAVA870");
+            final Path resultPath = TestRunner.getOutputPath(resultName + "x");
+
+            LOG.debug("Source file: {}\nTarget file: {}", sourcePath, targetPath);
+            try (Comparer comparer = new Comparer(sourcePath)) {
+                comparer.add(targetPath);
+
+                CompareOptions compareOptions = new CompareOptions();
+                compareOptions.setSensitivityOfComparison(70);
+                comparer.compare(resultPath, compareOptions);
+            }
+            LOG.debug("Result was saved as '{}'", resultPath);
+        }
+//        fail("Manual check required - https://issue.lisbon.dynabic.com/issues/COMPARISONJAVA-870");
+        // Order of chars must be the same as in source/target files
+    }
+
+    @Test
+    public void testCOMPARISONJAVA873() throws Exception {
+        final String sourceName = "Layout-Arrange-Old3.doc", targetName = "Layout-Arrange-New3.doc", resultName = "COMPARISONJAVA873-output.xls";
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA873");
+        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA873");
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+            // Must not throw NoClassDefFoundError ..ArchiveStreamFactory
+            comparer.compare(resultPath);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+//        fail("Manual check required - https://issue.lisbon.dynabic.com/issues/COMPARISONJAVA-873");
+    }
+
+    @Test
+    public void testCOMPARISONJAVA874() throws Exception {
+        final String sourceName = "Reference-Annotation-Old4.docx", targetName = "Reference-Annotation-New4.docx", resultName = "COMPARISONJAVA874-output.xls";
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA874");
+        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA874");
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+            // Must not throw NoClassDefFoundError ..ArchiveStreamFactory
+            comparer.compare(resultPath);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+//        fail("Manual check required - https://issue.lisbon.dynabic.com/issues/COMPARISONJAVA-874");
+    }
+
+    @Test
+    public void testCOMPARISONJAVA875() throws Exception {
+        {
+            final String sourceName = "Home-Font-Old2.xls", targetName = "Home-Font-New15.xls", resultName = "COMPARISONJAVA875-output.doc";
+            final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA875");
+            final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA875");
             final Path resultPath = TestRunner.getOutputPath(resultName);
 
             LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
@@ -810,9 +928,10 @@ public class CommonIssuesTests extends TestNGSetUp {
             LOG.debug("Result was saved as '{}'", resultPath);
         }
         {
-            final Path sourcePath = TestRunner.getStoragePath(sourceName + "x", "COMPARISONJAVA869");
-            final Path targetPath = TestRunner.getStoragePath(targetName + "x", "COMPARISONJAVA869");
-            final Path resultPath = TestRunner.getOutputPath(resultName + "x");
+            final String sourceName = "Home-Font-Old4 - fillcolor.xls", targetName = "Home-Font-New17 - fillcolor.xls", resultName = "COMPARISONJAVA875-output-filled.doc";
+            final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA875");
+            final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA875");
+            final Path resultPath = TestRunner.getOutputPath(resultName);
 
             LOG.debug("Source file: {}\nTarget file: {}", sourcePath, targetPath);
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -821,6 +940,146 @@ public class CommonIssuesTests extends TestNGSetUp {
             }
             LOG.debug("Result was saved as '{}'", resultPath);
         }
+//        fail("Manual check required - https://issue.lisbon.dynabic.com/issues/COMPARISONJAVA-875");
+    }
+
+    @Test
+    public void testCOMPARISONJAVA876() throws Exception {
+        final String sourceName = "Home-Style_old6.xls", targetName = "Home-Style_new6.xls", resultName = "COMPARISONJAVA876-output.xls";
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA876");
+        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA876");
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+            // Must not throw NoClassDefFoundError ..ArchiveStreamFactory
+            comparer.compare(resultPath);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // must not throw exception
+    }
+
+    @Test
+    public void testCOMPARISONJAVA878() throws Exception {
+        final String sourceName = "Layout-Arrange_old2.xls", targetName = "Layout-Arrange_new2.xls", resultName = "COMPARISONJAVA878-output.xlsx";
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA878");
+        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA878");
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+            // Must not throw NoClassDefFoundError ..ArchiveStreamFactory
+            comparer.compare(resultPath);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // must not throw exception
+    }
+
+    @Test
+    public void testCOMPARISONJAVA879() throws Exception {
+        final String sourceName = "Layout-Arrange_old10.xls", targetName = "Layout-Arrange_new10.xls", resultName = "COMPARISONJAVA879-output.xlsx";
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA879");
+        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA879");
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            comparer.compare(resultPath);
+            fail("The bus was fixed");
+        } catch (Exception e) {
+            System.err.println("Known exception: " + e.getMessage());
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // must not throw exception
+    }
+
+    @Test
+    public void testCOMPARISONJAVA880() throws Exception {
+        final String sourceName = "Review-Comment_old.xls", targetName = "Review-Comment_new.xls", resultName = "COMPARISONJAVA880-output.xlsx";
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA880");
+        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA880");
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            comparer.compare(resultPath);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // must show correct results
+    }
+
+    @Test
+    public void testCOMPARISONJAVA881() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA881";
+        final String sourceName = "DiffHomeParagraph_old1.pptx", targetName = "DiffHomeParagraph_new1.pptx", resultName = issueDirectory + "-output.pptx";
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            comparer.compare(resultPath);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        //
+    }
+
+    @Test
+    public void testCOMPARISONJAVA882() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA882";
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = issueDirectory + "-output.pptx";
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+            compareOptions.setDetalisationLevel(DetalisationLevel.High);
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // Comments must be compared
+    }
+
+    @Test
+    public void testCOMPARISONJAVA893() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA893";
+        final String sourceName = "sourceFile.docx", targetName = "targetFile.docx",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+//            compareOptions.setDetalisationLevel(DetalisationLevel.High);
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // There are 3 inserted items in summary page, that is not correct
     }
 
     @Test
@@ -841,6 +1100,602 @@ public class CommonIssuesTests extends TestNGSetUp {
     }
 
     @Test
+    public void testCOMPARISONJAVA913() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA913";
+        final String sourceName = "Home-Font-Italic_old1.pdf", targetName = "Home-Font-Italic_new1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+//            compareOptions.setDetalisationLevel(DetalisationLevel.High);
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // Source text styles are missed in result file
+    }
+
+    @Test
+    public void testCOMPARISONJAVA914() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA914";
+        final String sourceName = "Home-Font-Bold_old1.pdf", targetName = "Home-Font-Bold_new1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // Some chars were missed
+    }
+
+    @Test
+    public void testCOMPARISONJAVA915() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA915";
+        final String sourceName = "Home-Font-Cricle2_old1.pdf", targetName = "Home-Font-Cricle2_new3.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // result file is not as expected
+    }
+
+    @Test
+    public void testCOMPARISONJAVA916() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA916";
+        final String sourceName = "Home-Font-Ruby_old1.pdf", targetName = "Home-Font-Ruby_new1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // result is not as expected
+    }
+
+    @Test
+    public void testCOMPARISONJAVA917() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA917";
+        final String sourceName = "Home-Paragraph-Comb_old1.pdf", targetName = "Home-Paragraph-Comb_new2.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // text position in result document is not correct
+    }
+
+    @Test
+    public void testCOMPARISONJAVA918() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA918";
+        final String sourceName = "Home-Paragraph-Vert4_old1.pdf", targetName = "Home-Paragraph-Vert4_new1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // text position in result document is not correct
+    }
+
+    @Test
+    public void testCOMPARISONJAVA919() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA919";
+        final String sourceName = "Home-Paragraph-Sort_old2.pdf", targetName = "Home-Paragraph-Sort_new4.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // rotation is lost in result document
+    }
+
+    @Test
+    public void testCOMPARISONJAVA920() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA920";
+        final String sourceName = "Home-Paragraph-Equals_old1.pdf", targetName = "Home-Paragraph-Equals_new1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // position change is not marked in result
+    }
+
+    @Test
+    public void testCOMPARISONJAVA928() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA928";
+        final String sourceName = "Insert-Text-TextBox_old.pdf", targetName = "Insert-Text-TextBox_new.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // rectangle is lost in result file
+    }
+
+    @Test
+    public void testCOMPARISONJAVA930() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA930";
+        final String sourceName = "Insert-Mark-Formula_old.pdf", targetName = "Insert-Mark-Formula_new.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // comparison process brokes the formula in result document
+    }
+
+    @Test
+    public void testCOMPARISONJAVA931() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA931";
+        final String sourceName = "Design-Background-Sukashi_old.pdf", targetName = "Design-Background-Sukashi_new.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // warermark is lost in result file
+    }
+
+    @Test
+    public void testCOMPARISONJAVA932() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA932";
+        final String sourceName = "Layout-PageSetup-Para3_old.pdf", targetName = "Layout-PageSetup-Para3_new.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // columns layout is broken
+    }
+
+    @Test
+    public void testCOMPARISONJAVA933() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA933";
+        final String sourceName = "Layout-PageSetup-Newline_old.pdf", targetName = "Layout-PageSetup-Newline_new.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // symbol is lost in result document
+    }
+
+    @Test
+    public void testCOMPARISONJAVA934() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA934";
+        final String sourceName = "Layout-PageSetup-RowNum_old.pdf", targetName = "Layout-PageSetup-RowNum_new.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // text is transparant in result file
+    }
+
+    @Test
+    public void testCOMPARISONJAVA935() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA935";
+        final String sourceName = "Reference-Annotation_old.pdf", targetName = "Reference-Annotation_new.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // number was moved down
+    }
+
+    @Test
+    public void testCOMPARISONJAVA936() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA936";
+        final String sourceName = "Home-Font-Old7.xls", targetName = "Home-Font-New20.xls",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        //
+    }
+
+    @Test
+    public void testCOMPARISONJAVA937() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA937";
+        final String sourceName = "Insert-Graph-New4-01.xls", targetName = "Insert-Graph-New4-08.xls",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // must not fail
+    }
+
+    @Test
+    public void testCOMPARISONJAVA938() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA938";
+        final String sourceName = "DiffHomeImage_old3.pptx", targetName = "DiffHomeImage_new3.pptx",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // changes in figures in rectangle are not detected (2nd page)
+    }
+
+    @Test
+    public void testCOMPARISONJAVA939() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA939";
+        final String sourceName = "DiffInsertTable_old2.pptx", targetName = "DiffInsertTable_new2.pptx",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        //
+    }
+
+    @Test
+    public void testCOMPARISONJAVA940() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA940";
+        final String sourceName = "DiffInsertTable_old2 (1).pptx", targetName = "DiffInsertTable_new2.pptx",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        //
+    }
+
+    @Test
+    public void testCOMPARISONJAVA941() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA941";
+        final String sourceName = "Home-Paragraph-Vert-Up-old1.pdf", targetName = "Home-Paragraph-Vert-Up-new1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // alignment is incorrect
+    }
+
+    @Test
+    public void testCOMPARISONJAVA942() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA942";
+        final String sourceName = "Insert-Table-Title_old1.pdf", targetName = "Insert-Table-Title_new2.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // incorrect table layout
+    }
+
+    @Test
+    public void testCOMPARISONJAVA943() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA943";
+        final String sourceName = "Insert-Table-Name_old1.pdf", targetName = "Insert-Table-Name_new1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // wrong result
+    }
+
+    @Test
+    public void testCOMPARISONJAVA944() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA944";
+        final String sourceName = "Layout-Paper-Landscape-Old1.pdf", targetName = "Layout-Paper-Landscape-New1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        //
+    }
+
+    @Test
+    public void testCOMPARISONJAVA945() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA945";
+        final String sourceName = "Reference-Figures-Table-old1.pdf", targetName = "Reference-Figures-Table-new1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // Some words are lost in  result
+    }
+
+    @Test
+    public void testCOMPARISONJAVA946() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA946";
+        final String sourceName = "Reference-Index_old.pdf", targetName = "Reference-Index_new.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        //
+    }
+
+    @Test
+    public void testCOMPARISONJAVA975() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA975";
+        final String sourceName = "Layout-Arrange_old9.xls", targetName = "Layout-Arrange_new9.xls",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+            compareOptions.setDetectStyleChanges(true);
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        //
+    }
+
+    @Test
     public void testCOMPARISONJAVA976() throws Exception {
         final String sourceName = "Insert-Text-xlsx_old.pdf", targetName = "Insert-Text-xlsx_new.pdf", resultName = "COMPARISONJAVA976-output.pdf";
 
@@ -857,6 +1712,34 @@ public class CommonIssuesTests extends TestNGSetUp {
     }
 
     @Test
+    public void testCOMPARISONJAVA977() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA977";
+        final String sourceName = "source.doc", targetName = "target.doc",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+
+            comparer.compare(resultPath, compareOptions);
+
+            final ChangeInfo[] changes = comparer.getChanges();
+            for (ChangeInfo changeInfo : changes) {
+                System.out.println(changeInfo.getSourceText());
+                System.out.println(changeInfo.getTargetText());
+            }
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        //
+    }
+
+    @Test
     public void testCOMPARISONJAVA978() throws Exception {
         final String sourceName = "Insert-Image_old.xlsx", targetName = "Insert-Image_new.xlsx", resultName = "COMPARISONJAVA978-output.xlsx";
 
@@ -867,11 +1750,92 @@ public class CommonIssuesTests extends TestNGSetUp {
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
-            comparer.compare(resultPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+            compareOptions.setDetectStyleChanges(true);
+
+            comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result was saved as '{}'", resultPath);
+        // images changes must be detected
     }
 
+    @Test
+    public void testCOMPARISONJAVA979() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA979";
+        final String sourceName = "Reference-Table-Old1.pdf", targetName = "Reference-Table-New1.pdf",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+            compareOptions.setDetectStyleChanges(true);
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // Must not cut any text
+    }
+
+    @Test
+    public void testCOMPARISONJAVA980() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA980";
+        final String sourceName = "v1.docx", targetName = "v2.docx",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            StyleSettings deletedStyleSettings = new StyleSettings();
+            deletedStyleSettings.setStrikethrough(true);
+            deletedStyleSettings.setFontColor(Color.red);
+
+            CompareOptions compareOptions = new CompareOptions();
+            compareOptions.setDeletedItemStyle(deletedStyleSettings);
+            compareOptions.setSensitivityOfComparison(75);
+            compareOptions.setDetectStyleChanges(true);
+            compareOptions.setMarkChangedContent(true);
+            compareOptions.setCalculateCoordinates(true);
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        //
+    }
+
+    @Test
+    public void testCOMPARISONJAVA981() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA981";
+        final String sourceName = "Format-Accessibility_Old.xls", targetName = "Format-Accessibility_New.xls",
+                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+        final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+        final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+        final Path resultPath = TestRunner.getOutputPath(resultName);
+
+        LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+        try (Comparer comparer = new Comparer(sourcePath)) {
+            comparer.add(targetPath);
+
+            CompareOptions compareOptions = new CompareOptions();
+            compareOptions.setDetectStyleChanges(true);
+
+            comparer.compare(resultPath, compareOptions);
+        }
+        LOG.debug("Result was saved as '{}'", resultPath);
+        // Must not cut any text
+    }
 
     @Test
     public void testCOMPARISONJAVA1010() throws Exception {

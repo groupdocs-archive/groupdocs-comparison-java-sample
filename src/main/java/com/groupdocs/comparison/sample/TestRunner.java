@@ -1,6 +1,8 @@
 package com.groupdocs.comparison.sample;
 
 import com.groupdocs.comparison.license.License;
+import com.groupdocs.comparison.logging.ComparisonLogger;
+import com.groupdocs.comparison.logging.ConsoleLogger;
 import com.groupdocs.comparison.sample.common.AccessibleTests;
 import com.groupdocs.comparison.sample.common.FileFormatTests;
 import com.groupdocs.comparison.sample.operations.CommonOperationsTests;
@@ -8,6 +10,7 @@ import com.groupdocs.comparison.sample.operations.DocumentsOperationsTests;
 import com.groupdocs.comparison.sample.operations.OtherOperationsTests;
 import com.groupdocs.comparison.sample.tasks.CommonIssuesTests;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -19,6 +22,9 @@ import org.testng.xml.XmlTest;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -100,14 +106,31 @@ public class TestRunner {
 
     private static void configureLogging() {
         // Logging
+        ComparisonLogger.setLogger(new ConsoleLogger(false, false, true, true));
     }
 
     public static void applyLicense() {
         License lic = new License();
-        if (LICENSE_PATH != null && new File(LICENSE_PATH).exists()) {
-            System.out.println("Using license: " + LICENSE_PATH);
-            lic.setLicense(LICENSE_PATH);
-//            System.out.println("License is valid: " + License.isValidLicense());
+        if (LICENSE_PATH != null) {
+            if (!LICENSE_PATH.startsWith("http") && Files.exists(Paths.get(LICENSE_PATH))) {
+                System.out.println("Using license: " + LICENSE_PATH);
+                lic.setLicense(LICENSE_PATH);
+            } else if (LICENSE_PATH.startsWith("http")) {
+                System.out.println("Using remote license: " + LICENSE_PATH);
+                try {
+                    URL website = new URL(LICENSE_PATH);
+                    try (final InputStream inputStream = website.openStream()) {
+                        lic.setLicense(inputStream);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Can't load remote license from '" + LICENSE_PATH + "' (Do you forget to activate vpn?)");
+                    e.printStackTrace();
+                }
+            } else {
+                System.err.println("License was not set");
+            }
+
+            System.out.println("License is valid: " + License.isValidLicense());
         }
     }
 
@@ -149,8 +172,20 @@ public class TestRunner {
         final File ocp = new File(OUTPUT_CELL_PATH);
         final File lcp = new File(LICENSE_PATH);
         if (!lcp.exists()) {
-            LICENSE_PATH = System.getenv("GROUPDOCS_TOTAL");
-            System.out.println("License file does not exists! Using license from %GROUPDOCS_VIEWER% ...");
+            final String licGroupdocs = System.getenv("LIC_GROUPDOCS");
+            final String licPathPart = "\\Total\\Subscription\\Valid\\GroupDocs.Total.Product.Family.lic";
+            if (licGroupdocs == null || !Files.exists(Paths.get(licGroupdocs, licPathPart))) {
+                final String licGroupdocsUrl = System.getenv("GROUPDOCS_LIC_PATH");
+                if (licGroupdocsUrl != null) {
+                    LICENSE_PATH = licGroupdocsUrl;
+                    System.out.println("License file does not exists! Using license from %GROUPDOCS_LIC_PATH% ...");
+                } else {
+                    System.err.println("License file does not exists and variables %GROUPDOCS_LIC_PATH% and %GROUPDOCS_LIC_PATH% are not set!");
+                }
+            } else {
+                LICENSE_PATH = licGroupdocs + licPathPart;
+                System.out.println("License file does not exists! Using license from %LIC_GROUPDOCS% ...");
+            }
         }
         if (
                 (!sp.exists() && !sp.mkdirs()) ||
@@ -179,7 +214,14 @@ public class TestRunner {
 
         @Override
         public void onTestFailure(ITestResult result) {
-
+            final Throwable throwable = result.getThrowable();
+            final String stackTraceString;
+            if (throwable == null) {
+                stackTraceString = "No stacktrace!";
+            } else {
+                stackTraceString = ExceptionUtils.getStackTrace(throwable);
+            }
+            System.err.println("\t!> Failed: " + stackTraceString);
         }
 
         @Override

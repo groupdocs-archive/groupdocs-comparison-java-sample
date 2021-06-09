@@ -6,7 +6,7 @@
 
     <groupId>com.groupdocs.samples.comparison</groupId>
     <artifactId>groupdocs-comparison-java-sample</artifactId>
-    <version>20.11</version>
+    <version>21.6</version>
     <properties>
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
