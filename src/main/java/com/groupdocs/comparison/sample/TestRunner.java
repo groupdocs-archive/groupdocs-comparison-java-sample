@@ -180,7 +180,7 @@ public class TestRunner {
                     LICENSE_PATH = licGroupdocsUrl;
                     System.out.println("License file does not exists! Using license from %GROUPDOCS_LIC_PATH% ...");
                 } else {
-                    System.err.println("License file does not exists and variables %GROUPDOCS_LIC_PATH% and %GROUPDOCS_LIC_PATH% are not set!");
+                    System.err.println("License file does not exists and variable %GROUPDOCS_LIC_PATH% is not set!");
                 }
             } else {
                 LICENSE_PATH = licGroupdocs + licPathPart;
