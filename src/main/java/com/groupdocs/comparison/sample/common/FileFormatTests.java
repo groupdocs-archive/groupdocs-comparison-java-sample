@@ -800,7 +800,7 @@ public class FileFormatTests extends TestNGSetUp {
 
             final long size = Files.size(resultPath);
             System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 11288, "Result file has incorrect size");
+            Assert.assertEquals(size, 11320, "Result file has incorrect size");
         }
     }
 
