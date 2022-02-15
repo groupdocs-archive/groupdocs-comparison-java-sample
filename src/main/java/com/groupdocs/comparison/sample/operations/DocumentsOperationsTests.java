@@ -26,10 +26,10 @@ public class DocumentsOperationsTests {
     @Test
     public void testCompareTwoHtmlFromStreams() throws Exception {
 
-        final String sourceName = "source.html", targetName = "target.html", resultName = "do_testCompareTwoHtmlFromStreams.html";
+        final String sourceName = "source.html", targetName = "target.html", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
@@ -46,7 +46,7 @@ public class DocumentsOperationsTests {
     @Test
     public void testCompareTwoHtml() throws Exception {
 
-        final String sourceName = "source.html", targetName = "target.html", resultName = "do_testCompareTwoHtml.html";
+        final String sourceName = "source.html", targetName = "target.html", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
         final Path resultPath = getOutputPath(targetName);
@@ -65,10 +65,10 @@ public class DocumentsOperationsTests {
 
     @Test
     public void testCompareTwoPdfFromStreamsWithResultPathAndSettings() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreamsWithResultPathAndSettings.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         ComparerSettings comparerSettings = new ComparerSettings();
         try (Comparer comparer = new Comparer(sourcePath, comparerSettings)) {
@@ -87,7 +87,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPdfFromStreamsWithSettings() throws Exception {
 //
-//        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreamsWithSettings.pdf";
+//        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -107,10 +107,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPdfFromStreamsWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreamsWithResultPath.pdf";
+//        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create stream of document
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -128,7 +128,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPdfFromStreams() throws Exception {
 //
-//        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfFromStreams.pdf";
+//        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -148,10 +148,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPdfWithResultPathAndSettings() throws Exception {
 //
-//        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfWithResultPathAndSettings.pdf";
+//        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -165,7 +165,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPdfWithSettings() throws Exception {
 //
-//        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfWithSettings.pdf";
+//        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -181,10 +181,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPdfWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdfWithResultPath.pdf";
+//        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -198,7 +198,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPdf() throws Exception {
 //
-//        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "do_testCompareTwoPdf.pdf";
+//        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -214,10 +214,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPresentationsFromStreamsWithResultPathAndSettings() throws Exception {
 //
-//        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreamsWithResultPathAndSettings.pptx";
+//        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create stream of document
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -235,7 +235,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPresentationsFromStreamsWithSettings() throws Exception {
 //
-//        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreamsWithSettings.pptx";
+//        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -256,10 +256,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPresentationsFromStreamsWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreamsWithResultPath.pptx";
+//        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create two streams of presentations
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -277,7 +277,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPresentationsFromStreams() throws Exception {
 //
-//        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsFromStreams.pptx";
+//        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -297,10 +297,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPresentationsWithResultPathAndSettings() throws Exception {
 //
-//        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsWithResultPathAndSettings.pptx";
+//        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -314,7 +314,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //    public void testCompareTwoPresentationsWithSettings() throws Exception {
 //
-//        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsWithSettings.pptx";
+//        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -330,10 +330,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoPresentationsWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentationsWithResultPath.pptx";
+//        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -347,7 +347,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoPresentations() throws Exception {
 //
-//        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "do_testCompareTwoPresentations.pptx";
+//        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -364,10 +364,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoTextsFromStreamsWithResultPathAndSettings() throws Exception {
 //
-//        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreamsWithResultPathAndSettings.txt";
+//        final String sourceName = "source.txt", targetName = "target.txt", resultExtension = ".txt";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create two streams of textFiles
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -385,10 +385,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoTextsFromStreamsWithSettings() throws Exception {
 //
-//        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreamsWithSettings.txt";
+//        final String sourceName = "source.txt", targetName = "target.txt", resultExtension = ".txt";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create two streams of text files
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -406,10 +406,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoTextsFromStreamsWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreamsWithResultPath.txt";
+//        final String sourceName = "source.txt", targetName = "target.txt", resultExtension = ".txt";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create two streams of text files
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -427,7 +427,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoTextsFromStreams() throws Exception {
 //
-//        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsFromStreams.txt";
+//        final String sourceName = "source.txt", targetName = "target.txt", resultExtension = ".txt";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -446,10 +446,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoTextsWithResultPathAndSettings() throws Exception {
 //
-//        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsWithResultPathAndSettings.txt";
+//        final String sourceName = "source.txt", targetName = "target.txt", resultExtension = ".txt";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -463,7 +463,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoTextsWithSettings() throws Exception {
 //
-//        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsWithSettings.txt";
+//        final String sourceName = "source.txt", targetName = "target.txt", resultExtension = ".txt";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -480,10 +480,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoTextsWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTextsWithResultPath.txt";
+//        final String sourceName = "source.txt", targetName = "target.txt", resultExtension = ".txt";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -497,7 +497,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoTexts() throws Exception {
 //
-//        final String sourceName = "source.txt", targetName = "target.txt", resultName = "do_testCompareTwoTexts.txt";
+//        final String sourceName = "source.txt", targetName = "target.txt", resultExtension = ".txt";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -514,10 +514,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWordsFromStreamsWithResultPathAndSettings() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreamsWithResultPathAndSettings.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create two streams of documents
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -535,7 +535,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWordsFromStreamsWithSettings() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreamsWithSettings.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -555,10 +555,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWordsFromStreamsWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreamsWithResultPath.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create two streams of documents
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -576,7 +576,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWordsFromStreams() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsFromStreams.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -596,10 +596,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWordsWithResultPathAndSettings() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsWithResultPathAndSettings.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -613,7 +613,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWordsWithSettings() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsWithSettings.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -629,10 +629,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWordsWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "do_testCompareTwoWordsWithResultPath.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of GroupDocs.Comparison.Comparison and call method Compare.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -646,10 +646,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWorkbooksFromStreamsWithResultPathAndSettings() throws Exception {
 //
-//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithResultPathAndSettings.xlsx";
+//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultExtension = ".xlsx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create two streams of workbooks
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -667,7 +667,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWorkbooksFromStreamsWithSettings() throws Exception {
 //
-//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithSettings.xlsx";
+//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultExtension = ".xlsx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -687,10 +687,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWorkbooksFromStreamsWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreamsWithResultPath.xlsx";
+//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultExtension = ".xlsx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create two streams of workbooks
 //        InputStream sourceStream = new FileInputStream(sourcePath);
@@ -708,7 +708,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWorkbooksFromStreams() throws Exception {
 //
-//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksFromStreams.xlsx";
+//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultExtension = ".xlsx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -728,10 +728,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWorkbooksWithResultPathAndSettings() throws Exception {
 //
-//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksWithResultPathAndSettings.xlsx";
+//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultExtension = ".xlsx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -745,7 +745,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWorkbooksWithSettings() throws Exception {
 //
-//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksWithSettings.xlsx";
+//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultExtension = ".xlsx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //
@@ -761,10 +761,10 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWorkbooksWithResultPath() throws Exception {
 //
-//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooksWithResultPath.xlsx";
+//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultExtension = ".xlsx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
-//        final Path resultPath = getOutputPath(resultName);
+//        final Path resultPath = getOutputPath(resultExtension);
 //
 //        // Create instance of *GroupDocs.Comparison.Comparison* and call method *Compare*.
 //        Comparer comparer = new Comparer(sourcePath);
@@ -778,7 +778,7 @@ public class DocumentsOperationsTests {
 //    @Test
 //     public void testCompareTwoWorkbooks() throws Exception {
 //
-//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultName = "do_testCompareTwoWorkbooks.xlsx";
+//        final String sourceName = "source.xlsx", targetName = "target.xlsx", resultExtension = ".xlsx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //

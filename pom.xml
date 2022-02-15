@@ -6,7 +6,7 @@
 
     <groupId>com.groupdocs.samples.comparison</groupId>
     <artifactId>groupdocs-comparison-java-sample</artifactId>
-    <version>21.6</version>
+    <version>21.6.1</version>
     <properties>
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -89,7 +89,12 @@
         <repository>
             <id>maven.groupdocs.com</id>
             <name>artifact.groupdocs.com-releases</name>
-            <url>https://artifact.groupdocs.com/repo/</url>
+            <url>https://repository.groupdocs.com/repo/</url>
+        </repository>
+        <repository>
+            <id>qa.maven.groupdocs.com</id>
+            <name>artifact.groupdocs.com-releases</name>
+            <url>https://repository-qa.groupdocs.com/repo/</url>
         </repository>
         <repository>
             <id>maven.aspose.com</id>

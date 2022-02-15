@@ -17,7 +17,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
 import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
 
 /**
@@ -52,7 +51,7 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithString() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithString.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
 
@@ -64,7 +63,7 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithPath() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithPath.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
 
@@ -76,7 +75,7 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithStream() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStream.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
 
@@ -90,10 +89,10 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithStringAndResult() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStringAndResult.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString())) {
             comparer.add(targetPath.toAbsolutePath().toString());
@@ -107,10 +106,10 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithPathAndResult() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithPathAndResult.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
@@ -124,10 +123,10 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithStreamAndResult() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStreamAndResult.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
@@ -144,10 +143,10 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithStringAndResultAndComparerSettings() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStringAndResultAndComparerSettings.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         ComparerSettings comparerSettings = new ComparerSettings();
         try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), comparerSettings)) {
@@ -162,10 +161,10 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithPathAndResultAndComparerSettings() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithPathAndResultAndComparerSettings.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         ComparerSettings comparerSettings = new ComparerSettings();
         try (Comparer comparer = new Comparer(sourcePath, comparerSettings)) {
@@ -180,10 +179,10 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithStreamAndResultAndComparerSettings() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStreamAndResultAndComparerSettings.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         ComparerSettings comparerSettings = new ComparerSettings();
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
@@ -201,10 +200,10 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithStringAndResultAndGenerateSummaryPage() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStringAndResultAndGenerateSummaryPage.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString())) {
             comparer.add(targetPath.toAbsolutePath().toString());
@@ -224,10 +223,10 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithPathAndResultAndGenerateSummaryPage() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithPathAndResultAndGenerateSummaryPage.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
@@ -245,10 +244,10 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoWordsWithStreamAndResultAndGenerateSummaryPage() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "co_testCompareTwoWordsWithStreamAndResultAndGenerateSummaryPage.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
@@ -272,7 +271,7 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithString() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithString.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
@@ -285,7 +284,7 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithPath() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithPath.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
@@ -298,7 +297,7 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithStream() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStream.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
@@ -313,11 +312,11 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithStringAndResult() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStringAndResult.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), new LoadOptions(sourcePassword))) {
             comparer.add(targetPath.toAbsolutePath().toString(), new LoadOptions(targetPassword));
@@ -331,11 +330,11 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithPathAndResult() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithPathAndResult.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath, new LoadOptions(sourcePassword))) {
             comparer.add(targetPath, new LoadOptions(targetPassword));
@@ -349,11 +348,11 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithStreamAndResult() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStreamAndResult.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
@@ -370,11 +369,11 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithStringAndResultAndComparerSettings() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStringAndResultAndComparerSettings.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         ComparerSettings comparerSettings = new ComparerSettings();
         try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), new LoadOptions(sourcePassword), comparerSettings)) {
@@ -389,11 +388,11 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithPathAndResultAndComparerSettings() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithPathAndResultAndComparerSettings.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         ComparerSettings comparerSettings = new ComparerSettings();
         try (Comparer comparer = new Comparer(sourcePath, new LoadOptions(sourcePassword), comparerSettings)) {
@@ -408,11 +407,11 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithStreamAndResultAndComparerSettings() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStreamAndResultAndComparerSettings.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         ComparerSettings comparerSettings = new ComparerSettings();
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
@@ -430,11 +429,11 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithStringAndResultAndGenerateSummaryPage() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStringAndResultAndGenerateSummaryPage.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), new LoadOptions(sourcePassword))) {
             comparer.add(targetPath.toAbsolutePath().toString(), new LoadOptions(targetPassword));
@@ -454,11 +453,11 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithPathAndResultAndGenerateSummaryPage() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithPathAndResultAndGenerateSummaryPage.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath, new LoadOptions(sourcePassword))) {
             comparer.add(targetPath, new LoadOptions(targetPassword));
@@ -476,11 +475,11 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     @Test
     public void testCompareTwoEncryptedWordsWithStreamAndResultAndGenerateSummaryPage() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultName = "co_testCompareTwoEncryptedWordsWithStreamAndResultAndGenerateSummaryPage.docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
-        final Path resultPath = getOutputPath(resultName);
+        final Path resultPath = getOutputPath(resultExtension);
 
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());

@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -45,10 +46,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA107() throws Exception {
-        final String sourceName = "original.pdf", targetName = "updated.pdf", resultName = "COMPARISONJAVA107.pdf";
+        final String sourceName = "original.pdf", targetName = "updated.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA107");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA107");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
@@ -61,10 +62,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA226() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "COMPARISONJAVA226.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA226");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA226");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath);
              ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
@@ -78,12 +79,12 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA228() throws Exception {
-        final String sourceName = "source.docx", targetName1 = "target_1.docx", targetName2 = "target_2.docx", targetName3 = "target_3.docx", resultName = "COMPARISONJAVA228.docx";
+        final String sourceName = "source.docx", targetName1 = "target_1.docx", targetName2 = "target_2.docx", targetName3 = "target_3.docx", resultExtension = ".docx";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA228");
         final Path targetPath1 = TestRunner.getStoragePath(targetName1, "COMPARISONJAVA228");
         final Path targetPath2 = TestRunner.getStoragePath(targetName2, "COMPARISONJAVA228");
         final Path targetPath3 = TestRunner.getStoragePath(targetName3, "COMPARISONJAVA228");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath1, targetPath2, targetPath3);
@@ -93,10 +94,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA252() throws Exception {
-        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "COMPARISONJAVA252-output.ppt";
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".ppt";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA252");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA252");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
@@ -118,21 +119,10 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test
     public void testCOMPARISONJAVA419() throws Exception {
         {
-            final String sourceName = "source-highlights.rtf", targetName = "target-highlights.rtf", resultName = "COMPARISONJAVA419-highlights.rtf";
+            final String sourceName = "source-highlights.rtf", targetName = "target-highlights.rtf", resultExtension = ".rtf";
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA419");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA419");
-            final Path resultPath = TestRunner.getOutputPath(resultName); /* Create instance of GroupDocs.Comparison.Comparer and call method */
-
-            try (Comparer comparer = new Comparer(sourcePath)) {
-                comparer.add(targetPath);
-                comparer.compare(resultName, new CompareOptions.Builder().setDetectStyleChanges(true).setGenerateSummaryPage(true).build());
-            }
-        }
-        {
-            final String sourceName = "source-not-highlights.rtf", targetName = "target-not-highlights.rtf", resultName = "COMPARISONJAVA419-not-highlights.rtf";
-            final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA419");
-            final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA419");
-            final Path resultPath = TestRunner.getOutputPath(resultName); /* Create instance of GroupDocs.Comparison.Comparer and call method */
+            final Path resultPath = TestRunner.getOutputPath(resultExtension); /* Create instance of GroupDocs.Comparison.Comparer and call method */
 
             try (Comparer comparer = new Comparer(sourcePath)) {
                 comparer.add(targetPath);
@@ -140,10 +130,21 @@ public class CommonIssuesTests extends TestNGSetUp {
             }
         }
         {
-            final String sourceName = "source-3.rtf", targetName = "target-3.rtf", resultName = "COMPARISONJAVA419-3.rtf";
+            final String sourceName = "source-not-highlights.rtf", targetName = "target-not-highlights.rtf", resultExtension = ".rtf";
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA419");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA419");
-            final Path resultPath = TestRunner.getOutputPath(resultName); /* Create instance of GroupDocs.Comparison.Comparer and call method */
+            final Path resultPath = TestRunner.getOutputPath(resultExtension); /* Create instance of GroupDocs.Comparison.Comparer and call method */
+
+            try (Comparer comparer = new Comparer(sourcePath)) {
+                comparer.add(targetPath);
+                comparer.compare(resultPath, new CompareOptions.Builder().setDetectStyleChanges(true).setGenerateSummaryPage(true).build());
+            }
+        }
+        {
+            final String sourceName = "source-3.rtf", targetName = "target-3.rtf", resultExtension = ".rtf";
+            final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA419");
+            final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA419");
+            final Path resultPath = TestRunner.getOutputPath(resultExtension); /* Create instance of GroupDocs.Comparison.Comparer and call method */
 
             try (Comparer comparer = new Comparer(sourcePath)) {
                 comparer.add(targetPath);
@@ -154,10 +155,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA418() throws Exception {
-        final String sourceName = "Test.pdf", targetName = "Test_Copy.pdf", resultName = "COMPARISONJAVA418-output.pdf";
+        final String sourceName = "Test.pdf", targetName = "Test_Copy.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA418");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA418");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
@@ -167,10 +168,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA383() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA383-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA383");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA383");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
@@ -180,10 +181,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA381() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA381-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA381");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA381");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
@@ -193,10 +194,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA380() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA380-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA380");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA380");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
@@ -209,23 +210,23 @@ public class CommonIssuesTests extends TestNGSetUp {
         if (Boolean.parseBoolean("true")) { // To avoid commenting sources below
             throw new SkipException("Is not fixed yet");
         }
-        final String sourceName = "source.html", targetName = "target.html", resultName = "COMPARISONJAVA377-output.html";
+        final String sourceName = "source.html", targetName = "target.html", resultExtension = ".html";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA377");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA377");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
-            comparer.compare(resultName);
+            comparer.compare(resultPath);
         }
     }
 
     @Test
     @Ignore("COMPARISONJAVA-1185")
     public void testCOMPARISONJAVA231() throws Exception {
-        final String sourceName = "compara1.pdf", targetName = "compara2.pdf", resultName = "COMPARISONJAVA231-output.pdf";
+        final String sourceName = "compara1.pdf", targetName = "compara2.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA231");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA231");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              Comparer comparer = new Comparer(sourceStream)) {
@@ -236,10 +237,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA420() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA420-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA420");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA420");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              Comparer comparer = new Comparer(sourceStream)) {
@@ -252,10 +253,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA421() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA421-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA421");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA421");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              Comparer comparer = new Comparer(sourceStream)) {
@@ -266,10 +267,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA425() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA425-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA425");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA425");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              Comparer comparer = new Comparer(sourceStream)) {
@@ -282,10 +283,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA426() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA426-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA426");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA426");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              Comparer comparer = new Comparer(sourceStream)) {
@@ -298,10 +299,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA430() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA430-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA430");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA430");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare(resultPath, new CompareOptions.Builder().setDetectStyleChanges(true).setShowDeletedContent(true).setGenerateSummaryPage(true).build());
@@ -312,10 +313,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA431() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA431-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA431");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA431");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare(resultPath, new CompareOptions.Builder().setDetectStyleChanges(true).setShowDeletedContent(true).setGenerateSummaryPage(true).build());
@@ -326,10 +327,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test(timeOut = 200000)
     public void testCOMPARISONJAVA374() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA374-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA374");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA374");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         final List<Thread> threads = new ArrayList<Thread>();
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         for (int n = 0; n < 10; n++) {
@@ -358,10 +359,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test(timeOut = 200000)
     public void testCOMPARISONJAVA374_2() throws Exception {
-        final String sourceName = "hot_frog.pdf", targetName = "hot_frog-1.pdf", resultName = "COMPARISONJAVA374_2-output.pdf";
+        final String sourceName = "hot_frog.pdf", targetName = "hot_frog-1.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA374_2");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA374_2");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         ExecutorService executorService = Executors.newFixedThreadPool(5);
         for (int n = 0; n < 5; n++) {
@@ -390,10 +391,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA373() throws Exception {
-        final String sourceName = "karta_izo_parole.docx", targetName = "karta_izo_parole1.docx", resultName = "COMPARISONJAVA373-output.docx";
+        final String sourceName = "karta_izo_parole.docx", targetName = "karta_izo_parole1.docx", resultExtension = ".docx";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA373");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA373");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              Comparer comparer = new Comparer(sourceStream, new LoadOptions("parole"))) {
@@ -404,10 +405,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA372() throws Exception {
-        final String sourceName = "git_internals.pptx", targetName = "git_internals-1.pptx", resultName = "COMPARISONJAVA372-output.pptx";
+        final String sourceName = "git_internals.pptx", targetName = "git_internals-1.pptx", resultExtension = ".pptx";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA372");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA372");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (final Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare(resultPath);
@@ -421,13 +422,13 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA379() throws Exception {
-        final String sourceName = "hot_frog.pdf", targetName = "hot_frog-1.pdf", resultName = "COMPARISONJAVA379-output.pdf";
+        final String sourceName = "hot_frog.pdf", targetName = "hot_frog-1.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA379");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA379");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(sourcePath, targetPath);
-            comparer.compare(resultName);
+            comparer.compare(resultPath);
             final ChangeInfo[] changes = comparer.getChanges();
             assertNotNull(changes);
             LOG.debug("Changes count - {}", changes.length);
@@ -436,10 +437,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA376() throws Exception {
-        final String sourceName = "letter.txt", targetName = "letter2.txt", resultName = "COMPARISONJAVA376-output.txt";
+        final String sourceName = "letter.txt", targetName = "letter2.txt", resultExtension = ".txt";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA376");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA376");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare(resultPath);
@@ -449,10 +450,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA447() throws Exception {
-        final String sourceName = "source.pdf", targetName = "target.pdf", resultName = "COMPARISONJAVA447-output.pdf";
+        final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA447");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA447");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare(resultPath, new CompareOptions.Builder().setDetectStyleChanges(true).build());
@@ -462,10 +463,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA78() throws Exception {
-        final String sourceName = "source50p.pdf", targetName = "target50p.pdf", resultName = "COMPARISONJAVA78-output.pdf";
+        final String sourceName = "source50p.pdf", targetName = "target50p.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA78");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA78");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         for (int n = 0; n < 10; n++) {
             final long before = new Date().getTime();
             try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
@@ -483,11 +484,12 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA698() throws Exception {
-        final String sourceName = "candy.pdf", targetName = "candy-1.pdf", resultName = "COMPARISONJAVA698-output.pdf";
+        final String sourceName = "candy.pdf", targetName = "candy-1.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA698");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA698");
-        final Path firstResultPath = TestRunner.getOutputPath(resultName.replace("-", "-first-"));
-        final Path secondResultPath = TestRunner.getOutputPath(resultName.replace("-", "-second-"));
+        final Path outputPath = getOutputPath(resultExtension);
+        final Path firstResultPath = Paths.get(outputPath.toString().replace("-", "-first-"));
+        final Path secondResultPath = Paths.get(outputPath.toString().replace("-", "-second-"));
         final ChangeInfo[] firstChanges;
         final byte[] firstComparisonData;
         try (
@@ -533,11 +535,12 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA699() throws Exception {
-        final String sourceName = "123.docx", targetName = "123_-_Copy.docx", resultName = "COMPARISONJAVA699-output.docx";
+        final String sourceName = "123.docx", targetName = "123_-_Copy.docx", resultExtension = ".docx";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA699");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA699");
-        final Path firstResultPath = TestRunner.getOutputPath(resultName.replace("-", "-first-"));
-        final Path secondResultPath = TestRunner.getOutputPath(resultName.replace("-", "-second-"));
+        final Path outputPath = getOutputPath(resultExtension);
+        final Path firstResultPath = Paths.get(outputPath.toString().replace("-", "-first-"));
+        final Path secondResultPath = Paths.get(outputPath.toString().replace("-", "-second-"));
         final List<ChangeInfo> firstChanges;
         final byte[] firstComparisonData;
         try (Comparer comparer = new Comparer(sourcePath);
@@ -581,10 +584,10 @@ public class CommonIssuesTests extends TestNGSetUp {
         if (Boolean.parseBoolean("true")) { // To avoid commenting sources below
             throw new SkipException("Is not fixed yet");
         }
-        final String sourceName = "signature.html", targetName = "viewer.html", resultName = "COMPARISONJAVA459-output.html";
+        final String sourceName = "signature.html", targetName = "viewer.html", resultExtension = ".html";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA459");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA459");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare(resultPath,
@@ -596,10 +599,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA375() throws Exception {
-        final String sourceName = "hot_frog.pdf", targetName = "hot_frog-1.pdf", resultName = "COMPARISONJAVA375-output.pdf";
+        final String sourceName = "hot_frog.pdf", targetName = "hot_frog-1.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA375");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA375");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare(resultPath);
@@ -611,10 +614,10 @@ public class CommonIssuesTests extends TestNGSetUp {
         if (Boolean.parseBoolean("true")) { // To avoid commenting sources below
             throw new SkipException("Is not fixed yet");
         }
-        final String sourceName = "source-with-comments.html", targetName = "target-with-comments.html", resultName = "do_testBugInDotNetWithCommentsinHtmlFiles.html";
+        final String sourceName = "source-with-comments.html", targetName = "target-with-comments.html", resultExtension = ".html";
         final Path sourcePath = TestRunner.getStoragePath(sourceName);
         final Path targetPath = TestRunner.getStoragePath(targetName);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (InputStream sourceStream = new FileInputStream(sourcePath.toFile());
              InputStream targetStream = new FileInputStream(targetPath.toFile());
              Comparer comparer = new Comparer(sourceStream)) {
@@ -628,10 +631,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA774() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultName = "COMPARISONJAVA774-output.docx";
+        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA774");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA774");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare(resultPath);
@@ -644,10 +647,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA764() throws Exception {
-        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = "COMPARISONJAVA764-output.pptx";
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA764");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA764");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare(resultPath, new CompareOptions.Builder().setGenerateSummaryPage(true).setCalculateCoordinates(true).setDetalisationLevel(3).setDetectStyleChanges(true).setShowDeletedContent(true).setSensitivityOfComparison(100).build());
@@ -658,10 +661,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA867() throws Exception {
-        final String sourceName = "left.doc", targetName = "right.doc", resultName = "COMPARISONJAVA867-output.doc";
+        final String sourceName = "left.doc", targetName = "right.doc", resultExtension = ".doc";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA867");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA867");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         final boolean validLicense = License.isValidLicense();
         TestRunner.unsetLicense(); // it works correctly with valid license
@@ -678,10 +681,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA866_pdf() throws Exception {
-        final String sourceName = "sample_old{number}.pdf", targetName = "sample_new{number}.pdf", resultName = "COMPARISONJAVA866-output-{number}.pdf";
+        final String sourceName = "sample_old{number}.pdf", targetName = "sample_new{number}.pdf", resultExtension = ".pdf";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA866", "pdf");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA866", "pdf");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         {
             try (Comparer comparer = new Comparer(sourcePath.toString().replace("{number}", "1"))) {
 
@@ -726,10 +729,10 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA866_xlsx() throws Exception {
-        final String sourceName = "sample_old{number}.xlsx", targetName = "sample_new{number}.xlsx", resultName = "COMPARISONJAVA866-output-{number}.xlsx";
+        final String sourceName = "sample_old{number}.xlsx", targetName = "sample_new{number}.xlsx", resultExtension = ".xlsx";
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA866", "xlsx");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA866", "xlsx");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
         {
             try (Comparer comparer = new Comparer(sourcePath.toString().replace("{number}", "1"))) {
 
@@ -774,11 +777,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA872() throws Exception {
-        final String sourceName = "Home-Font-Old3.doc", targetName = "Home-Font-New3.doc", resultName = "COMPARISONJAVA872-output.doc";
+        final String sourceName = "Home-Font-Old3.doc", targetName = "Home-Font-New3.doc", resultExtension = ".doc";
         {
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA872");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA872");
-            final Path resultPath = TestRunner.getOutputPath(resultName);
+            final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
             LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -790,7 +793,7 @@ public class CommonIssuesTests extends TestNGSetUp {
         {
             final Path sourcePath = TestRunner.getStoragePath(sourceName + "x", "COMPARISONJAVA872");
             final Path targetPath = TestRunner.getStoragePath(targetName + "x", "COMPARISONJAVA872");
-            final Path resultPath = TestRunner.getOutputPath(resultName + "x");
+            final Path resultPath = getOutputPath(resultExtension + "x");
 
             LOG.debug("Source file: {}\nTarget file: {}", sourcePath, targetPath);
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -803,11 +806,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA869() throws Exception {
-        final String sourceName = "Image-Pen-Old1.doc", targetName = "Image-Pen-New1.doc", resultName = "COMPARISONJAVA869-output.doc";
+        final String sourceName = "Image-Pen-Old1.doc", targetName = "Image-Pen-New1.doc", resultExtension = ".doc";
         { // DOC
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA869");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA869");
-            final Path resultPath = TestRunner.getOutputPath(resultName);
+            final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
             LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -824,7 +827,7 @@ public class CommonIssuesTests extends TestNGSetUp {
         { // DOCX
             final Path sourcePath = TestRunner.getStoragePath(sourceName + "x", "COMPARISONJAVA869");
             final Path targetPath = TestRunner.getStoragePath(targetName + "x", "COMPARISONJAVA869");
-            final Path resultPath = TestRunner.getOutputPath(resultName + "x");
+            final Path resultPath = getOutputPath(resultExtension + "x");
 
             LOG.debug("Source file: {}\nTarget file: {}", sourcePath, targetPath);
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -841,11 +844,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA870() throws Exception {
-        final String sourceName = "Reference-Figures-Old2.doc", targetName = "Reference-Figures-New2.doc", resultName = "COMPARISONJAVA870-output.doc";
+        final String sourceName = "Reference-Figures-Old2.doc", targetName = "Reference-Figures-New2.doc", resultExtension = ".doc";
         {
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA870");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA870");
-            final Path resultPath = TestRunner.getOutputPath(resultName);
+            final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
             LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -860,7 +863,7 @@ public class CommonIssuesTests extends TestNGSetUp {
         {
             final Path sourcePath = TestRunner.getStoragePath(sourceName + "x", "COMPARISONJAVA870");
             final Path targetPath = TestRunner.getStoragePath(targetName + "x", "COMPARISONJAVA870");
-            final Path resultPath = TestRunner.getOutputPath(resultName + "x");
+            final Path resultPath = getOutputPath(resultExtension + "x");
 
             LOG.debug("Source file: {}\nTarget file: {}", sourcePath, targetPath);
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -878,11 +881,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA873() throws Exception {
-        final String sourceName = "Layout-Arrange-Old3.doc", targetName = "Layout-Arrange-New3.doc", resultName = "COMPARISONJAVA873-output.xls";
+        final String sourceName = "Layout-Arrange-Old3.doc", targetName = "Layout-Arrange-New3.doc", resultExtension = ".xls";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA873");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA873");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -896,11 +899,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA874() throws Exception {
-        final String sourceName = "Reference-Annotation-Old4.docx", targetName = "Reference-Annotation-New4.docx", resultName = "COMPARISONJAVA874-output.xls";
+        final String sourceName = "Reference-Annotation-Old4.docx", targetName = "Reference-Annotation-New4.docx", resultExtension = ".xls";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA874");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA874");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -915,10 +918,10 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test
     public void testCOMPARISONJAVA875() throws Exception {
         {
-            final String sourceName = "Home-Font-Old2.xls", targetName = "Home-Font-New15.xls", resultName = "COMPARISONJAVA875-output.doc";
+            final String sourceName = "Home-Font-Old2.xls", targetName = "Home-Font-New15.xls", resultExtension = ".doc";
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA875");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA875");
-            final Path resultPath = TestRunner.getOutputPath(resultName);
+            final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
             LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -928,10 +931,10 @@ public class CommonIssuesTests extends TestNGSetUp {
             LOG.debug("Result was saved as '{}'", resultPath);
         }
         {
-            final String sourceName = "Home-Font-Old4 - fillcolor.xls", targetName = "Home-Font-New17 - fillcolor.xls", resultName = "COMPARISONJAVA875-output-filled.doc";
+            final String sourceName = "Home-Font-Old4 - fillcolor.xls", targetName = "Home-Font-New17 - fillcolor.xls", resultExtension = ".doc";
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA875");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA875");
-            final Path resultPath = TestRunner.getOutputPath(resultName);
+            final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
             LOG.debug("Source file: {}\nTarget file: {}", sourcePath, targetPath);
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -945,11 +948,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA876() throws Exception {
-        final String sourceName = "Home-Style_old6.xls", targetName = "Home-Style_new6.xls", resultName = "COMPARISONJAVA876-output.xls";
+        final String sourceName = "Home-Style_old6.xls", targetName = "Home-Style_new6.xls", resultExtension = ".xls";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA876");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA876");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -963,11 +966,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA878() throws Exception {
-        final String sourceName = "Layout-Arrange_old2.xls", targetName = "Layout-Arrange_new2.xls", resultName = "COMPARISONJAVA878-output.xlsx";
+        final String sourceName = "Layout-Arrange_old2.xls", targetName = "Layout-Arrange_new2.xls", resultExtension = ".xlsx";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA878");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA878");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -981,11 +984,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA879() throws Exception {
-        final String sourceName = "Layout-Arrange_old10.xls", targetName = "Layout-Arrange_new10.xls", resultName = "COMPARISONJAVA879-output.xlsx";
+        final String sourceName = "Layout-Arrange_old10.xls", targetName = "Layout-Arrange_new10.xls", resultExtension = ".xlsx";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA879");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA879");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1002,11 +1005,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA880() throws Exception {
-        final String sourceName = "Review-Comment_old.xls", targetName = "Review-Comment_new.xls", resultName = "COMPARISONJAVA880-output.xlsx";
+        final String sourceName = "Review-Comment_old.xls", targetName = "Review-Comment_new.xls", resultExtension = ".xlsx";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA880");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA880");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1021,11 +1024,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test
     public void testCOMPARISONJAVA881() throws Exception {
         final String issueDirectory = "COMPARISONJAVA881";
-        final String sourceName = "DiffHomeParagraph_old1.pptx", targetName = "DiffHomeParagraph_new1.pptx", resultName = issueDirectory + "-output.pptx";
+        final String sourceName = "DiffHomeParagraph_old1.pptx", targetName = "DiffHomeParagraph_new1.pptx", resultExtension = ".pptx";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1040,11 +1043,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test
     public void testCOMPARISONJAVA882() throws Exception {
         final String issueDirectory = "COMPARISONJAVA882";
-        final String sourceName = "source.pptx", targetName = "target.pptx", resultName = issueDirectory + "-output.pptx";
+        final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".pptx";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1063,11 +1066,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA893() throws Exception {
         final String issueDirectory = "COMPARISONJAVA893";
         final String sourceName = "sourceFile.docx", targetName = "targetFile.docx",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1084,11 +1087,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA896() throws Exception {
-        final String sourceName = "Review-Protect_old.xls", targetName = "Review-Protect_new.xls", resultName = "COMPARISONJAVA896-output.xls";
+        final String sourceName = "Review-Protect_old.xls", targetName = "Review-Protect_new.xls", resultExtension = ".xls";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA896");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA896");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1103,11 +1106,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA913() throws Exception {
         final String issueDirectory = "COMPARISONJAVA913";
         final String sourceName = "Home-Font-Italic_old1.pdf", targetName = "Home-Font-Italic_new1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1126,11 +1129,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA914() throws Exception {
         final String issueDirectory = "COMPARISONJAVA914";
         final String sourceName = "Home-Font-Bold_old1.pdf", targetName = "Home-Font-Bold_new1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1148,11 +1151,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA915() throws Exception {
         final String issueDirectory = "COMPARISONJAVA915";
         final String sourceName = "Home-Font-Cricle2_old1.pdf", targetName = "Home-Font-Cricle2_new3.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1170,11 +1173,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA916() throws Exception {
         final String issueDirectory = "COMPARISONJAVA916";
         final String sourceName = "Home-Font-Ruby_old1.pdf", targetName = "Home-Font-Ruby_new1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1192,11 +1195,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA917() throws Exception {
         final String issueDirectory = "COMPARISONJAVA917";
         final String sourceName = "Home-Paragraph-Comb_old1.pdf", targetName = "Home-Paragraph-Comb_new2.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1214,11 +1217,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA918() throws Exception {
         final String issueDirectory = "COMPARISONJAVA918";
         final String sourceName = "Home-Paragraph-Vert4_old1.pdf", targetName = "Home-Paragraph-Vert4_new1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1236,11 +1239,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA919() throws Exception {
         final String issueDirectory = "COMPARISONJAVA919";
         final String sourceName = "Home-Paragraph-Sort_old2.pdf", targetName = "Home-Paragraph-Sort_new4.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1258,11 +1261,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA920() throws Exception {
         final String issueDirectory = "COMPARISONJAVA920";
         final String sourceName = "Home-Paragraph-Equals_old1.pdf", targetName = "Home-Paragraph-Equals_new1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1280,11 +1283,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA928() throws Exception {
         final String issueDirectory = "COMPARISONJAVA928";
         final String sourceName = "Insert-Text-TextBox_old.pdf", targetName = "Insert-Text-TextBox_new.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1302,11 +1305,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA930() throws Exception {
         final String issueDirectory = "COMPARISONJAVA930";
         final String sourceName = "Insert-Mark-Formula_old.pdf", targetName = "Insert-Mark-Formula_new.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1324,11 +1327,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA931() throws Exception {
         final String issueDirectory = "COMPARISONJAVA931";
         final String sourceName = "Design-Background-Sukashi_old.pdf", targetName = "Design-Background-Sukashi_new.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1346,11 +1349,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA932() throws Exception {
         final String issueDirectory = "COMPARISONJAVA932";
         final String sourceName = "Layout-PageSetup-Para3_old.pdf", targetName = "Layout-PageSetup-Para3_new.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1368,11 +1371,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA933() throws Exception {
         final String issueDirectory = "COMPARISONJAVA933";
         final String sourceName = "Layout-PageSetup-Newline_old.pdf", targetName = "Layout-PageSetup-Newline_new.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1390,11 +1393,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA934() throws Exception {
         final String issueDirectory = "COMPARISONJAVA934";
         final String sourceName = "Layout-PageSetup-RowNum_old.pdf", targetName = "Layout-PageSetup-RowNum_new.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1412,11 +1415,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA935() throws Exception {
         final String issueDirectory = "COMPARISONJAVA935";
         final String sourceName = "Reference-Annotation_old.pdf", targetName = "Reference-Annotation_new.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1434,11 +1437,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA936() throws Exception {
         final String issueDirectory = "COMPARISONJAVA936";
         final String sourceName = "Home-Font-Old7.xls", targetName = "Home-Font-New20.xls",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1456,11 +1459,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA937() throws Exception {
         final String issueDirectory = "COMPARISONJAVA937";
         final String sourceName = "Insert-Graph-New4-01.xls", targetName = "Insert-Graph-New4-08.xls",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1478,11 +1481,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA938() throws Exception {
         final String issueDirectory = "COMPARISONJAVA938";
         final String sourceName = "DiffHomeImage_old3.pptx", targetName = "DiffHomeImage_new3.pptx",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1500,11 +1503,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA939() throws Exception {
         final String issueDirectory = "COMPARISONJAVA939";
         final String sourceName = "DiffInsertTable_old2.pptx", targetName = "DiffInsertTable_new2.pptx",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1522,11 +1525,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA940() throws Exception {
         final String issueDirectory = "COMPARISONJAVA940";
         final String sourceName = "DiffInsertTable_old2 (1).pptx", targetName = "DiffInsertTable_new2.pptx",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1544,11 +1547,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA941() throws Exception {
         final String issueDirectory = "COMPARISONJAVA941";
         final String sourceName = "Home-Paragraph-Vert-Up-old1.pdf", targetName = "Home-Paragraph-Vert-Up-new1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1566,11 +1569,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA942() throws Exception {
         final String issueDirectory = "COMPARISONJAVA942";
         final String sourceName = "Insert-Table-Title_old1.pdf", targetName = "Insert-Table-Title_new2.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1588,11 +1591,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA943() throws Exception {
         final String issueDirectory = "COMPARISONJAVA943";
         final String sourceName = "Insert-Table-Name_old1.pdf", targetName = "Insert-Table-Name_new1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1610,11 +1613,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA944() throws Exception {
         final String issueDirectory = "COMPARISONJAVA944";
         final String sourceName = "Layout-Paper-Landscape-Old1.pdf", targetName = "Layout-Paper-Landscape-New1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1632,11 +1635,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA945() throws Exception {
         final String issueDirectory = "COMPARISONJAVA945";
         final String sourceName = "Reference-Figures-Table-old1.pdf", targetName = "Reference-Figures-Table-new1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1654,11 +1657,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA946() throws Exception {
         final String issueDirectory = "COMPARISONJAVA946";
         final String sourceName = "Reference-Index_old.pdf", targetName = "Reference-Index_new.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1676,11 +1679,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA975() throws Exception {
         final String issueDirectory = "COMPARISONJAVA975";
         final String sourceName = "Layout-Arrange_old9.xls", targetName = "Layout-Arrange_new9.xls",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1697,11 +1700,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA976() throws Exception {
-        final String sourceName = "Insert-Text-xlsx_old.pdf", targetName = "Insert-Text-xlsx_new.pdf", resultName = "COMPARISONJAVA976-output.pdf";
+        final String sourceName = "Insert-Text-xlsx_old.pdf", targetName = "Insert-Text-xlsx_new.pdf", resultExtension = ".pdf";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA976");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA976");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1715,11 +1718,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA977() throws Exception {
         final String issueDirectory = "COMPARISONJAVA977";
         final String sourceName = "source.doc", targetName = "target.doc",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1741,11 +1744,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA978() throws Exception {
-        final String sourceName = "Insert-Image_old.xlsx", targetName = "Insert-Image_new.xlsx", resultName = "COMPARISONJAVA978-output.xlsx";
+        final String sourceName = "Insert-Image_old.xlsx", targetName = "Insert-Image_new.xlsx", resultExtension = ".xlsx";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA978");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA978");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1764,11 +1767,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA979() throws Exception {
         final String issueDirectory = "COMPARISONJAVA979";
         final String sourceName = "Reference-Table-Old1.pdf", targetName = "Reference-Table-New1.pdf",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1787,11 +1790,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA980() throws Exception {
         final String issueDirectory = "COMPARISONJAVA980";
         final String sourceName = "v1.docx", targetName = "v2.docx",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1818,11 +1821,11 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA981() throws Exception {
         final String issueDirectory = "COMPARISONJAVA981";
         final String sourceName = "Format-Accessibility_Old.xls", targetName = "Format-Accessibility_New.xls",
-                resultName = issueDirectory + "-output" + sourceName.substring(sourceName.lastIndexOf('.'));
+                resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
         final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1839,11 +1842,11 @@ public class CommonIssuesTests extends TestNGSetUp {
 
     @Test
     public void testCOMPARISONJAVA1010() throws Exception {
-        final String sourceName = "source.html", targetName = "target.html", resultName = "COMPARISONJAVA1010-output.html";
+        final String sourceName = "source.html", targetName = "target.html", resultExtension = ".html";
 
         final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA1010");
         final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA1010");
-        final Path resultPath = TestRunner.getOutputPath(resultName);
+        final Path resultPath = TestRunner.getOutputPath(resultExtension);
 
         LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -1852,5 +1855,52 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
         }
         LOG.debug("Result was saved as '{}'", resultPath);
+    }
+
+    @Test
+    public void testCOMPARISONJAVA1189() throws Exception {
+        final String issueDirectory = "COMPARISONJAVA1189";
+        {
+            final String sourceName = "house-source.png", targetName = "house-target.png",
+                    resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+            final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+            final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+            final Path resultPath = TestRunner.getOutputPath(resultExtension);
+
+            LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+            try (Comparer comparer = new Comparer(sourcePath)) {
+                comparer.add(targetPath);
+
+                CompareOptions compareOptions = new CompareOptions();
+                compareOptions.setGenerateSummaryPage(false);
+
+                comparer.compare(resultPath, compareOptions);
+            }
+            LOG.debug("Result was saved as '{}'", resultPath);
+            assertTrue(Files.exists(resultPath));
+            assertTrue(Files.size(resultPath) > 0);
+        } // It must generate PDF file when setGenerateSummaryPage is enabled and PNG file when disabled
+        {
+            final String sourceName = "laptop-source.jpg", targetName = "laptop-target.jpg",
+                    resultExtension = "" + sourceName.substring(sourceName.lastIndexOf('.'));
+
+            final Path sourcePath = TestRunner.getStoragePath(sourceName, issueDirectory);
+            final Path targetPath = TestRunner.getStoragePath(targetName, issueDirectory);
+            final Path resultPath = TestRunner.getOutputPath(resultExtension);
+
+            LOG.debug("\nSource file: {}\nTarget file: {}", sourcePath, targetPath);
+            try (Comparer comparer = new Comparer(sourcePath)) {
+                comparer.add(targetPath);
+
+                CompareOptions compareOptions = new CompareOptions();
+                compareOptions.setGenerateSummaryPage(false);
+
+                comparer.compare(resultPath, compareOptions);
+            }
+            LOG.debug("Result was saved as '{}'", resultPath);
+            assertTrue(Files.exists(resultPath));
+            assertTrue(Files.size(resultPath) > 0);
+        } // Must do the same, but output image must be JPG
     }
 }

@@ -53,7 +53,7 @@ public class OtherOperationsTests {
 //    @Test
 //    public void testHowToUseCoordinatesOfChanges() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "result.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //        final Path resultPath = getOutputPath(targetName);
@@ -111,7 +111,7 @@ public class OtherOperationsTests {
 //    @Test
 //    public void testHowToGetImageRepresentationOfDocumentPages() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "result.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //        final Path targetPath = getStoragePath(targetName);
 //        final Path resultPath = getOutputPath(targetName);
@@ -145,7 +145,7 @@ public class OtherOperationsTests {
 //    @Test
 //    public void testHowToGetDocumentInfo() throws Exception {
 //
-//        final String sourceName = "source.docx", targetName = "target.docx", resultName = "result.docx";
+//        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
 //        final Path sourcePath = getStoragePath(sourceName);
 //
 //        Informer informer = new Informer();
