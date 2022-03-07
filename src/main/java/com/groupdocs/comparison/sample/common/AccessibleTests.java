@@ -35,7 +35,7 @@ import java.util.List;
 
 public class AccessibleTests extends TestNGSetUp {
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparison() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(Comparer.class,
                 "add",
@@ -92,7 +92,7 @@ public class AccessibleTests extends TestNGSetUp {
         )));
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparisonLicense() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(License.class,
                 "setLicense",
@@ -107,7 +107,7 @@ public class AccessibleTests extends TestNGSetUp {
         )));
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparisonCommonDelegates() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(Delegates.CreatePageStream.class,
                 "invoke")));
@@ -115,7 +115,7 @@ public class AccessibleTests extends TestNGSetUp {
                 "invoke")));
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparisonCommonException() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(ComparisonException.class)));
         System.out.println(String.format("[OK] %s is accessible", checkMethods(DocumentComparisonException.class)));
@@ -125,7 +125,7 @@ public class AccessibleTests extends TestNGSetUp {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(UnsupportedFileFormatException.class)));
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparisonInterfaces() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(IDocumentInfo.class,
                 "getFileType",
@@ -138,7 +138,7 @@ public class AccessibleTests extends TestNGSetUp {
                 "setSize")));
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparisonLocalization() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(SupportedLocales.class,
                 "isLocaleSupported",
@@ -147,7 +147,7 @@ public class AccessibleTests extends TestNGSetUp {
         )));
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparisonLogging() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(ConsoleLogger.class,
                 "trace",
@@ -179,7 +179,7 @@ public class AccessibleTests extends TestNGSetUp {
         )));
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparisonOptions() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(ApplyChangeOptions.class,
                 "isSaveOriginalState",
@@ -341,7 +341,7 @@ public class AccessibleTests extends TestNGSetUp {
         )));
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparisonResult() {
         System.out.println(String.format("[OK] %s is accessible", checkMethods(CategoryChange.class,
                 "getCategory",

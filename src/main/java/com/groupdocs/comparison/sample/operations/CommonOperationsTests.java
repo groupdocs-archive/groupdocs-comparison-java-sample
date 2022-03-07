@@ -5,8 +5,10 @@ import com.groupdocs.comparison.ComparerSettings;
 import com.groupdocs.comparison.license.Metered;
 import com.groupdocs.comparison.options.CompareOptions;
 import com.groupdocs.comparison.options.load.LoadOptions;
+import com.groupdocs.comparison.result.ChangeInfo;
 import com.groupdocs.comparison.sample.config.TestNGSetUp;
-import org.testng.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
@@ -18,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * The type View generator.
@@ -26,8 +29,9 @@ import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
  */
 @SuppressWarnings("all")
 public class CommonOperationsTests extends TestNGSetUp {
+    private static final Logger LOG = LoggerFactory.getLogger(CommonOperationsTests.class);
 
-    @Test
+    @Test(invocationCount = 1)
     public void testMeteredLicenseAndLimits() {
         if (Boolean.parseBoolean("true")) { // Not ot comment sources below
             throw new SkipException("publicKey and privateKey must be set");
@@ -49,33 +53,47 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     // region docx
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithString() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
+        final String sourceName = "source.docx", targetName = "target.docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
 
         try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString())) {
             comparer.add(targetPath.toAbsolutePath().toString());
             comparer.compare();
+
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(21);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithPath() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
+        final String sourceName = "source.docx", targetName = "target.docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
             comparer.add(targetPath);
             comparer.compare();
+
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(21);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithStream() throws Exception {
-        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
+        final String sourceName = "source.docx", targetName = "target.docx";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
 
@@ -84,10 +102,17 @@ public class CommonOperationsTests extends TestNGSetUp {
              Comparer comparer = new Comparer(sourceStream)) {
             comparer.add(targetStream);
             comparer.compare();
+
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(21);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithStringAndResult() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
@@ -98,13 +123,16 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetPath.toAbsolutePath().toString());
             comparer.compare(resultPath.toAbsolutePath().toString());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 11816, expectedSizeMax = 11818;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithPathAndResult() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
@@ -115,13 +143,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetPath);
             comparer.compare(resultPath);
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 11816, expectedSizeMax = 11819;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithStreamAndResult() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
@@ -135,13 +167,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetStream);
             comparer.compare(resultStream);
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 11816, expectedSizeMax = 11819;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithStringAndResultAndComparerSettings() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
@@ -153,13 +189,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetPath.toAbsolutePath().toString());
             comparer.compare(resultPath.toAbsolutePath().toString());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 11816, expectedSizeMax = 11818;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithPathAndResultAndComparerSettings() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
@@ -171,13 +211,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetPath);
             comparer.compare(resultPath);
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 11816, expectedSizeMax = 11819;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithStreamAndResultAndComparerSettings() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
@@ -192,13 +236,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetStream);
             comparer.compare(resultStream);
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 11816, expectedSizeMax = 11818;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithStringAndResultAndGenerateSummaryPage() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
@@ -215,13 +263,17 @@ public class CommonOperationsTests extends TestNGSetUp {
                             .setGenerateSummaryPage(true)
                             .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 11816, expectedSizeMax = 11818;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithPathAndResultAndGenerateSummaryPage() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
@@ -236,13 +288,17 @@ public class CommonOperationsTests extends TestNGSetUp {
                             .setGenerateSummaryPage(true)
                             .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 11816, expectedSizeMax = 11819;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoWordsWithStreamAndResultAndGenerateSummaryPage() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
         final Path sourcePath = getStoragePath(sourceName);
@@ -259,9 +315,13 @@ public class CommonOperationsTests extends TestNGSetUp {
                             .setGenerateSummaryPage(true)
                             .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 11816, expectedSizeMax = 11818;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
@@ -269,9 +329,9 @@ public class CommonOperationsTests extends TestNGSetUp {
 
     // region docx with password
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithString() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
@@ -279,12 +339,19 @@ public class CommonOperationsTests extends TestNGSetUp {
         try (Comparer comparer = new Comparer(sourcePath.toAbsolutePath().toString(), new LoadOptions(sourcePassword))) {
             comparer.add(targetPath.toAbsolutePath().toString(), new LoadOptions(targetPassword));
             comparer.compare();
+
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(20);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithPath() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
@@ -292,12 +359,19 @@ public class CommonOperationsTests extends TestNGSetUp {
         try (Comparer comparer = new Comparer(sourcePath, new LoadOptions(sourcePassword))) {
             comparer.add(targetPath, new LoadOptions(targetPassword));
             comparer.compare();
+
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(20);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithStream() throws Exception {
-        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
+        final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx";
         final String sourcePassword = "pass", targetPassword = "pass";
         final Path sourcePath = getStoragePath(sourceName);
         final Path targetPath = getStoragePath(targetName);
@@ -307,10 +381,17 @@ public class CommonOperationsTests extends TestNGSetUp {
              Comparer comparer = new Comparer(sourceStream, new LoadOptions(sourcePassword))) {
             comparer.add(targetStream, new LoadOptions(targetPassword));
             comparer.compare();
+
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(20);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithStringAndResult() throws Exception {
         final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
@@ -322,13 +403,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetPath.toAbsolutePath().toString(), new LoadOptions(targetPassword));
             comparer.compare(resultPath.toAbsolutePath().toString());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 9761, expectedSizeMax = 9763;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithPathAndResult() throws Exception {
         final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
@@ -340,13 +425,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetPath, new LoadOptions(targetPassword));
             comparer.compare(resultPath);
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 9761, expectedSizeMax = 9763;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithStreamAndResult() throws Exception {
         final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
@@ -361,13 +450,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetStream, new LoadOptions(targetPassword));
             comparer.compare(resultStream);
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 9761, expectedSizeMax = 9763;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithStringAndResultAndComparerSettings() throws Exception {
         final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
@@ -380,13 +473,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetPath.toAbsolutePath().toString(), new LoadOptions(targetPassword));
             comparer.compare(resultPath.toAbsolutePath().toString());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 9761, expectedSizeMax = 9763;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithPathAndResultAndComparerSettings() throws Exception {
         final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
@@ -399,13 +496,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetPath, new LoadOptions(targetPassword));
             comparer.compare(resultPath);
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 9761, expectedSizeMax = 9763;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithStreamAndResultAndComparerSettings() throws Exception {
         final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
@@ -421,13 +522,17 @@ public class CommonOperationsTests extends TestNGSetUp {
             comparer.add(targetStream, new LoadOptions(targetPassword));
             comparer.compare(resultStream);
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 9761, expectedSizeMax = 9763;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithStringAndResultAndGenerateSummaryPage() throws Exception {
         final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
@@ -445,13 +550,17 @@ public class CommonOperationsTests extends TestNGSetUp {
                             .setGenerateSummaryPage(true)
                             .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 9761, expectedSizeMax = 9763;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithPathAndResultAndGenerateSummaryPage() throws Exception {
         final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
@@ -467,13 +576,17 @@ public class CommonOperationsTests extends TestNGSetUp {
                             .setGenerateSummaryPage(true)
                             .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 9761, expectedSizeMax = 9763;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTwoEncryptedWordsWithStreamAndResultAndGenerateSummaryPage() throws Exception {
         final String sourceName = "source-encrypted.docx", targetName = "target-encrypted.docx", resultExtension = ".docx";
         final String sourcePassword = "pass", targetPassword = "pass";
@@ -491,9 +604,13 @@ public class CommonOperationsTests extends TestNGSetUp {
                             .setGenerateSummaryPage(true)
                             .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertNotEquals(size, 0, "Result is empty");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 9761, expectedSizeMax = 9763;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 

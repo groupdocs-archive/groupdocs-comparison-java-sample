@@ -7,6 +7,8 @@
     <groupId>com.groupdocs.samples.comparison</groupId>
     <artifactId>groupdocs-comparison-java-sample</artifactId>
     <version>21.6.1</version>
+<!--    <version>22.2</version>-->
+<!--    <version>22.2-dev</version>-->
     <properties>
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,6 +54,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>2.9.1</version>
         </dependency>
     </dependencies>
     <build>

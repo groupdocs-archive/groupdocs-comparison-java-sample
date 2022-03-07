@@ -4,8 +4,10 @@ import com.groupdocs.comparison.Comparer;
 import com.groupdocs.comparison.ComparerSettings;
 import com.groupdocs.comparison.options.CompareOptions;
 import com.groupdocs.comparison.options.style.DetalisationLevel;
+import com.groupdocs.comparison.result.ChangeInfo;
 import com.groupdocs.comparison.sample.config.TestNGSetUp;
-import org.testng.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
@@ -17,10 +19,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FileFormatTests extends TestNGSetUp {
+    private static final Logger LOG = LoggerFactory.getLogger(FileFormatTests.class);
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareAsAsStream() throws Exception {
         final String sourceName = "source.as", targetName = "target.as", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -38,13 +42,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 22291, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(50);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 22291;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareAs3AsStream() throws Exception {
         final String sourceName = "source.as3", targetName = "target.as3", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -62,13 +76,22 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 15278, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(30);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 15278;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareAsmAsStream() throws Exception {
         final String sourceName = "source.asm", targetName = "target.asm", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -86,13 +109,22 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 8630, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(40);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 8630;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareBatAsStream() throws Exception {
         final String sourceName = "source.bat", targetName = "target.bat", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -110,13 +142,22 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1153, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1153;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCmdAsStream() throws Exception {
         final String sourceName = "source.cmd", targetName = "target.cmd", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -134,13 +175,22 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3286, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(9);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3286;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCAsStream() throws Exception {
         final String sourceName = "source.c", targetName = "target.c", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -158,13 +208,22 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 16095, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(44);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 16095;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareHAsStream() throws Exception {
         final String sourceName = "source.h", targetName = "target.h", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -182,13 +241,22 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 6156, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(22);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 6156;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePdfAsStream() throws Exception {
         final String sourceName = "source.pdf", targetName = "target.pdf", resultExtension = ".pdf";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -206,13 +274,22 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 112919, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(5);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 112919;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareDocAsStream() throws Exception {
         final String sourceName = "source.doc", targetName = "target.doc", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -230,13 +307,22 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 129536, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(29);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 129536;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareDocmAsStream() throws Exception {
         final String sourceName = "source.docm", targetName = "target.docm", resultExtension = ".html";
@@ -255,13 +341,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareDocxAsStream() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -279,13 +375,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue((12600 < size) && (size < 12700), "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 12679, expectedSizeMax = 12691;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareDotAsStream() throws Exception {
         final String sourceName = "source.dot", targetName = "target.dot", resultExtension = ".html";
@@ -304,13 +410,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareDotmAsStream() throws Exception {
         final String sourceName = "source.dotm", targetName = "target.dotm", resultExtension = ".html";
@@ -329,13 +445,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareDotxAsStream() throws Exception {
         final String sourceName = "source.dotx", targetName = "target.dotx", resultExtension = ".html";
@@ -354,13 +480,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareXlsAsStream() throws Exception {
         final String sourceName = "source.xls", targetName = "target.xls", resultExtension = ".xlsx";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -378,13 +514,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue(54500 < size && size < 54750, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(74);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 54694, expectedSizeMax = 54730;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareXltAsStream() throws Exception {
         final String sourceName = "source.xlt", targetName = "target.xlt", resultExtension = ".html";
@@ -403,13 +549,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareXlsxAsStream() throws Exception {
         final String sourceName = "source.xlsx", targetName = "target.xlsx", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -427,13 +583,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue(7775 < size && size < 7785, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 7776, expectedSizeMax = 7783;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareXltmAsStream() throws Exception {
         final String sourceName = "source.xltm", targetName = "target.xltm", resultExtension = ".html";
@@ -452,13 +618,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareXlsbAsStream() throws Exception {
         final String sourceName = "source.xlsb", targetName = "target.xlsb", resultExtension = ".html";
@@ -477,13 +653,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareXlsmAsStream() throws Exception {
         final String sourceName = "source.xlsm", targetName = "target.xlsm", resultExtension = ".html";
@@ -502,13 +688,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testComparePotAsStream() throws Exception {
         final String sourceName = "source.pot", targetName = "target.pot", resultExtension = ".html";
@@ -527,13 +723,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testComparePotxAsStream() throws Exception {
         final String sourceName = "source.potx", targetName = "target.potx", resultExtension = ".html";
@@ -552,13 +758,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testComparePpsAsStream() throws Exception {
         final String sourceName = "source.pps", targetName = "target.pps", resultExtension = ".html";
@@ -577,13 +793,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testComparePpsxAsStream() throws Exception {
         final String sourceName = "source.ppsx", targetName = "target.ppsx", resultExtension = ".html";
@@ -602,13 +828,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePptxAsStream() throws Exception {
         final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -626,13 +862,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue(52900 < size && size < 53300, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 52974, expectedSizeMax = 52989;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testComparePptAsStream() throws Exception {
         final String sourceName = "source.ppt", targetName = "target.ppt", resultExtension = ".html";
@@ -651,13 +897,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareVsdxAsStream() throws Exception {
         final String sourceName = "source.vsdx", targetName = "target.vsdx", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -675,13 +931,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue(22300 < size && size < 22400, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 22341, expectedSizeMax = 22344;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareVsdAsStream() throws Exception {
         final String sourceName = "source.vsd", targetName = "target.vsd", resultExtension = ".vsdx";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -699,13 +965,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue(16100 < size && size < 16200, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(0);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 16143, expectedSizeMax = 16146;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareVssAsStream() throws Exception {
         final String sourceName = "source.vss", targetName = "target.vss", resultExtension = ".html";
@@ -724,13 +1000,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareVstAsStream() throws Exception {
         final String sourceName = "source.vst", targetName = "target.vst", resultExtension = ".html";
@@ -749,13 +1035,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareVdxAsStream() throws Exception {
         final String sourceName = "source.vdx", targetName = "target.vdx", resultExtension = ".html";
@@ -774,13 +1070,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareOneAsStream() throws Exception {
         final String sourceName = "source.one", targetName = "target.one", resultExtension = ".one";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -798,13 +1104,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 11320, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(1);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 11320L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareOdtAsStream() throws Exception {
         final String sourceName = "source.odt", targetName = "target.odt", resultExtension = ".html";
@@ -823,13 +1139,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareOdpAsStream() throws Exception {
         final String sourceName = "source.odp", targetName = "target.odp", resultExtension = ".html";
@@ -848,13 +1174,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareOtpAsStream() throws Exception {
         final String sourceName = "source.otp", targetName = "target.otp", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -872,13 +1208,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue(5400 < size && size < 5550, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(2);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 5476, expectedSizeMax = 5482;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareOdsAsStream() throws Exception {
         final String sourceName = "source.ods", targetName = "target.ods", resultExtension = ".html";
@@ -897,13 +1243,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareOttAsStream() throws Exception {
         final String sourceName = "source.ott", targetName = "target.ott", resultExtension = ".html";
@@ -922,13 +1278,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareRtfAsStream() throws Exception {
         final String sourceName = "source.rtf", targetName = "target.rtf", resultExtension = ".html";
@@ -947,13 +1313,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareTxtAsStream() throws Exception {
         final String sourceName = "source.txt", targetName = "target.txt", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -971,13 +1347,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 775, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(2);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 775L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCsvAsStream() throws Exception {
         final String sourceName = "source.csv", targetName = "target.csv", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -995,13 +1381,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2013, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(5);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2013L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareHtmlAsStream() throws Exception {
         final String sourceName = "source.html", targetName = "target.html", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1019,13 +1415,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 754, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(2);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 754L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMhtmlAsStream() throws Exception {
         final String sourceName = "source.mhtml", targetName = "target.mhtml", resultExtension = ".mhtml";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1043,13 +1449,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue(5400 < size && size < 5550, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(14);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 5466, expectedSizeMax = 5467;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMobiAsStream() throws Exception {
         final String sourceName = "source.mobi", targetName = "target.mobi", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1067,13 +1483,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 9728, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(2);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 9728L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareDcmAsStream() throws Exception {
         final String sourceName = "source.dcm", targetName = "target.dcm", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1091,13 +1517,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 191845, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(248);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 191845L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareDjvuAsStream() throws Exception {
         final String sourceName = "source.djvu", targetName = "target.djvu", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1115,13 +1551,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2347543, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(2124);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2347543L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareDwgAsStream() throws Exception {
         final String sourceName = "source.dwg", targetName = "target.dwg", resultExtension = ".pdf";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1139,13 +1585,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 325269, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(507);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 325269L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareDxfAsStream() throws Exception {
         final String sourceName = "source.dxf", targetName = "target.dxf", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1163,13 +1619,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 124500, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(11);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 124500L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareBmpAsStream() throws Exception {
         final String sourceName = "source.bmp", targetName = "target.bmp", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1187,13 +1653,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 175172, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(118);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 175172L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareGifAsStream() throws Exception {
         final String sourceName = "source.gif", targetName = "target.gif", resultExtension = ".html";
@@ -1212,13 +1688,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareJpegAsStream() throws Exception {
         final String sourceName = "source.jpeg", targetName = "target.jpeg", resultExtension = ".html";
@@ -1237,13 +1723,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePngAsStream() throws Exception {
         final String sourceName = "source.png", targetName = "target.png", resultExtension = ".pdf";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1260,13 +1756,24 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetalisationLevel(DetalisationLevel.High)
                     .setDetectStyleChanges(true)
                     .build());
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(56);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 174456L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 174456, "Result file has incorrect size");
+
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareEmlAsStream() throws Exception {
         final String sourceName = "source.eml", targetName = "target.eml", resultExtension = ".eml";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1284,13 +1791,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue(1900 < size && size < 2000, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(5);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 1951, expectedSizeMax = 1952;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareEmlxAsStream() throws Exception {
         final String sourceName = "source.emlx", targetName = "target.emlx", resultExtension = ".emlx";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1308,13 +1825,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertTrue(1900 < size && size < 2000, "Result file has incorrect size");
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(5);
+
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 1930, expectedSizeMax = 1931;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
+                    .isGreaterThanOrEqualTo(expectedSizeMin)
+                    .isLessThanOrEqualTo(expectedSizeMax);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMsgAsStream() throws Exception {
         final String sourceName = "source.msg", targetName = "target.msg", resultExtension = ".msg";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1332,13 +1859,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 15872, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(5);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 15872L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareCadAsStream() throws Exception {
         final String sourceName = "source.cad", targetName = "target.cad", resultExtension = ".html";
@@ -1357,13 +1894,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCppAsStream() throws Exception {
         final String sourceName = "source.cpp", targetName = "target.cpp", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1381,13 +1928,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 9260, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(12);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 9260L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCcAsStream() throws Exception {
         final String sourceName = "source.cc", targetName = "target.cc", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1405,13 +1962,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 29833, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(44);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 29833L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCxxAsStream() throws Exception {
         final String sourceName = "source.cxx", targetName = "target.cxx", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1429,13 +1996,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 15042, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(31);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 15042L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareHxxAsStream() throws Exception {
         final String sourceName = "source.hxx", targetName = "target.hxx", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1453,13 +2030,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 14396, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(32);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 14396L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareHhAsStream() throws Exception {
         final String sourceName = "source.hh", targetName = "target.hh", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1477,13 +2064,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 15694, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(36);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 15694L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareHppAsStream() throws Exception {
         final String sourceName = "source.hpp", targetName = "target.hpp", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1501,13 +2098,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 19232, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(46);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 19232L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCmakeAsStream() throws Exception {
         final String sourceName = "source.cmake", targetName = "target.cmake", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1525,13 +2132,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 6629, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(18);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 6629L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCsAsStream() throws Exception {
         final String sourceName = "source.cs", targetName = "target.cs", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1549,13 +2166,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 8559, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 8559L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCsxAsStream() throws Exception {
         final String sourceName = "source.csx", targetName = "target.csx", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1573,13 +2200,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 6989, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(2);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 6989L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCakeAsStream() throws Exception {
         final String sourceName = "source.cake", targetName = "target.cake", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1597,13 +2234,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3190, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(10);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3190L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareDiffAsStream() throws Exception {
         final String sourceName = "source.diff", targetName = "target.diff", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1621,13 +2268,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 5425, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(5);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 5425L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePatchAsStream() throws Exception {
         final String sourceName = "source.patch", targetName = "target.patch", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1645,13 +2302,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 981, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 981L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareRejAsStream() throws Exception {
         final String sourceName = "source.rej", targetName = "target.rej", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1669,13 +2336,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2999, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(17);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2999L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareGroovyAsStream() throws Exception {
         final String sourceName = "source.groovy", targetName = "target.groovy", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1693,13 +2370,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3415, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(5);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3415L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareGvyAsStream() throws Exception {
         final String sourceName = "source.gvy", targetName = "target.gvy", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1717,13 +2404,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1074, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(3);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1074L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareGradleAsStream() throws Exception {
         final String sourceName = "source.gradle", targetName = "target.gradle", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1741,13 +2438,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 14332, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(23);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 14332L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareHamlAsStream() throws Exception {
         final String sourceName = "source.haml", targetName = "target.haml", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1765,13 +2472,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 6686, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(14);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 6686L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareJsAsStream() throws Exception {
         final String sourceName = "source.js", targetName = "target.js", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1789,13 +2506,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 10899, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(26);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 10899L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareEs6AsStream() throws Exception {
         final String sourceName = "source.es6", targetName = "target.es6", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1813,13 +2540,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3816, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(16);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3816L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMjsAsStream() throws Exception {
         final String sourceName = "source.mjs", targetName = "target.mjs", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1837,13 +2574,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2035, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(3);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2035L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePacAsStream() throws Exception {
         final String sourceName = "source.pac", targetName = "target.pac", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1861,13 +2608,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 6229, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 6229L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareJsonAsStream() throws Exception {
         final String sourceName = "source.json", targetName = "target.json", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1885,13 +2642,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 4544, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(12);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 4544L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareBowerrcAsStream() throws Exception {
         final String sourceName = "source.bowerrc", targetName = "target.bowerrc", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1909,13 +2676,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2937, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2937L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareJshintrcAsStream() throws Exception {
         final String sourceName = "source.jshintrc", targetName = "target.jshintrc", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1933,13 +2710,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 20492, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(11);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 20492L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareJscsrcAsStream() throws Exception {
         final String sourceName = "source.jscsrc", targetName = "target.jscsrc", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1957,13 +2744,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 13900, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(28);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 13900L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareWEBMANIFESTAsStream() throws Exception {
         final String sourceName = "source.webmanifest", targetName = "target.webmanifest", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -1981,13 +2778,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2865, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(10);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2865L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareJsmapAsStream() throws Exception {
         final String sourceName = "source.jsmap", targetName = "target.jsmap", resultExtension = ".html";
@@ -2006,13 +2813,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareHarAsStream() throws Exception {
         final String sourceName = "source.har", targetName = "target.har", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2030,13 +2847,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 777526, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(316);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 777526L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareJavaAsStream() throws Exception {
         final String sourceName = "source.java", targetName = "target.java", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2054,13 +2881,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 22771, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(22);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 22771L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareLessAsStream() throws Exception {
         final String sourceName = "source.less", targetName = "target.less", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2078,13 +2915,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 15775, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 15775L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareLogAsStream() throws Exception {
         final String sourceName = "source.log", targetName = "target.log", resultExtension = ".html";
@@ -2103,13 +2950,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMakeAsStream() throws Exception {
         final String sourceName = "source.make", targetName = "target.make", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2127,13 +2984,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2776, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(11);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2776L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMkAsStream() throws Exception {
         final String sourceName = "source.mk", targetName = "target.mk", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2151,13 +3018,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 5517, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(9);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 5517L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMdAsStream() throws Exception {
         final String sourceName = "source.md", targetName = "target.md", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2175,13 +3052,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2124, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2124L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMkdAsStream() throws Exception {
         final String sourceName = "source.mkd", targetName = "target.mkd", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2199,13 +3086,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3004, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(11);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3004L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMdwnAsStream() throws Exception {
         final String sourceName = "source.mdwn", targetName = "target.mdwn", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2223,13 +3120,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 5537, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(24);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 5537L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMdownAsStream() throws Exception {
         final String sourceName = "source.mdown", targetName = "target.mdown", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2247,13 +3154,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 4694, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(15);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 4694L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMarkdownAsStream() throws Exception {
         final String sourceName = "source.markdown", targetName = "target.markdown", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2271,13 +3188,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3162, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(8);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3162L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMarkdnAsStream() throws Exception {
         final String sourceName = "source.markdn", targetName = "target.markdn", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2295,13 +3222,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3723, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(2);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3723L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMdtxtAsStream() throws Exception {
         final String sourceName = "source.mdtxt", targetName = "target.mdtxt", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2319,13 +3256,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2074, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(3);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2074L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMdtextAsStream() throws Exception {
         final String sourceName = "source.mdtext", targetName = "target.mdtext", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2343,13 +3290,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 4037, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(10);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 4037L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMlAsStream() throws Exception {
         final String sourceName = "source.ml", targetName = "target.ml", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2367,13 +3324,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 5383, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(11);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 5383L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareMliAsStream() throws Exception {
         final String sourceName = "source.mli", targetName = "target.mli", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2391,13 +3358,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 8187, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(17);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 8187L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareObjcAsStream() throws Exception {
         final String sourceName = "source.objc", targetName = "target.objc", resultExtension = ".html";
@@ -2416,13 +3393,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareObjcpAsStream() throws Exception {
         final String sourceName = "source.objcp", targetName = "target.objcp", resultExtension = ".html";
@@ -2441,13 +3428,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePhpAsStream() throws Exception {
         final String sourceName = "source.php", targetName = "target.php", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2465,13 +3462,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 8081, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(11);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 8081L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePhp4AsStream() throws Exception {
         final String sourceName = "source.php4", targetName = "target.php4", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2489,13 +3496,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 9346, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(27);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 9346L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePhp5AsStream() throws Exception {
         final String sourceName = "source.php5", targetName = "target.php5", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2513,13 +3530,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 6096, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(8);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 6096L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePhtmlAsStream() throws Exception {
         final String sourceName = "source.phtml", targetName = "target.phtml", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2537,13 +3564,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2988, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(7);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2988L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCtpAsStream() throws Exception {
         final String sourceName = "source.ctp", targetName = "target.ctp", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2561,13 +3598,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1828, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1828L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePlAsStream() throws Exception {
         final String sourceName = "source.pl", targetName = "target.pl", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2585,13 +3632,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3902, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(9);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3902L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePmAsStream() throws Exception {
         final String sourceName = "source.pm", targetName = "target.pm", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2609,13 +3666,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 56964, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(112);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 56964L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePodAsStream() throws Exception {
         final String sourceName = "source.pod", targetName = "target.pod", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2633,13 +3700,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2294, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2294L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareTAsStream() throws Exception {
         final String sourceName = "source.t", targetName = "target.t", resultExtension = ".html";
@@ -2658,13 +3735,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePsgiAsStream() throws Exception {
         final String sourceName = "source.psgi", targetName = "target.psgi", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2682,13 +3769,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3321, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3321L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareP6AsStream() throws Exception {
         final String sourceName = "source.p6", targetName = "target.p6", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2706,13 +3803,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 4648, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 4648L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePl6AsStream() throws Exception {
         final String sourceName = "source.pl6", targetName = "target.pl6", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2730,13 +3837,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3408, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3408L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePm6AsStream() throws Exception {
         final String sourceName = "source.pm6", targetName = "target.pm6", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2754,13 +3871,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 8278, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 8278L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareNqpAsStream() throws Exception {
         final String sourceName = "source.nqp", targetName = "target.nqp", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2778,13 +3905,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 8617, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(52);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 8617L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testComparePropAsStream() throws Exception {
         final String sourceName = "source.prop", targetName = "target.prop", resultExtension = ".html";
@@ -2803,13 +3940,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCfgAsStream() throws Exception {
         final String sourceName = "source.cfg", targetName = "target.cfg", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2827,13 +3974,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1897, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1897L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareConfAsStream() throws Exception {
         final String sourceName = "source.conf", targetName = "target.conf", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2851,13 +4008,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1079, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(1);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1079L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     @Ignore("Files are required")
     public void testCompareDirAsStream() throws Exception {
         final String sourceName = "source.dir", targetName = "target.dir", resultExtension = ".html";
@@ -2876,13 +4043,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1481840, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(123);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481840L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePyAsStream() throws Exception {
         final String sourceName = "source.py", targetName = "target.py", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2900,13 +4077,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 6796, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(39);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 6796L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareRpyAsStream() throws Exception {
         final String sourceName = "source.rpy", targetName = "target.rpy", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2924,13 +4111,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 27461, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(46);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 27461L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePywAsStream() throws Exception {
         final String sourceName = "source.pyw", targetName = "target.pyw", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2948,13 +4145,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 38580, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(45);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 38580L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareCpyAsStream() throws Exception {
         final String sourceName = "source.cpy", targetName = "target.cpy", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2972,13 +4179,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1610, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(5);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1610L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareGypAsStream() throws Exception {
         final String sourceName = "source.gyp", targetName = "target.gyp", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -2996,13 +4213,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3660, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3660L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareGypiAsStream() throws Exception {
         final String sourceName = "source.gypi", targetName = "target.gypi", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3020,13 +4247,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 7210, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(23);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 7210L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePyiAsStream() throws Exception {
         final String sourceName = "source.pyi", targetName = "target.pyi", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3044,13 +4281,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 74223, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(210);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 74223L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareIpyAsStream() throws Exception {
         final String sourceName = "source.ipy", targetName = "target.ipy", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3068,13 +4315,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2173, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(9);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2173L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareRstAsStream() throws Exception {
         final String sourceName = "source.rst", targetName = "target.rst", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3092,13 +4349,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1617, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(3);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1617L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareRbAsStream() throws Exception {
         final String sourceName = "source.rb", targetName = "target.rb", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3116,13 +4383,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 5288, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(17);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 5288L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareErbAsStream() throws Exception {
         final String sourceName = "source.erb", targetName = "target.erb", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3140,13 +4417,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3642, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(12);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3642L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareRjsAsStream() throws Exception {
         final String sourceName = "source.rjs", targetName = "target.rjs", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3164,13 +4451,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1588, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1588L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareGemspecAsStream() throws Exception {
         final String sourceName = "source.gemspec", targetName = "target.gemspec", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3188,13 +4485,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 5894, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(13);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 5894L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareRakeAsStream() throws Exception {
         final String sourceName = "source.rake", targetName = "target.rake", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3212,13 +4519,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2206, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2206L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareRuAsStream() throws Exception {
         final String sourceName = "source.ru", targetName = "target.ru", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3236,13 +4553,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2960, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(11);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2960L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testComparePodspecAsStream() throws Exception {
         final String sourceName = "source.podspec", targetName = "target.podspec", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3260,13 +4587,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2526, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(8);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2526L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareRbiAsStream() throws Exception {
         final String sourceName = "source.rbi", targetName = "target.rbi", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3284,13 +4621,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2383, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(6);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2383L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareSassAsStream() throws Exception {
         final String sourceName = "source.sass", targetName = "target.sass", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3308,13 +4655,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1742, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(8);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1742L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareScssAsStream() throws Exception {
         final String sourceName = "source.scss", targetName = "target.scss", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3332,13 +4689,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1906, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(9);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1906L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareScalaAsStream() throws Exception {
         final String sourceName = "source.scala", targetName = "target.scala", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3356,13 +4723,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 5967, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(4);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 5967L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareSbtAsStream() throws Exception {
         final String sourceName = "source.sbt", targetName = "target.sbt", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3380,13 +4757,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3169, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(5);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3169L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareScAsStream() throws Exception {
         final String sourceName = "source.sc", targetName = "target.sc", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3404,13 +4791,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 6022, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(2);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 6022L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareShAsStream() throws Exception {
         final String sourceName = "source.sh", targetName = "target.sh", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3428,13 +4825,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 12165, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(17);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 12165L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareBashAsStream() throws Exception {
         final String sourceName = "source.bash", targetName = "target.bash", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3452,13 +4859,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1662, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(3);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1662L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareBashrcAsStream() throws Exception {
         final String sourceName = "source.bashrc", targetName = "target.bashrc", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3476,13 +4893,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 48128, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(67);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 48128L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareEbuildAsStream() throws Exception {
         final String sourceName = "source.ebuild", targetName = "target.ebuild", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3500,13 +4927,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 55518, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(173);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 55518L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareSqlAsStream() throws Exception {
         final String sourceName = "source.sql", targetName = "target.sql", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3524,13 +4961,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 15026, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(46);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 15026L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareDsqlAsStream() throws Exception {
         final String sourceName = "source.dsql", targetName = "target.dsql", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3548,13 +4995,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 1056, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(2);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 1056L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareVimAsStream() throws Exception {
         final String sourceName = "source.vim", targetName = "target.vim", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3572,13 +5029,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3640, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(13);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3640L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareYamlAsStream() throws Exception {
         final String sourceName = "source.yaml", targetName = "target.yaml", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3596,13 +5063,23 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 2548, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(7);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 2548L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testCompareYmlAsStream() throws Exception {
         final String sourceName = "source.yml", targetName = "target.yml", resultExtension = ".html";
         final Path sourcePath = getStoragePath(sourceName, "formats");
@@ -3620,9 +5097,19 @@ public class FileFormatTests extends TestNGSetUp {
                     .setDetectStyleChanges(true)
                     .build());
 
-            final long size = Files.size(resultPath);
-            System.out.println("Stream size: " + size);
-            Assert.assertEquals(size, 3084, "Result file has incorrect size");
+
+            LOG.debug("Result file was written as {}", resultPath);
+            final ChangeInfo[] changes = comparer.getChanges();
+            LOG.debug("Finished comparing with {} changes.", changes.length);
+            assertThat(changes)
+                    .isNotNull()
+                    .withFailMessage("Changes count is not as expected:<%d>", changes.length)
+                    .hasSize(11);
+
+            final long actulalSize = Files.size(resultPath), expectedSize = 3084L;
+            assertThat(actulalSize)
+                    .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
+                    .isEqualTo(expectedSize);
         }
     }
 }

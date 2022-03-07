@@ -9,10 +9,10 @@ import org.testng.annotations.Test;
 @SuppressWarnings("all")
 public class OtherOperationsTests {
 
-    @Test
+    @Test(invocationCount = 1)
     public void testMock() throws Exception {
     }
-//    @Test
+//    @Test(invocationCount = 1)
 //    public void testHowToGetWidthAndHeightOfPageImages() throws Exception {
 //
 //        final String sourceName = "source.docx";
@@ -29,7 +29,7 @@ public class OtherOperationsTests {
 //        Assert.assertNotNull(width);
 //    }
 //
-//    @Test
+//    @Test(invocationCount = 1)
 //    public void testHowToGetCoordinateOfTheFirstChange() throws Exception {
 //
 //        final String sourceName = "source.docx", targetName = "target.docx";
@@ -50,7 +50,7 @@ public class OtherOperationsTests {
 //        Assert.assertNotNull(rectangle);
 //    }
 //
-//    @Test
+//    @Test(invocationCount = 1)
 //    public void testHowToUseCoordinatesOfChanges() throws Exception {
 //
 //        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
@@ -108,7 +108,7 @@ public class OtherOperationsTests {
 //        }
 //    }
 //
-//    @Test
+//    @Test(invocationCount = 1)
 //    public void testHowToGetImageRepresentationOfDocumentPages() throws Exception {
 //
 //        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
@@ -142,7 +142,7 @@ public class OtherOperationsTests {
 //        }
 //    }
 //
-//    @Test
+//    @Test(invocationCount = 1)
 //    public void testHowToGetDocumentInfo() throws Exception {
 //
 //        final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
@@ -158,7 +158,7 @@ public class OtherOperationsTests {
 //        Assert.assertTrue(documentInfo.getPagesData().size() > 0);
 //    }
 //
-//    @Test
+//    @Test(invocationCount = 1)
 //    public void testHowToSetComparionDetailLevel() throws Exception {
 //
 //        final String sourceName = "source.txt", targetName = "target.txt";
