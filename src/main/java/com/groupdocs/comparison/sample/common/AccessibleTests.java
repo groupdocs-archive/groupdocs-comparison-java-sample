@@ -73,7 +73,8 @@ public class AccessibleTests extends TestNGSetUp {
                 "getChanges",
                 "getChanges",
                 "getSource",
-                "getTargets"
+                "getTargets",
+                "getResultString"
         )));
         System.out.println(String.format("[OK] %s is accessible", checkMethods(ComparerSettings.class,
                 "getLogger",
@@ -192,6 +193,7 @@ public class AccessibleTests extends TestNGSetUp {
                 "getName"
         )));
         System.out.println(String.format("[OK] %s is accessible", checkMethods(CompareOptions.class,
+                "isCalculateCoordinates",
                 "getCalculateCoordinates",
                 "setCalculateCoordinates",
                 "isCompareBookmarks",
@@ -212,6 +214,7 @@ public class AccessibleTests extends TestNGSetUp {
                 "setDeletedItemStyle",
                 "getDetalisationLevel",
                 "setDetalisationLevel",
+                "isDetectStyleChanges",
                 "getDetectStyleChanges",
                 "setDetectStyleChanges",
                 "getDiagramMasterSetting",
@@ -220,8 +223,12 @@ public class AccessibleTests extends TestNGSetUp {
                 "setGenerateSummaryPage",
                 "getHeaderFootersComparison",
                 "setHeaderFootersComparison",
+                "isHeaderFootersComparison",
                 "getInsertedItemStyle",
                 "setInsertedItemStyle",
+                "setLeaveGaps",
+                "isLeaveGaps",
+                "isMarkChangedContent",
                 "getMarkChangedContent",
                 "setMarkChangedContent",
                 "getMarkNestedContent",
@@ -234,8 +241,10 @@ public class AccessibleTests extends TestNGSetUp {
                 "setPasswordSaveOption",
                 "getSensitivityOfComparison",
                 "setSensitivityOfComparison",
+                "isShowDeletedContent",
                 "getShowDeletedContent",
                 "setShowDeletedContent",
+                "isShowInsertedContent",
                 "getShowInsertedContent",
                 "setShowInsertedContent",
                 "setWordsSeparatorChars"
@@ -357,6 +366,8 @@ public class AccessibleTests extends TestNGSetUp {
                 "setBox",
                 "getComparisonAction",
                 "setComparisonAction",
+                "getComponentType",
+                "setComponentType",
                 "getId",
                 "setId",
                 "getPageInfo",

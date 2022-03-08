@@ -140,7 +140,7 @@ public class TestRunner {
     public static void unsetLicense() {
         License lic = new License();
         try {
-            lic.setLicense((String) null);
+            lic.setLicense((InputStream) null);
         } catch (Exception e) {
             e.printStackTrace();
         }

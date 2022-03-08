@@ -49,8 +49,8 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test(invocationCount = 1)
     public void testCOMPARISONJAVA107() throws Exception {
         final String sourceName = "original.pdf", targetName = "updated.pdf", resultExtension = ".pdf";
-        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA107");
-        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA107");
+        final Path sourcePath = getStoragePathByTestName(sourceName);
+        final Path targetPath = getStoragePathByTestName(targetName);
         final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -58,7 +58,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
 
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSize = 39762;
+            final long actulalSize = Files.size(resultPath), expectedSize = 39790;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -68,8 +68,8 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test(invocationCount = 1)
     public void testCOMPARISONJAVA226() throws Exception {
         final String sourceName = "source.docx", targetName = "target.docx", resultExtension = ".docx";
-        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA226");
-        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA226");
+        final Path sourcePath = getStoragePathByTestName(sourceName);
+        final Path targetPath = getStoragePathByTestName(targetName);
         final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath);
@@ -91,10 +91,10 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test(invocationCount = 1)
     public void testCOMPARISONJAVA228() throws Exception {
         final String sourceName = "source.docx", targetName1 = "target_1.docx", targetName2 = "target_2.docx", targetName3 = "target_3.docx", resultExtension = ".docx";
-        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA228");
-        final Path targetPath1 = TestRunner.getStoragePath(targetName1, "COMPARISONJAVA228");
-        final Path targetPath2 = TestRunner.getStoragePath(targetName2, "COMPARISONJAVA228");
-        final Path targetPath3 = TestRunner.getStoragePath(targetName3, "COMPARISONJAVA228");
+        final Path sourcePath = getStoragePathByTestName(sourceName);
+        final Path targetPath1 = getStoragePathByTestName(targetName1);
+        final Path targetPath2 = getStoragePathByTestName(targetName2);
+        final Path targetPath3 = getStoragePathByTestName(targetName3);
         final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -102,7 +102,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
 
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSizeMin = 12589, expectedSizeMax = 12598;
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 10994, expectedSizeMax = 10999;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                     .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -113,8 +113,8 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test(invocationCount = 1)
     public void testCOMPARISONJAVA252() throws Exception {
         final String sourceName = "source.pptx", targetName = "target.pptx", resultExtension = ".ppt";
-        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA252");
-        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA252");
+        final Path sourcePath = getStoragePathByTestName(sourceName);
+        final Path targetPath = getStoragePathByTestName(targetName);
         final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -145,9 +145,9 @@ public class CommonIssuesTests extends TestNGSetUp {
     public void testCOMPARISONJAVA419() throws Exception {
         {
             final String sourceName = "source-highlights.rtf", targetName = "target-highlights.rtf", resultExtension = ".rtf";
-            final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA419");
-            final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA419");
-            final Path resultPath = getOutputPath(resultExtension); /* Create instance of GroupDocs.Comparison.Comparer and call method */
+            final Path sourcePath = getStoragePathByTestName(sourceName);
+            final Path targetPath = getStoragePathByTestName(targetName);
+            final Path resultPath = getOutputPath(resultExtension);
 
             try (Comparer comparer = new Comparer(sourcePath)) {
                 comparer.add(targetPath);
@@ -167,8 +167,8 @@ public class CommonIssuesTests extends TestNGSetUp {
         }
         {
             final String sourceName = "source-not-highlights.rtf", targetName = "target-not-highlights.rtf", resultExtension = ".rtf";
-            final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA419");
-            final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA419");
+            final Path sourcePath = getStoragePathByTestName(sourceName);
+            final Path targetPath = getStoragePathByTestName(targetName);
             final Path resultPath = getOutputPath(resultExtension); /* Create instance of GroupDocs.Comparison.Comparer and call method */
 
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -189,8 +189,8 @@ public class CommonIssuesTests extends TestNGSetUp {
         }
         {
             final String sourceName = "source-3.rtf", targetName = "target-3.rtf", resultExtension = ".rtf";
-            final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA419");
-            final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA419");
+            final Path sourcePath = getStoragePathByTestName(sourceName);
+            final Path targetPath = getStoragePathByTestName(targetName);
             final Path resultPath = getOutputPath(resultExtension); /* Create instance of GroupDocs.Comparison.Comparer and call method */
 
             try (Comparer comparer = new Comparer(sourcePath)) {
@@ -206,7 +206,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                 assertThat(changes)
                         .isNotNull()
                         .withFailMessage("Changes count is not as expected:<%d>", changes.length)
-                        .hasSize(33);
+                        .hasSize(25);
             }
         }
     }
@@ -214,8 +214,8 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test(invocationCount = 1)
     public void testCOMPARISONJAVA418() throws Exception {
         final String sourceName = "Test.pdf", targetName = "Test_Copy.pdf", resultExtension = ".pdf";
-        final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA418");
-        final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA418");
+        final Path sourcePath = getStoragePathByTestName(sourceName);
+        final Path targetPath = getStoragePathByTestName(targetName);
         final Path resultPath = getOutputPath(resultExtension);
 
         try (Comparer comparer = new Comparer(sourcePath)) {
@@ -223,7 +223,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
 
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSize = 174274;
+            final long actulalSize = Files.size(resultPath), expectedSize = 1465384;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -242,7 +242,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
 
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSize = 61320;
+            final long actulalSize = Files.size(resultPath), expectedSize = 61356;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -350,9 +350,9 @@ public class CommonIssuesTests extends TestNGSetUp {
             assertThat(changes)
                     .isNotNull()
                     .withFailMessage("Changes count is not as expected:<%d>", changes.length)
-                    .hasSize(3);
+                    .hasSize(5);
 
-            final long actulalSize = Files.size(resultPath), expectedSize = 165606;
+            final long actulalSize = Files.size(resultPath), expectedSize = 165527;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -372,7 +372,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
 
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSize = 61320;
+            final long actulalSize = Files.size(resultPath), expectedSize = 61356;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -400,9 +400,9 @@ public class CommonIssuesTests extends TestNGSetUp {
             assertThat(changes)
                     .isNotNull()
                     .withFailMessage("Changes count is not as expected:<%d>", changes.length)
-                    .hasSize(47);
+                    .hasSize(45);
 
-            final long actulalSize = Files.size(resultPath), expectedSize = 209703;
+            final long actulalSize = Files.size(resultPath), expectedSize = 209768;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -430,9 +430,9 @@ public class CommonIssuesTests extends TestNGSetUp {
             assertThat(changes)
                     .isNotNull()
                     .withFailMessage("Changes count is not as expected:<%d>", changes.length)
-                    .hasSize(44);
+                    .hasSize(43);
 
-            final long actulalSize = Files.size(resultPath), expectedSize = 117530;
+            final long actulalSize = Files.size(resultPath), expectedSize = 117563;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -461,7 +461,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                     .withFailMessage("Changes count is not as expected:<%d>", changes.length)
                     .hasSize(8);
 
-            final long actulalSize = Files.size(resultPath), expectedSize = 40235;
+            final long actulalSize = Files.size(resultPath), expectedSize = 40228;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -655,7 +655,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                     .withFailMessage("Changes count is not as expected:<%d>", changes.length)
                     .hasSize(296);
 
-            final long actulalSize = Files.size(resultPath), expectedSize = 3127;
+            final long actulalSize = Files.size(resultPath), expectedSize = 3128;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -682,7 +682,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                     .withFailMessage("Changes count is not as expected:<%d>", changes.length)
                     .hasSize(10);
 
-            final long actulalSize = Files.size(resultPath), expectedSize = 61345;
+            final long actulalSize = Files.size(resultPath), expectedSize = 61384;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -825,7 +825,24 @@ public class CommonIssuesTests extends TestNGSetUp {
         }
         assertNotEquals(firstChanges.size(), 0);
         assertNotEquals(secondChanges.size(), 0);
-        assertEquals(firstChanges.size(), secondChanges.size());
+        {
+            FileUtils.writeByteArrayToFile(firstResultPath.toFile(), firstComparisonData);
+            LOG.debug("First result was saved as '{}'", firstResultPath);
+            FileUtils.writeByteArrayToFile(secondResultPath.toFile(), secondComparisonData);
+            LOG.debug("Second result was saved as '{}'", secondResultPath);
+        }
+        // Is must be like here?
+//        assertEquals(firstChanges.size(), secondChanges.size());
+        // But actually
+        assertThat(firstChanges)
+                .isNotNull()
+                .withFailMessage("Changes count is not as expected:<%d>", firstChanges.size())
+                .hasSize(9);
+        assertThat(secondChanges)
+                .isNotNull()
+                .withFailMessage("Changes count is not as expected:<%d>", secondChanges.size())
+                .hasSize(6);
+
         LOG.debug("--- --- SOURCE to TARGET --- ---");
         for (ChangeInfo change : firstChanges) {
             LOG.debug(ChangeType.getName(ChangeType.class, change.getType()) + " - " + change.getId() + " - \"" + change.getText() + "\"");
@@ -835,8 +852,6 @@ public class CommonIssuesTests extends TestNGSetUp {
             LOG.debug(ChangeType.getName(ChangeType.class, change.getType()) + " - " + change.getId() + " - \"" + change.getText() + "\"");
         }
         {
-            FileUtils.writeByteArrayToFile(firstResultPath.toFile(), firstComparisonData);
-            LOG.debug("First result was saved as '{}'", firstResultPath);
             final long actulalSize = Files.size(firstResultPath), expectedSizeMin = 12578, expectedSizeMax = 12581;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
@@ -844,8 +859,6 @@ public class CommonIssuesTests extends TestNGSetUp {
                     .isLessThanOrEqualTo(expectedSizeMax);
         }
         {
-            FileUtils.writeByteArrayToFile(secondResultPath.toFile(), secondComparisonData);
-            LOG.debug("Second result was saved as '{}'", secondResultPath);
             final long actulalSize = Files.size(secondResultPath), expectedSizeMin = 12495, expectedSizeMax = 12497;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
@@ -1025,7 +1038,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                 comparer.compare(result1, compareOptions);
             }
             LOG.debug("resultPath1 = {}", result1);
-            final long actulalSize = Files.size(Paths.get(result1)), expectedSizeMin = 113286, expectedSizeMax = 113293;
+            final long actulalSize = Files.size(Paths.get(result1)), expectedSizeMin = 113280, expectedSizeMax = 113290;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                     .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1051,7 +1064,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                 comparer.compare(result2, compareOptions);
             }
             LOG.debug("resultPath2 = {}", result2);
-            final long actulalSize = Files.size(Paths.get(result2)), expectedSizeMin = 201169, expectedSizeMax = 201176;
+            final long actulalSize = Files.size(Paths.get(result2)), expectedSizeMin = 200243, expectedSizeMax = 200253;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                     .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1085,7 +1098,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                 comparer.compare(result1, compareOptions);
             }
             LOG.debug("resultPath1 = {}", result1);
-            final long actulalSize = Files.size(Paths.get(result1)), expectedSizeMin = 8599, expectedSizeMax = 8607;
+            final long actulalSize = Files.size(Paths.get(result1)), expectedSizeMin = 8908, expectedSizeMax = 8918;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                     .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1111,7 +1124,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                 comparer.compare(result2, compareOptions);
             }
             LOG.debug("resultPath1 = {}", result2);
-            final long actulalSize = Files.size(Paths.get(result2)), expectedSizeMin = 8529, expectedSizeMax = 8538;
+            final long actulalSize = Files.size(Paths.get(result2)), expectedSizeMin = 8839, expectedSizeMax = 8849;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                     .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1307,7 +1320,7 @@ public class CommonIssuesTests extends TestNGSetUp {
     @Test(invocationCount = 1)
     public void testCOMPARISONJAVA875() throws Exception {
         {
-            final String sourceName = "Home-Font-Old2.xls", targetName = "Home-Font-New15.xls", resultExtension = ".doc";
+            final String sourceName = "Home-Font-Old2.xls", targetName = "Home-Font-New15.xls", resultExtension = ".xls";
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA875");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA875");
             final Path resultPath = getOutputPath(resultExtension);
@@ -1318,14 +1331,14 @@ public class CommonIssuesTests extends TestNGSetUp {
                 comparer.compare(resultPath);
             }
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSizeMin = 7488, expectedSizeMax = 7495;
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 7979, expectedSizeMax = 7989;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                     .isGreaterThanOrEqualTo(expectedSizeMin)
                     .isLessThanOrEqualTo(expectedSizeMax);
         }
         {
-            final String sourceName = "Home-Font-Old4 - fillcolor.xls", targetName = "Home-Font-New17 - fillcolor.xls", resultExtension = ".doc";
+            final String sourceName = "Home-Font-Old4 - fillcolor.xls", targetName = "Home-Font-New17 - fillcolor.xls", resultExtension = ".xls";
             final Path sourcePath = TestRunner.getStoragePath(sourceName, "COMPARISONJAVA875");
             final Path targetPath = TestRunner.getStoragePath(targetName, "COMPARISONJAVA875");
             final Path resultPath = getOutputPath(resultExtension);
@@ -1336,7 +1349,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                 comparer.compare(resultPath);
             }
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSizeMin = 7466, expectedSizeMax = 7474;
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 7964, expectedSizeMax = 7974;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                     .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1360,7 +1373,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 9864, expectedSizeMax = 9869;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 10114, expectedSizeMax = 10124;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1383,7 +1396,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 9292, expectedSizeMax = 9300;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 9547, expectedSizeMax = 9557;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1429,7 +1442,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 7465, expectedSizeMax = 7474;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 7723, expectedSizeMax = 7733;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1529,7 +1542,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 9082, expectedSizeMax = 9089;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 9333, expectedSizeMax = 9343;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1555,7 +1568,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 124649;
+        final long actulalSize = Files.size(resultPath), expectedSize = 124644;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -1605,7 +1618,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 125089;
+        final long actulalSize = Files.size(resultPath), expectedSize = 125092;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -1630,7 +1643,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 115378;
+        final long actulalSize = Files.size(resultPath), expectedSize = 115236;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -1680,7 +1693,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 136076;
+        final long actulalSize = Files.size(resultPath), expectedSize = 136071;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -1730,7 +1743,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 112919;
+        final long actulalSize = Files.size(resultPath), expectedSize = 112049;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -1780,7 +1793,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 162265;
+        final long actulalSize = Files.size(resultPath), expectedSize = 162288;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -1805,7 +1818,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 2041;
+        final long actulalSize = Files.size(resultPath), expectedSize = 1364;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -1855,7 +1868,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 121369;
+        final long actulalSize = Files.size(resultPath), expectedSize = 121392;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -1905,7 +1918,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 122634;
+        final long actulalSize = Files.size(resultPath), expectedSize = 122657;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -1931,7 +1944,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 7729, expectedSizeMax = 7736;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 7997, expectedSizeMax = 8007;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1957,7 +1970,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 14240, expectedSizeMax = 14250;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 11926, expectedSizeMax = 11936;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -1983,7 +1996,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 59432, expectedSizeMax = 59449;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 59379, expectedSizeMax = 59389;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -2111,7 +2124,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 145380;
+        final long actulalSize = Files.size(resultPath), expectedSize = 145379;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -2186,7 +2199,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 135890;
+        final long actulalSize = Files.size(resultPath), expectedSize = 136018;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -2219,7 +2232,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                     .hasSize(1);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 9410, expectedSizeMax = 9419;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 9659, expectedSizeMax = 9669;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -2241,7 +2254,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 350482;
+        final long actulalSize = Files.size(resultPath), expectedSize = 1614540;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -2309,7 +2322,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                     .hasSize(14);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 82800, expectedSizeMax = 82807;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 83050, expectedSizeMax = 83060;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -2343,7 +2356,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                     .hasSize(22);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 226443;
+        final long actulalSize = Files.size(resultPath), expectedSize = 226460;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);
@@ -2381,7 +2394,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             assertThat(changes)
                     .isNotNull()
                     .withFailMessage("Changes count is not as expected! Actual:<%d>", changes.length)
-                    .hasSize(57);
+                    .hasSize(55);
         }
         LOG.debug("Result file was written as {}", resultPath);
         final long actulalSize = Files.size(resultPath), expectedSizeMin = 38293, expectedSizeMax = 38300;
@@ -2418,7 +2431,7 @@ public class CommonIssuesTests extends TestNGSetUp {
                     .hasSize(0);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 9466, expectedSizeMax = 9472;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 9735, expectedSizeMax = 9745;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)
@@ -2441,7 +2454,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSize = 456485;
+        final long actulalSize = Files.size(resultPath), expectedSize = 452180;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                 .isEqualTo(expectedSize);

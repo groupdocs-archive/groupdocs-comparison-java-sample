@@ -4,6 +4,7 @@ package com.groupdocs.comparison.sample.operations;
 import com.groupdocs.comparison.Comparer;
 import com.groupdocs.comparison.ComparerSettings;
 import com.groupdocs.comparison.options.CompareOptions;
+import com.groupdocs.comparison.sample.config.TestNGSetUp;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static com.groupdocs.comparison.sample.TestRunner.getOutputPath;
 import static com.groupdocs.comparison.sample.TestRunner.getStoragePath;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Aleksey Permyakov on 10.08.2016.
  */
 @SuppressWarnings("all")
-public class DocumentsOperationsTests {
+public class DocumentsOperationsTests extends TestNGSetUp {
     private static final Logger LOG = LoggerFactory.getLogger(DocumentsOperationsTests.class);
 
     @Test(invocationCount = 1)
@@ -42,7 +42,7 @@ public class DocumentsOperationsTests {
             comparer.compare(resultPath);
 
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSize = 688;
+            final long actulalSize = Files.size(resultPath), expectedSize = 629;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -66,7 +66,7 @@ public class DocumentsOperationsTests {
             IOUtils.write(arrayOutputStream.toByteArray(), fileOutputStream);
 
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSize = 688;
+            final long actulalSize = Files.size(resultPath), expectedSize = 600;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
@@ -89,7 +89,7 @@ public class DocumentsOperationsTests {
             comparer.compare(resultPath, compareOptions);
 
             LOG.debug("Result file was written as {}", resultPath);
-            final long actulalSize = Files.size(resultPath), expectedSize = 1482024;
+            final long actulalSize = Files.size(resultPath), expectedSize = 1481385;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be:<%d> but was:<%d>", expectedSize, actulalSize)
                     .isEqualTo(expectedSize);
