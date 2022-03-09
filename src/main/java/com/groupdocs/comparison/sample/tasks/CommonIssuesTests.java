@@ -1970,7 +1970,7 @@ public class CommonIssuesTests extends TestNGSetUp {
             comparer.compare(resultPath, compareOptions);
         }
         LOG.debug("Result file was written as {}", resultPath);
-        final long actulalSize = Files.size(resultPath), expectedSizeMin = 11926, expectedSizeMax = 11936;
+        final long actulalSize = Files.size(resultPath), expectedSizeMin = 11925, expectedSizeMax = 11935;
         assertThat(actulalSize)
                 .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                 .isGreaterThanOrEqualTo(expectedSizeMin)

@@ -276,7 +276,9 @@ public class AccessibleTests extends TestNGSetUp {
                 "getFontDirectories",
                 "setFontDirectories",
                 "getPassword",
-                "setPassword"
+                "setPassword",
+                "isLoadText",
+                "setLoadText"
         )));
         System.out.println(String.format("[OK] %s is accessible", checkMethods(MetadataType.class,
                 "getName"

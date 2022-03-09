@@ -870,7 +870,7 @@ public class FileFormatTests extends TestNGSetUp {
                     .withFailMessage("Changes count is not as expected:<%d>", changes.length)
                     .hasSize(6);
 
-            final long actulalSize = Files.size(resultPath), expectedSizeMin = 52974, expectedSizeMax = 52989;
+            final long actulalSize = Files.size(resultPath), expectedSizeMin = 52973, expectedSizeMax = 52989;
             assertThat(actulalSize)
                     .withFailMessage("Result file size is expected to be from <%d> to <%d> but was:<%d>", expectedSizeMin, expectedSizeMax, actulalSize)
                     .isGreaterThanOrEqualTo(expectedSizeMin)
