@@ -6,9 +6,7 @@
 
     <groupId>com.groupdocs.samples.comparison</groupId>
     <artifactId>groupdocs-comparison-java-sample</artifactId>
-<!--    <version>21.6.1</version>-->
     <version>22.3</version>
-<!--    <version>22.2-dev</version>-->
     <properties>
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,6 +21,7 @@
             <artifactId>groupdocs-comparison</artifactId>
             <version>${groupdocs.comparison}</version>
             <type>jar</type>
+            <classifier>jdk7</classifier>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -110,7 +109,7 @@
         </repository>
         <repository>
             <id>maven-central</id>
-            <url>http://repo1.maven.org/maven2</url>
+            <url>https://repo1.maven.org/maven2</url>
         </repository>
     </repositories>
 </project>

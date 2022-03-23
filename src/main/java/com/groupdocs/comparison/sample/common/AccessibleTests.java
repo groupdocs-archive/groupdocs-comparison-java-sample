@@ -88,6 +88,7 @@ public class AccessibleTests extends TestNGSetUp {
                 "setName",
                 "getPassword",
                 "getStream",
+                "close",
                 // ---
                 "setPassword"
         )));
